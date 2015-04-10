@@ -37,10 +37,7 @@ $this->title = $model->judul;
 			<td><label>Status</label></td>
 			<td>: <?php echo $model->status;?></td>
 		</tr>
-		<tr height='40'>
-			<td><label>Photo</label></td>
-			<td>: <?php echo $model->foto;?></td>
-		</tr>
+		
 		<tr height='40'>
 			<td><label>Approval Supervisor</label></td>
 			<td>: <?php if($model['status_approval_supervi']==1){
@@ -66,6 +63,14 @@ $this->title = $model->judul;
 					}?></td>
 		</tr>
 		<tr height='40'>
+			<td colspan='2'><label>Photo</label></td>
+		</tr>
+		<tr>
+			<?php if($model['foto']!=''){?>
+			<td colspan='2'><img src='<?php echo Yii::$app->params['upload'].$model->foto;?>' width='300' height='300' style='border:1px solid black;'></td>
+			<?php }else{ echo "<td></td>";} ?>		
+		</tr>
+		<tr height='40'>
 			<td><label>Notes</label></td>
 			<td>:</td>
 		</tr>		
@@ -77,7 +82,7 @@ $this->title = $model->judul;
 		 <?php if($model['creator']==Yii::$app->user->identity->nik && !($model['status_approval_pm']==1 || $model['status_approval_supervi']==1)){ ?>
 		 	<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 		 <?php } ?>
-		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
+		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     	<br>
 
     
