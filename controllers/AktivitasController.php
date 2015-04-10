@@ -176,6 +176,7 @@ class AktivitasController extends Controller
 	 * Hanya bisa dilakukan oleh supervisor / project manager / admin
 	 */
 	 public function actionApprove($id){
+	 	$jabatan=Yii::$app->user->identity->jabatan;
 	 	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
