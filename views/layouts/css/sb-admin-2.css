@@ -394,4 +394,18 @@ table.dataTable thead .sorting:after {
   	width: 100%;
   	padding-left: 10px;
   	padding-right: 10px;
+  	margin-bottom: -10px;
+}
+
+.login-button{
+  	background-color: #e0574d;
+  	color: #ffffff;
+  	width: 94%;
+  	margin-left: 10px;
+  	padding-right: 10px;
+}
+
+.login-button:hover{
+	background-color: #ca4e45;
+	color: #fff;
 }
