@@ -46,10 +46,11 @@ $model=new Issue();
     			<td><?= $model->findCreator($row['creator']) ?></td>
     			<td><?= $model->findLocation($row['siteId']) ?></td>
     			<td><?= $row['status'] ?></td>
+    			<?php if($row['creator']==Yii::$app->user->identity->nik){ ?>
     			<td>
-					<a href='<?=Yii::$app->params['url']?>issue/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
-				    <a href="<?=Yii::$app->params['url']?>issue/delete?id=$row[id]" onClick="return confirm('are you sure want to delete this issue?')"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>
-				</td>
+					<a href='<?=Yii::$app->params['url']?>issue/update?id=<?= $row['id']?>'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
+				    <a href="<?=Yii::$app->params['url']?>issue/delete?id=<?= $row['id']?>" onClick="return confirm('are you sure want to delete this issue?')"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>
+				</td><?php }else{echo "<td></td>";}?>
        		</tr>
     		<?php } ?>
     	</tbody>
