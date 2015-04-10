@@ -355,3 +355,43 @@ table.dataTable thead .sorting:after {
 	background-color: #e0574d;
 	color: #fff;
 }
+
+.login-box{
+  	padding: 15px 15px 0 15px;
+  	width: 350px;
+  	background-color: #e7e7e7;
+  	margin: 10px auto 0px;
+  	border-radius: 5px;
+  	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.line{
+	width: 100%;
+	height: 80px;
+	background: #e0574d;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+	padding-left: 30px;
+	padding-top: 10px;
+}
+
+.loginButton{
+	font-size: 18px;
+  	font-weight: bold;
+  	color: #ffffff;
+}
+
+.img-logo-login{
+	width: 300px;
+	height: 80px;
+	margin-top: 150px;
+}
+
+.input-box{
+	height: 40px;
+  	width: 100%;
+  	padding-left: 10px;
+  	padding-right: 10px;
+}
