@@ -22,9 +22,9 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 
     <?php $form = ActiveForm::begin(); ?>
 
-	<?= $form->field($model, 'judul')->textInput(['maxlength' => 100]) ?>
+	<?= $form->field($model, 'judul')->textInput(['maxlength' => 100,'placeholder'=>'Nama Aktivitas']) ?>
 	
-    <?= $form->field($model, 'tanggal')->textInput(['class'=>'date form-control']) ?>
+    <?= $form->field($model, 'tanggal')->textInput(['class'=>'date form-control','placeholder'=>'Tanggal Aktivitas']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(['Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
 

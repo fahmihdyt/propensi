@@ -57,15 +57,15 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal' => 'Tanggal',
-            'judul' => 'Judul',
+            'tanggal' => 'Date',
+            'judul' => 'Activity',
             'status' => 'Status',
-            'foto' => 'Foto',
-            'keterangan' => 'Keterangan',
+            'foto' => 'Photo',
+            'keterangan' => 'Notes',
             'status_approval_pm' => 'Status Approval Pm',
             'status_approval_supervi' => 'Status Approval Supervi',
             'creator' => 'Creator',
-            'siteId' => 'Site ID',
+            'siteId' => 'Site',
         ];
     }
 
@@ -103,6 +103,10 @@ class Aktivitas extends \yii\db\ActiveRecord
 		return $hasil['nama'];
 	}
 
+	public function getAllCoor($nik){
+		return Yii::$app->db->createCommand("select * from aktivitas where creator='$nik'")->queryAll();
+	}
+	
 	/*
 	 * Method for set approval by supervisor true!
 	 * @param $id

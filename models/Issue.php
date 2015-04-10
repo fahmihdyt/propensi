@@ -53,13 +53,13 @@ class Issue extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal' => 'Tanggal',
-            'judul' => 'Judul',
-            'jenis' => 'Jenis',
-            'keterangan' => 'Keterangan',
+            'tanggal' => 'Date',
+            'judul' => 'Issue',
+            'jenis' => 'Type',
+            'keterangan' => 'Notes',
             'status' => 'Status',
             'creator' => 'Creator',
-            'siteId' => 'Site ID',
+            'siteId' => 'Site',
         ];
     }
 

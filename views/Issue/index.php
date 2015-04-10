@@ -21,7 +21,7 @@ $model=new Issue();
     
     <!--Tombol Create New-->
     <p>
-        <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     
     <!--Table-->
@@ -46,13 +46,11 @@ $model=new Issue();
     			<td><?= $model->findCreator($row['creator']) ?></td>
     			<td><?= $model->findLocation($row['siteId']) ?></td>
     			<td><?= $row['status'] ?></td>
-    			<?php 
-    			echo "<td>
-						  <a href='".Yii::$app->params['url']."issue/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
-						  <a href='".Yii::$app->params['url']."issue/delete?id=$row[id]'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>".
-					 "</td>";
-    			?>
-    		</tr>
+    			<td>
+					<a href='<?=Yii::$app->params['url']?>issue/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
+				    <a href="<?=Yii::$app->params['url']?>issue/delete?id=$row[id]" onClick="return confirm('are you sure want to delete this issue?')"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>
+				</td>
+       		</tr>
     		<?php } ?>
     	</tbody>
     </table>

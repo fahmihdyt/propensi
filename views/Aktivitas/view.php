@@ -12,7 +12,7 @@ $this->title = $model->judul;
 	<!--Mapping Site-->
 		
 	<!--Detail Header-->
-    <h1 style='margin-top:0px; padding-top:15px;'>View Activity : <?= Html::encode($this->title) ?></h1>
+    <h1 style='margin-top:0px; padding-top:25px;'>View Activity : <?= Html::encode($this->title) ?></h1>
     <hr>
     
     <!--Detail Body-->
@@ -78,7 +78,7 @@ $this->title = $model->judul;
 		 	<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 		 <?php } ?>
 		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
-    
+    	<br>
 
     
 

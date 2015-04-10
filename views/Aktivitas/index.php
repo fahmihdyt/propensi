@@ -18,10 +18,13 @@ $model=new Aktivitas();
     	<hr>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-			
+	
+	<?php 
+	$jabatan=Yii::$app->user->identity->jabatan;
+	if( $jabatan == 'Supervisor' || $jabatan== 'Coordinator' || $jabatan=='Administrator'){?>		
     <p>
         <?= Html::a('Create Aktivitas', ['create'], ['class' => 'btn btn-primary']) ?>
-    </p>
+    </p><?php } ?>
 
 	<!--Proses Export Tabel-->
 	<table class='table table-striped'>
@@ -74,23 +77,19 @@ $model=new Aktivitas();
 					//Action									
 					echo "<td>";
 					
-					//Edit & Delete hanya untuk miliknya
+					//Edit & Delete hanya untuk miliknya dan jika belum di approve!
 					if($row['creator']== Yii::$app->user->identity->nik && !($row['status_approval_pm']==1 || $row['status_approval_supervi']==1))
-					{
-						echo "<a href='".Yii::$app->params['url']."aktivitas/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
-						  	  <a href='".Yii::$app->params['url']."aktivitas/delete?id=$row[id]'?><?php><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>";
-					}
+					{ ?>
+						<a href='<?=Yii::$app->params['url']?>aktivitas/update?id=<?=$row['id']?>'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
+						<a href='<?=Yii::$app->params['url']?>aktivitas/delete?id=<?=$row['id']?>' onClick="return confirm('are you sure want to delete this activity?')"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>
 					
+					
+					<?php }
 					//Approval for Supervisor
-					if(Yii::$app->user->identity->jabatan == 'Supervisor'){
+					if(Yii::$app->user->identity->jabatan == 'Supervisor' || Yii::$app->user->identity->jabatan =='Project Manager'){
 						echo "<a href='".Yii::$app->params['url']."aktivitas/approve?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Approve</a>"; 
 					}
-					
-					//Approval for Project Manager
-					if(Yii::$app->user->identity->jabatan == 'Project Manager'){
-						echo "<a href='".Yii::$app->params['url']."aktivitas/approve?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Approve</a>"; 
-					}
-					
+										
 					echo "</td>";
 					echo "</tr>";
 				}

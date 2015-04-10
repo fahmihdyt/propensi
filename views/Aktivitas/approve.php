@@ -35,6 +35,7 @@
 		<input type='hidden' name='id' value='<?= $data['id'] ?>'>
 		<input type='hidden' name='keterangan' value='<?= $data['keterangan']?>'>
 		<input type='hidden' name='username' value='<?= Yii::$app->user->identity->nama;?>'>
+		<input type='hidden' name='approveSP' value="<?= $data['status_approval_supervi'] ?>">
 		<tr height='50'>
 			
 			<td width="140">
@@ -54,6 +55,9 @@
 		}
 		if($status=='suksesReject'){
 			echo "<div class='alert alert-warning' style='line-height:0px'>Activity Has Been Rejected!</div>";
+		}
+		if($status=='failApprove'){
+			echo "<div class='alert alert-danger' style='line-height:0px'>Activity Should Be Approved by Supervisor Before!</div>";
 		}
 	}
 ?>
