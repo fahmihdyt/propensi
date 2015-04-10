@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Username']) ?>
+    <?= $form->field($model, 'username')->textInput(['id' => 'username', 'placeholder' => 'Username', 'autocomplete' => 'off']) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password']) ?>
+    <?= $form->field($model, 'password')->passwordInput(['id' => 'password', 'placeholder' => 'Password']) ?>
     
         <div class="form-group">
         <div>

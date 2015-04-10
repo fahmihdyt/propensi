@@ -50,8 +50,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                		<img class="img-logo" src="http://localhost/propensi/views/layouts/logo.png">
-                		&nbsp;&mdash;&nbsp;Sistem Manajemen Proyek PT Jaya Anugrah Lestari
+                	<img class="img-logo" src="http://localhost/propensi/views/layouts/logo.png">
                 </a>
             </div>
             <!-- /.navbar-header -->
@@ -91,7 +90,7 @@
                             <a <?php if ($currentUrl == "akun") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>akun"><i class="fa fa-user fa-lg"></i> &nbsp;Account</a>
                         </li>
                         <li>
-                            <a href="<?php echo Yii::$app->params['url']?>aktivitas"><i class="fa fa-folder-open fa-lg"></i> &nbsp;Project</a>
+                            <a <?php if ($currentUrl == "project") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>project"><i class="fa fa-folder-open fa-lg"></i> &nbsp;Project</a>
                         </li>
                         <li>
                             <a <?php if ($currentUrl == "aktivitas") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>aktivitas"><i class="fa fa-list-alt fa-lg"></i> &nbsp;Activity</a>

@@ -345,10 +345,10 @@ table.dataTable thead .sorting:after {
 }
 
 .img-logo {
-	width:200px;
-	height:50px;
-	margin-top:-10px;
-	margin-left:-8px;
+	width:210px;
+	height:70px;
+	margin-top:-15px;
+	margin-left: 5px;
 }
 
 .selected {
@@ -377,15 +377,9 @@ table.dataTable thead .sorting:after {
 	padding-top: 10px;
 }
 
-.loginButton{
-	font-size: 18px;
-  	font-weight: bold;
-  	color: #ffffff;
-}
-
 .img-logo-login{
 	width: 300px;
-	height: 80px;
+	height: 100px;
 	margin-top: 150px;
 }
 
@@ -395,6 +389,34 @@ table.dataTable thead .sorting:after {
   	padding-left: 10px;
   	padding-right: 10px;
   	margin-bottom: -10px;
+}
+
+#username{
+	background-image: url('http://localhost/propensi/views/login/username.png');
+    background-position: 300px 4px;
+    background-size: 20px 25px;
+    background-repeat: no-repeat;
+}
+
+#username:focus{
+	background-image: url('http://localhost/propensi/views/login/username-focus.png');
+    background-position: 300px 4px;
+    background-size: 20px 25px;
+    background-repeat: no-repeat;
+}
+
+#password{
+	background-image: url('http://localhost/propensi/views/login/password.png');
+    background-position: 300px 4px;
+    background-size: 20px 25px;
+    background-repeat: no-repeat;
+}
+
+#password:focus{
+	background-image: url('http://localhost/propensi/views/login/password-focus.png');
+    background-position: 300px 4px;
+    background-size: 20px 25px;
+    background-repeat: no-repeat;
 }
 
 .login-button{
