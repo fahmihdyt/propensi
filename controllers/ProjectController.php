@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Site;
-use app\models\SiteSearch;
+use app\models\Project;
+use app\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SiteController implements the CRUD actions for Site model.
+ * ProjectController implements the CRUD actions for Project model.
  */
-class SiteController extends Controller
+class ProjectController extends Controller
 {
     public function behaviors()
     {
@@ -20,14 +20,14 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['get'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Site models.
+     * Lists all Project models.
      * @return mixed
      */
     public function actionIndex()
@@ -35,32 +35,31 @@ class SiteController extends Controller
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensitmp/web');
     	}
-		
-        $searchModel = new SiteSearch();
+        $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-		$data = Site::find()->all();
+		
+		$data = Project::find()->all();
 		
         return $this->render('index', ['data' => $data]);
     }
 
     /**
-     * Displays a single Site model.
+     * Displays a single Project model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-      	if(Yii::$app->user->isGuest){
+    	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensitmp/web');
     	}
-	    return $this->render('view', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Site model.
+     * Creates a new Project model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -70,7 +69,7 @@ class SiteController extends Controller
     		return $this->redirect('/propensitmp/web');
     	}
 		
-        $model = new Site();
+        $model = new Project();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +81,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Updates an existing Site model.
+     * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -105,28 +104,29 @@ class SiteController extends Controller
     }
 
     /**
-     * Deletes an existing Site model.
+     * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
+    	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Site model based on its primary key value.
+     * Finds the Project model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Site the loaded model
+     * @return Project the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Site::findOne($id)) !== null) {
+        if (($model = Project::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

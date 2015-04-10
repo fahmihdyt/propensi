@@ -56,14 +56,14 @@ class Site extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nama' => 'Nama',
-            'titik_nominal' => 'Titik Nominal',
-            'status_kepemilikan' => 'Status Kepemilikan',
-            'tipe_antena' => 'Tipe Antena',
-            'keterangan' => 'Keterangan',
-            'foto' => 'Foto',
-            'status_kerja' => 'Status Kerja',
-            'proyek' => 'Proyek',
+            'nama' => 'Site Name',
+            'titik_nominal' => 'Nominal Point',
+            'status_kepemilikan' => 'Ownership Status',
+            'tipe_antena' => 'Amtenna Type',
+            'keterangan' => 'Description',
+            'foto' => 'Photo',
+            'status_kerja' => 'Status',
+            'proyek' => 'Project',
         ];
     }
 
@@ -106,4 +106,9 @@ class Site extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Titikkandidat::className(), ['siteId' => 'id']);
     }
+	
+	public function getProject($idproject){
+		$result = Yii::$app->db->createCommand("select nama from proyek where id=$idproject")->queryOne();
+		return $result['nama'];
+	}
 }
