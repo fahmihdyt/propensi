@@ -1,0 +1,154 @@
+create table jabatan(
+	id int AUTO_INCREMENT,
+	jabatan varchar(20),
+	primary key(id)
+)
+
+
+
+create table akun(
+	nik varchar(12) ,
+	nama varchar(30),
+	gender varchar(1),
+	email varchar(50),
+	username varchar(30) not null,
+	password varchar(255) not null,
+	alamat varchar(200),
+	jabatan int,
+	no_telp varchar(30),
+	primary key(nik),
+	foreign key(jabatan) references  jabatan(id) on update cascade on delete cascade
+
+)
+
+create table pengumuman(
+	id int auto_increment,
+	tanggal date,
+	judul varchar(100) not null,
+	isi text not null,
+	creator varchar(12),
+	primary key(id),
+	foreign key(creator) references akun(nik) on update cascade on delete cascade
+)
+
+create table aktivitas(
+	id int auto_increment,
+	tanggal date,
+	judul varchar(100) not null,
+	status varchar(30) not null,
+	foto varchar(200) ,
+	keterangan text not null,
+	status_approval_pm varchar(10),
+	status_approval_supervi varchar(10),
+	creator varchar(12),
+	siteId int,
+	primary key(id),
+	foreign key(creator) references akun(nik) on update cascade on delete cascade,
+	foreign key(siteId) references site(id) on update cascade on delete cascade
+)
+
+create table aktivitas2(
+	id int auto_increment,
+	tanggal date,
+	judul varchar(100) not null,
+	status varchar(30) not null,
+	foto varchar(200) ,
+	keterangan text not null,
+	status_approval_pm varchar(10),
+	status_approval_supervi varchar(10),
+	creator varchar(12),
+	siteId int,
+	primary key(id),
+)
+
+create table site(
+	id int auto_increment,
+	nama varchar(100),
+	titik_nominal(10),
+	status_kepemilikan varchar(50),
+	tipe_antena varchar(20),
+	keterangan text,
+	foto varchar(200),
+	status_kerja varchar(100),
+	proyek int,
+	primary key(id),
+	foreign key(proyek) references proyek(id) on update cascade on delete cascade
+		
+)
+
+create table proyek(
+	id int auto_increment,
+	tanggal_mulai date,
+	nama varchar(200) not null,
+	klienId int,
+	primary ket(id),
+	foreign key(klienId) references klien(id) on update cascade on delete cascade
+
+)
+
+create table issue(
+	id int auto_increment,
+	tanggal date not null,
+	judul varchar(100) not null,
+	jenis varchar(50) ,
+	keterangan text,
+	status varchar(30),
+	creator varchar(12),
+	siteId int,
+	primary key(id),
+	foreign key(creator) references akun(nik) on update cascade on delete cascade,
+	foreign key(siteId) references site(id) on update cascade on delete cascade	
+	
+)
+
+create table titikKandidat(
+	id int auto_increment,
+	titik_kandidat varchar(10) not null,
+	siteId int,
+	primary key(id),
+	foreign key (siteId) references site(id) on update cascade on delete cascade
+)
+
+create table klien(
+	id int auto_increment,
+	nama varchar(100) not null,
+	alamat text,
+	email varchar(50),
+	no_telp varchar(30),
+	primary key(id)
+)
+
+create table PICKlien(
+	id int auto_increment,
+	nama varchar(100) not null,
+	no_telp varchar(50) not null,
+	klienId int,
+	primary key(id),
+	foreign key(klienId) references klien(id) on update cascade on delete cascade
+)
+
+create table projectTeam(
+	id int auto_increment,
+	proyekId int,
+	nik varchar(12),
+	primary key(id),
+	foreign key(proyekId) references proyek(id) on update cascade on delete cascade,
+	foreign key(nik) references akun(nik) on update cascade on delete cascade _
+)
+
+create table barisMilestone(
+	id int auto_increment,
+	tanggal date not null,
+	kategoriId int,
+	siteId int,
+	primary key(id),
+	foreign key(kategoriId) references kategori(id) on update cascade on delete cascade,
+	foreign key(siteId) references site(id) on update cascade on delete cascade
+	
+)
+
+create table kategori(
+	id int auto_increment,
+	nama varchar(100) not null,
+	primary key(id)
+)
