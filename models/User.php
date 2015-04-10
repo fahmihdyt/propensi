@@ -117,9 +117,9 @@ class user extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return null;
     }
 	
-	public function validatePassword($password)
+	public function validatePassword($password,$username)
     {	
-    	$password=Yii::$app->db->createCommand("select password from akun where password='$password'")->queryOne();
+    	$password=User::findOne(['username' => $username, 'password' => $password]);
         if(count($password)==0){
         	return false;
         }
