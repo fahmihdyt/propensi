@@ -59,7 +59,7 @@ class Site extends \yii\db\ActiveRecord
             'nama' => 'Site Name',
             'titik_nominal' => 'Nominal Point',
             'status_kepemilikan' => 'Ownership Status',
-            'tipe_antena' => 'Amtenna Type',
+            'tipe_antena' => 'Antenna Type',
             'keterangan' => 'Description',
             'foto' => 'Photo',
             'status_kerja' => 'Status',
