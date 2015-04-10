@@ -29,6 +29,8 @@ class AktivitasController extends Controller
 
 	/*Bertanya sebelum menghapus*/
 	
+	public $layout="main";
+	
     /**
      * Lists all Aktivitas models.
      * @return mixed
@@ -38,8 +40,11 @@ class AktivitasController extends Controller
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
+		
         $searchModel = new AktivitasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		
 		$model=new Aktivitas();
 		$data=$model->getAll();
         return $this->render('index', [
@@ -64,8 +69,8 @@ class AktivitasController extends Controller
             'name'=>$name
         ]);
     }
-
-    /**
+	
+	/**
      * Creates a new Aktivitas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -126,7 +131,54 @@ class AktivitasController extends Controller
         return $this->redirect(['index']);
     }
 	
-	
+	/**
+	 * Approval Method
+	 * Untuk melakukan approval dengan diberikan notes di keterangan!
+	 */
+	 public function actionApprove($id){
+	 	if (\Yii::$app->user->isGuest) {
+            return $this->redirect('/propensi/web');
+        }
+		
+		$model=$this->findModel($id);
+		if(!Yii::$app->user->identity->jabatan=='Supervisor' || !Yii::$app->user->identity->jabatan=='Project Manager')
+		{
+			return $this->redirect('/propensi/web');
+		}	
+		
+		return $this->render('approve',['data'=>$model]);
+	 }	
+	 
+	 /**
+	  * Approval Process Method
+	  */
+	  public function actionApproveprocess(){
+	  	 $data=array();	
+	  	 $data['id']=$_GET['id'];
+	  	 $data['user']=$_GET['user'];
+		 $data['status']=$_GET['statusApproval'];
+		 $data['notes']=$_GET['notes'];
+		 $data['keterangan']=$_GET['keterangan'];
+		 $data['username']=$_GET['username'];
+		 
+		 $model=new Aktivitas();
+		 
+		 //Approval Supervisor
+		 if($data['user']=='Supervisor'){
+		 	if($model->approve($data)=='1'){
+		 		if($data['status']=='approve')
+		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesApprove");
+		 		if($data['status']=='reject')
+					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesReject");
+				}			
+		 }
+		 //return $model->approve($data)
+				
+		 //Approval PM
+		 if($data['user']=='Project Manager'){
+		 	
+		 }
+	  } 
 
     /**
      * Finds the Aktivitas model based on its primary key value.

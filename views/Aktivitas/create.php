@@ -5,10 +5,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Aktivitas */
-
-$this->title = 'Create Aktivitas';
-$this->params['breadcrumbs'][] = ['label' => 'Aktivitas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aktivitas-create">
 

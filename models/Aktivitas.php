@@ -38,14 +38,15 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             [['tanggal'], 'safe'],
-            [['judul', 'status', 'keterangan'], 'required'],
+            [['judul', 'status', 'keterangan','tanggal'], 'required'],
             [['keterangan'], 'string'],
             [['siteId'], 'integer'],
             [['judul'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 30],
             [['foto'], 'string', 'max' => 200],
             [['status_approval_pm', 'status_approval_supervi'], 'string', 'max' => 10],
-            [['creator'], 'string', 'max' => 12]
+            [['creator'], 'string', 'max' => 12],
+            
         ];
     }
 
@@ -101,6 +102,44 @@ class Aktivitas extends \yii\db\ActiveRecord
 		$hasil= Yii::$app->db->createCommand("select * from site where id='$siteId'")->queryOne();
 		return $hasil['nama'];
 	}
+
+	/*
+	 * Method for set approval by supervisor true!
+	 * @param $id
+	 */
+	 public function approve($data){
+	 	if($data['status']=='approve')
+			$statusNote='Approval';
+		else
+			$statusNote='Reject';
+		
+	 	$newKeterangan=$data['keterangan'].
+		 "<p>
+		 	<strong>".$statusNote." Notes:<br></strong>
+		 	".date('d/m/Y')." - ".$data['username']." :".$data['notes']."
+		 	<br >
+		  </p>";
+		  
+		  if($data['status']=='approve'){
+		  	$status=1;
+		  }
+		  else{
+		  	$status=0;
+		  }
+		  
+		  if($data['user']=='Supervisor'){
+		  	$sql="update aktivitas set keterangan='$newKeterangan',status_approval_supervi=$status where id=$data[id]";
+		  }
+		  else if($data['user']=='Project Manager'){
+		  	$sql="update aktivitas set keterangan='$newKeterangan',status_approval_pm='$status' where id=$data[id]";
+		  }
+		  
+		 //return $sql;
+		 $hasil=Yii::$app->db->createCommand($sql)->execute();
+		 return $hasil;
+		 
+	 	
+	 }
 	
 
 

@@ -43,11 +43,27 @@ $this->title = $model->judul;
 		</tr>
 		<tr height='40'>
 			<td><label>Approval Supervisor</label></td>
-			<td>: <?php echo $model->status_approval_supervi?></td>
+			<td>: <?php if($model['status_approval_supervi']==1){
+						echo 'Approved ';
+					}
+					else if($model['status_approval_supervi']==0 && !is_null($model['status_approval_supervi'])){
+						echo 'Rejected';
+					}
+					else{
+						echo '';
+					}?></td>
 		</tr>
 		<tr height='40'>
 			<td><label>Approval PM</label></td>
-			<td>: <?php echo $model->status_approval_pm;?></td>
+			<td>: <?php if($model['status_approval_pm']==1){
+						echo 'Approved';
+					}
+					else if($model['status_approval_pm']==0 && !is_null($model['status_approval_pm'])){
+						echo 'Rejected';
+					}
+					else{
+						echo '';
+					}?></td>
 		</tr>
 		<tr height='40'>
 			<td><label>Notes</label></td>
@@ -57,7 +73,10 @@ $this->title = $model->judul;
 		<div id='keterangan' style='border:3px solid; border-radius:5px; padding:10px; margin-bottom:10px'>
 			<?php echo $model->keterangan?>
 		</div>
-		 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		
+		 <?php if($model['creator']==Yii::$app->user->identity->nik && !($model['status_approval_pm']==1 || $model['status_approval_supervi']==1)){ ?>
+		 	<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		 <?php } ?>
 		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
     
 

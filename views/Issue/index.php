@@ -41,7 +41,7 @@ $model=new Issue();
     		$i=1;
     		foreach($data as $row){?>
     		<tr>
-    			<td><?= $i ?></td>
+    			<td><?= $row['tanggal'] ?></td>
     			<td><a href='<?php echo Yii::$app->params['url']?>issue/view?id=<?= $row['id'] ?>'><?= $row['judul'] ?></a></td>
     			<td><?= $model->findCreator($row['creator']) ?></td>
     			<td><?= $model->findLocation($row['siteId']) ?></td>
@@ -60,12 +60,3 @@ $model=new Issue();
    
 
 </div>
-
-<!-- 'id',
-            'tanggal',
-            'judul',
-            'jenis',
-            'keterangan:ntext',
-            // 'status',
-            // 'creator',
-            // 'siteId',-->

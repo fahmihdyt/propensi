@@ -18,16 +18,15 @@ $model=new Aktivitas();
     	<hr>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+			
     <p>
-        <?= Html::a('Create Aktivitas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Aktivitas', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
 	<!--Proses Export Tabel-->
 	<table class='table table-striped'>
 		<thead style=''>
 			<tr>
-				<th rowspan='2'>No.</th>
 				<th rowspan='2'>Date</th>
 				<th rowspan='2'>Activity</th>
 				<th rowspan='2'>Site</th>
@@ -45,17 +44,54 @@ $model=new Aktivitas();
 				$i=1;
 				foreach($data as $row){
 					echo "<tr>";
-					echo "<td>".$i++."</td>";
 					echo "<td>".$row['tanggal']."</td>";
 					echo "<td><a href='".Yii::$app->params['url']."aktivitas/view?id=$row[id]'>".$row['judul']."</a></td>";
 					echo "<td>".$model->findLocation($row['siteId'])."</td>";
 					echo "<td>".$model->findCreator($row['creator'])."</td>";
-					echo "<td>".$row['status_approval_supervi']."</td>";
-					echo "<td>".$row['status_approval_pm']."</td>";
-					echo "<td>
-						  <a href='".Yii::$app->params['url']."aktivitas/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
-						  <a href='".Yii::$app->params['url']."aktivitas/delete?id=$row[id]'?><?php><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>".
-						  "</td>";
+					
+					//Status Approval by Supervisor
+					if($row['status_approval_supervi']==1){
+						echo '<td> Approved </td>';
+					}
+					else if($row['status_approval_supervi']==0 && !is_null($row['status_approval_supervi'])){
+						echo '<td> Rejected </td>';
+					}
+					else{
+						echo '<td></td>';
+					}
+
+					//Status Approval by project manager
+					if($row['status_approval_pm']==1){
+						echo '<td> Approved </td>';
+					}
+					else if($row['status_approval_pm']==0 && !is_null($row['status_approval_pm'])){
+						echo '<td> Rejected </td>';
+					}
+					else{
+						echo '<td></td>';
+					}
+
+					//Action									
+					echo "<td>";
+					
+					//Edit & Delete hanya untuk miliknya
+					if($row['creator']== Yii::$app->user->identity->nik && !($row['status_approval_pm']==1 || $row['status_approval_supervi']==1))
+					{
+						echo "<a href='".Yii::$app->params['url']."aktivitas/update?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit </a>
+						  	  <a href='".Yii::$app->params['url']."aktivitas/delete?id=$row[id]'?><?php><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete </a>";
+					}
+					
+					//Approval for Supervisor
+					if(Yii::$app->user->identity->jabatan == 'Supervisor'){
+						echo "<a href='".Yii::$app->params['url']."aktivitas/approve?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Approve</a>"; 
+					}
+					
+					//Approval for Project Manager
+					if(Yii::$app->user->identity->jabatan == 'Project Manager'){
+						echo "<a href='".Yii::$app->params['url']."aktivitas/approve?id=$row[id]'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Approve</a>"; 
+					}
+					
+					echo "</td>";
 					echo "</tr>";
 				}
 			?>			
@@ -63,3 +99,29 @@ $model=new Aktivitas();
 	</table>
 	
 </div>
+
+<!-- Notifikasi jika approval by Supervisor sukses-->
+<?php if(isset($_GET['status']) && $_GET['status']=='ApproveSukses'){?>
+	<script> approveSV(); </script>
+<?php } ?>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                   <h4 class="modal-title" id="myModalLabel">Approval Activity</h4>
+              </div>
+              <div class="modal-body">
+	          </div>
+	          <div class="modal-footer">
+	               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	               <button type="button" class="btn btn-primary">Save changes</button>
+	          </div>
+	     </div>
+               <!-- /.modal-content -->
+     </div>
+         <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

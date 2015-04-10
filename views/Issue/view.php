@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php echo $model->keterangan?>
 		</div>
 		 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
 
    
 

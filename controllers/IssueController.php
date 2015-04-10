@@ -33,7 +33,7 @@ class IssueController extends Controller
     public function actionIndex()
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 		
         $data=new Issue();
@@ -51,7 +51,7 @@ class IssueController extends Controller
     public function actionView($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 		
     	$model=$this->findModel($id);
@@ -68,7 +68,7 @@ class IssueController extends Controller
     public function actionCreate()
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 		
         $model = new issue();
@@ -91,7 +91,7 @@ class IssueController extends Controller
     public function actionUpdate($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 		
         $model = $this->findModel($id);
@@ -114,7 +114,7 @@ class IssueController extends Controller
     public function actionDelete($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 		
         $this->findModel($id)->delete();
@@ -132,7 +132,7 @@ class IssueController extends Controller
     protected function findModel($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect('/propensiTemp/web');
         }
 
         if (($model = issue::findOne($id)) !== null) {
