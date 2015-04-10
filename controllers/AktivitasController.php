@@ -96,7 +96,7 @@ class AktivitasController extends Controller
         $model = new Aktivitas();
 		$modelSite=Site::find()->all();
 		
-		 if ($model->load(Yii::$app->request->post())){
+		 if ($model->load(Yii::$app->request->post()) ){
 		 	 //store
 		 	 
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
@@ -111,13 +111,14 @@ class AktivitasController extends Controller
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
+				
 			 	if($model->save()){
                 	$imageName->saveAs($path);
                 	return $this->redirect(['view', 'id'=>$model->id]);
-            	} else {
-                // error in saving model
-            	}
-			 }		 
+            	} 
+            	else {}
+				}
+			 	 
 		 }
 		 else{
 		 	return $this->render('create', [
@@ -162,7 +163,7 @@ class AktivitasController extends Controller
 			return $this->redirect('/propensi/web/index.php/aktivitas');
 		}
 		
-		if ($model->load(Yii::$app->request->post())){
+		if ($model->load(Yii::$app->request->post())  && $model->validate()){
 		 	 //store
 		 	 
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
@@ -177,6 +178,7 @@ class AktivitasController extends Controller
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
+				
 			 	if($model->save()){
                 	$imageName->saveAs($path);
                 	return $this->redirect(['view', 'id'=>$model->id]);
