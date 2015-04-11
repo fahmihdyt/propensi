@@ -158,7 +158,8 @@ class AktivitasController extends Controller
 			return $this->redirect('/propensi/web/index.php/aktivitas');
 		}
 		
-		if ($model->load(Yii::$app->request->post())  && $model->validate()){
+		//mulai proses upload photo
+		if ($model->load(Yii::$app->request->post())){
 		 	
 			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
@@ -184,7 +185,7 @@ class AktivitasController extends Controller
 		 else{
 		 	return $this->render('update', [
                 'model' => $model]);
-		 }
+		 } //end proses upload photo
     }
 
     /**

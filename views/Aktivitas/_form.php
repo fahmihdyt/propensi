@@ -20,7 +20,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 
 <div class="aktivitas-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?> <!--Enctype untuk allow upload photo-->
 
 	<?= $form->field($model, 'judul')->textInput(['maxlength' => 100,'placeholder'=>'Nama Aktivitas']) ?>
 	
@@ -28,7 +28,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 
     <?= $form->field($model, 'status')->dropDownList(['Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
 
-    <?= $form->field($model, 'foto')->fileInput() ?>
+    <?= $form->field($model, 'foto')->fileInput() ?> <!--Form untuk upload photo-->
     
     <?= $form->field($model, 'siteId')->dropDownList($data,['id'=>'nama']) ?>
 
