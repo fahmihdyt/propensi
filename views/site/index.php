@@ -12,11 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
 
+	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <hr></div>
 
     <p>
-        <?= Html::a('Create Site', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Create New Site', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     
     <table class='table table-striped'>
