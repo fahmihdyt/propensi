@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<?= $row['tanggal'] ?>
 					</a>
 				</td>
-				 																					
+																						
 				<td><?= $model->getKategoriName($row['kategoriId'])?>
 				 </td>
 					<td>
