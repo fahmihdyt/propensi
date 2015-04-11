@@ -18,41 +18,41 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr>
     
     <!--Detail Body-->
-	<table style='font-size:18px;'>
-		<tr height='40'>
+	<table style='font-size:14px;'>
+		<tr height='20'>
 			<td><label>Date</label></td>
 			<td>: <?php echo $model->tanggal;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td width="190"><label>Issue</label></td>
 			<td>: <?php echo $model->judul;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Type</label></td>
 			<td>: <?php echo $model->jenis;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Status</label></td>
 			<td>: <?php echo $model->status;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td width="100"><label>Creator</label></td>
 			<td>: <?php echo $model->findCreator($model->creator);?></td>
 		</tr>	
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Location</label></td>
 			<td>: <?php echo $model->findLocation($model->siteId);?></td>
 		</tr>			
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Notes</label></td>
 			<td>:</td>
 		</tr>		
 	</table>
-		<div id='keterangan' style='border:3px solid; border-radius:5px; padding:10px; margin-bottom:10px'>
+		<div id='keterangan' style='border:1px solid black; padding:5px; border-radius:5px; margin-bottom:5px;'>
 			<?php echo $model->keterangan?>
 		</div>
 		 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?>
+		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?><br><br>
 
    
 

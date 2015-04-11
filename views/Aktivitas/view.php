@@ -16,29 +16,29 @@ $this->title = $model->judul;
     <hr>
     
     <!--Detail Body-->
-	<table style='font-size:18px;'>
-		<tr height='40'>
+	<table style='font-size:14px;'>
+		<tr height='20'>
 			<td><label>Date</label></td>
 			<td>: <?php echo $model->tanggal;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td width="190"><label>Activity</label></td>
 			<td>: <?php echo $model->judul;?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td width="100"><label>Creator</label></td>
 			<td>: <?= $model->findCreator($model->creator) ?></td>
 		</tr>	
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Location</label></td>
 			<td>: <?php echo $model->findLocation($model->siteId);?></td>
 		</tr>	
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Status</label></td>
 			<td>: <?php echo $model->status;?></td>
 		</tr>
 		
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Approval Supervisor</label></td>
 			<td>: <?php if($model['status_approval_supervi']==1){
 						echo 'Approved ';
@@ -50,7 +50,7 @@ $this->title = $model->judul;
 						echo '';
 					}?></td>
 		</tr>
-		<tr height='40'>
+		<tr height='20'>
 			<td><label>Approval PM</label></td>
 			<td>: <?php if($model['status_approval_pm']==1){
 						echo 'Approved';
@@ -62,8 +62,9 @@ $this->title = $model->judul;
 						echo '';
 					}?></td>
 		</tr>
-		<tr height='40'>
-			<td colspan='2'><label>Photo</label></td>
+		<tr height='20'>
+			<td colspan='1'><label>Photo</label></td>
+			<td>: </td>
 		</tr>
 		<tr>
 			<?php if($model['foto']!=''){?>
@@ -72,10 +73,10 @@ $this->title = $model->judul;
 		</tr>
 		<tr height='40'>
 			<td><label>Notes</label></td>
-			<td>:</td>
+			<td>: </td>
 		</tr>		
 	</table>
-		<div id='keterangan' style='border:3px solid; border-radius:5px; padding:10px; margin-bottom:10px'>
+		<div id='keterangan' style='border:1px solid black; padding:5px; border-radius:5px; margin-bottom:10px;'>
 			<?php echo $model->keterangan?>
 		</div>
 		
@@ -83,7 +84,7 @@ $this->title = $model->judul;
 		 	<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 		 <?php } ?>
 		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
-    	<br>
+    	<br><br>
 
     
 

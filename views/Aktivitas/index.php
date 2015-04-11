@@ -8,7 +8,7 @@ use app\models\Aktivitas;
 /* @var $searchModel app\models\AktivitasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Aktivitas';
+$this->title = 'Activity';
 $this->params['breadcrumbs'][] = $this->title;
 $model=new Aktivitas();
 ?>
@@ -23,7 +23,7 @@ $model=new Aktivitas();
 	$jabatan=Yii::$app->user->identity->jabatan;
 	if( $jabatan == 'Supervisor' || $jabatan== 'Coordinator' || $jabatan=='Administrator'){?>		
     <p>
-        <?= Html::a('Create Aktivitas', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Create New Activity', ['create'], ['class' => 'btn btn-primary']) ?>
     </p><?php } ?>
 
 	<!--Proses Export Tabel-->

@@ -97,27 +97,31 @@ class AktivitasController extends Controller
 		$modelSite=Site::find()->all();
 		
 		 if ($model->load(Yii::$app->request->post()) ){
-		 	 //store
 		 	 
+			 //store File
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
-			 //return $imageName->name;
+							 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
 			 		return $this->redirect(['view', 'id'=>$model->id]);
 			 	}
 			 }
 			 else{
+			 	 //get file extension
+				$hasil=explode('.',$imageName);
+				$ext=$hasil[count($hasil)-1];
+				 
 			 	$model->foto = $imageName->name;
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
-				
-			 	if($model->save()){
+				if($model->validate())	{			
+			 	if($model->save() ){
                 	$imageName->saveAs($path);
                 	return $this->redirect(['view', 'id'=>$model->id]);
             	} 
             	else {}
-				}
+				}}
 			 	 
 		 }
 		 else{
@@ -126,15 +130,6 @@ class AktivitasController extends Controller
                 'site'=>$modelSite,
             ]);
 		 }
-
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'site'=>$modelSite,
-            ]);
-        }*/
     }
 
     /**
@@ -164,10 +159,10 @@ class AktivitasController extends Controller
 		}
 		
 		if ($model->load(Yii::$app->request->post())  && $model->validate()){
-		 	 //store
-		 	 
+		 	
+			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
-			 //return $imageName->name;
+			
 			 if(!isset($imageName)){
 			 	if($model->save()){
 			 		return $this->redirect(['view', 'id'=>$model->id]);
@@ -178,8 +173,7 @@ class AktivitasController extends Controller
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
-				
-			 	if($model->save()){
+				if($model->save()){
                 	$imageName->saveAs($path);
                 	return $this->redirect(['view', 'id'=>$model->id]);
             	} else {
@@ -189,17 +183,8 @@ class AktivitasController extends Controller
 		 }
 		 else{
 		 	return $this->render('update', [
-                'model' => $model,
-                ]);
+                'model' => $model]);
 		 }
-
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }*/
     }
 
     /**

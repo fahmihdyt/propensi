@@ -21,7 +21,7 @@ $model=new Issue();
     
     <!--Tombol Create New-->
     <p>
-        <?= Html::a('Create Issue', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Create New Issue', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     
     <!--Table-->
