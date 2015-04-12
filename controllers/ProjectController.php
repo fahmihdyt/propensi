@@ -8,6 +8,8 @@ use app\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Site;
+use app\models\Klien;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -33,7 +35,7 @@ class ProjectController extends Controller
     public function actionIndex()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -50,11 +52,17 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+    	$model=$this->findModel($id);
+    	$site=Site::findAll(['proyek' =>$id]);
+		$klien=Klien::findOne(['id'=>$model['klienId']]);
+		
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'site' => $site,
+            'klien'=> $klien
         ]);
     }
 
@@ -66,7 +74,7 @@ class ProjectController extends Controller
     public function actionCreate()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
 		
         $model = new Project();
@@ -89,7 +97,7 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
 		
         $model = $this->findModel($id);
