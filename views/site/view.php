@@ -14,7 +14,7 @@ $idProject = $model->proyek;
 $model->proyek = $model->getProject($idProject);
 
 ?>
-<div class="site-view">
+<div class="site-view col-lg-12">
 
 	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
