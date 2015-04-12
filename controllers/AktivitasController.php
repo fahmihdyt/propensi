@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\FileHelper;
 
 /**
  * AktivitasController implements the CRUD actions for Aktivitas model.
@@ -115,13 +116,17 @@ class AktivitasController extends Controller
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
-				if($model->validate())	{			
-			 	if($model->save() ){
-                	$imageName->saveAs($path);
-                	return $this->redirect(['view', 'id'=>$model->id]);
-            	} 
-            	else {}
-				}}
+				if($model->foto && $model->validate()){			
+				 	if($model->save() ){
+	                	$imageName->saveAs($path);
+	                	return $this->redirect(['view', 'id'=>$model->id]);
+	            	} 
+	            	else {}
+					}
+				else{
+					return 'gagal upload';
+				}
+				}
 			 	 
 		 }
 		 else{

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Site;
+//use yii\widgets\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Aktivitas */
@@ -29,6 +30,11 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <?= $form->field($model, 'status')->dropDownList(['Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
 
     <?= $form->field($model, 'foto')->fileInput() ?> <!--Form untuk upload photo-->
+    <?php 
+    	//echo $form->field($model, 'foto')->widget(FileInput::classname(), [
+	    //	'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']]
+		//]); 
+	?>
     
     <?= $form->field($model, 'siteId')->dropDownList($data,['id'=>'nama']) ?>
 

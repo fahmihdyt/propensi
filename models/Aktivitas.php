@@ -43,7 +43,7 @@ class Aktivitas extends \yii\db\ActiveRecord
             [['siteId'], 'integer'],
             [['judul'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 30],
-            ['foto', 'file','extensions' => ['png','jpg']], //validasi untuk file 
+            [['foto'], 'file', 'extensions' => 'gif, jpg'], //validasi untuk file 
             [['status_approval_pm', 'status_approval_supervi'], 'string', 'max' => 10],
             [['creator'], 'string', 'max' => 12],
             
