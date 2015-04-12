@@ -45,7 +45,7 @@ class Site extends \yii\db\ActiveRecord
             [['titik_nominal'], 'string', 'max' => 10],
             [['status_kepemilikan'], 'string', 'max' => 50],
             [['tipe_antena'], 'string', 'max' => 20],
-            [['foto'], 'string', 'max' => 200]
+            ['foto', 'file','extensions' => ['png','jpg']]
         ];
     }
 

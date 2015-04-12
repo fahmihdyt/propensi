@@ -14,7 +14,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
 <div class="site-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+   <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 100]) ?>
 
@@ -26,9 +26,9 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'foto')->textInput(['maxlength' => 200]) ?>
+    <?= $form->field($model, 'foto')->fileinput() ?>
 
-    <?= $form->field($model, 'status_kerja')->textInput(['maxlength' => 100]) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['Start'=>'Start','On Process'=>'On Process','Done'=>'Done']) ?>
 
     <?= $form->field($model, 'proyek')->dropDownList($data, ['id' => 'proyek']) ?>
 

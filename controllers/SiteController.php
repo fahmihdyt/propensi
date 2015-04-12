@@ -102,6 +102,34 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+		
+		if ($model->load(Yii::$app->request->post())){
+		 	
+			 //store file
+		 	 $imageName = UploadedFile::getInstance($model, 'foto');
+			
+			 if(!isset($imageName)){
+			 	if($model->save()){
+			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 	}
+			 }
+			 else{
+			 	$model->foto = $imageName->name;
+			 	$path = 'upload/'.$model->foto;
+			 
+				//proses save dan upload
+				if($model->save()){
+                	$imageName->saveAs($path);
+                	return $this->redirect(['view', 'id'=>$model->id]);
+            	} else {
+                // error in saving model
+            	}
+			 }		 
+		 }
+		 else{
+		 	return $this->render('update', [
+                'model' => $model]);
+		 } //end proses upload photo
     }
 
     /**
