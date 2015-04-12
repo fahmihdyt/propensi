@@ -132,10 +132,15 @@ class AkunController extends Controller
 		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
         	return $this->redirect('/propensi/web');
         }
-		
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+		if(\Yii::$app->user->identity->nik !== $id){
+        	$this->findModel($id)->delete();
+        	return $this->redirect(['index']);
+		}
+		
+		else{
+			return $this->redirect(['index']);
+		}
     }
 
     /**

@@ -103,10 +103,11 @@
                         <li>
                             <a <?php if ($currentUrl == "klien") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>klien"><i class="fa fa-suitcase fa-lg"></i> &nbsp;Client</a>
                         </li>
-                        <?php if($privilege == "Administrator") { ?>
+                        <?php if($privilege == "Administrator" || $privilege == "Project Manager") { ?>
                         <li>
                             <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bar-chart-o fa-lg"></i> &nbsp;Report</a>
-                        </li>
+                        </li><?php } ?>
+                        <?php if($privilege == "Administrator") { ?>
                         <li>
                             <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bullhorn fa-lg"></i> &nbsp;Announcement</a>
                         </li><?php } ?>
