@@ -14,7 +14,7 @@ $idClient = $model->klienId;
 $model->klienId = $model->getClient($idClient);
 
 ?>
-<div class="project-view">
+<div class="project-view col-lg-12">
 
 	<div style="margin-top: 0px; padding-top: 25px;">
     <h1><?= Html::encode($this->title) ?></h1>
