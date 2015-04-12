@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use app\models\Aktivitas;
+use app\models\Issue;
+use app\models\Barismilestone;
 /**
  * SiteController implements the CRUD actions for Site model.
  */
@@ -33,7 +36,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
 		
         $searchModel = new SiteSearch();
@@ -51,11 +54,17 @@ class SiteController extends Controller
      */
     public function actionView($id)
     {
-      	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    	if(Yii::$app->user->isGuest){
+    		return $this->redirect('/propensi/web');
     	}
+		$barisms=Barismilestone::findAll(['siteId' => $id]);
+    	$activity=Aktivitas::findAll(['siteId' => $id]);
+		$issue=Issue::findAll(['siteId' => $id]);
 	    return $this->render('view', [
             'model' => $this->findModel($id),
+            'barisms' => $barisms,
+            'activity' => $activity,
+            'issue' => $issue
         ]);
     }
 
@@ -67,18 +76,44 @@ class SiteController extends Controller
     public function actionCreate()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect('/propensi/web');
     	}
 		
         $model = new Site();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
+        if ($model->load(Yii::$app->request->post()) ){
+		 	 
+			 //store File
+		 	 $imageName = UploadedFile::getInstance($model, 'foto');
+							 			 
+			 if(!isset($imageName)){
+			 	if($model->save()){
+			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 	}
+			 }
+			 else{
+			 	 //get file extension
+				$hasil=explode('.',$imageName);
+				$ext=$hasil[count($hasil)-1];
+				 
+			 	$model->foto = $imageName->name;
+			 	$path = 'upload/'.$model->foto;
+			 
+				//proses save dan upload
+				if($model->validate())	{			
+			 	if($model->save() ){
+                	$imageName->saveAs($path);
+                	return $this->redirect(['view', 'id'=>$model->id]);
+            	} 
+            	else {}
+				}}
+			 	 
+		 }
+		 else{
+		 	return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+		 }
     }
 
     /**
