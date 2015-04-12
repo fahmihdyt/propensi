@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\Client;
+use app\models\Klien;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Project */
 /* @var $form yii\widgets\ActiveForm */
 
-$data = ArrayHelper::map(Client::find()->asArray()->all(),'id', 'nama');
+$data = ArrayHelper::map(Klien::find()->asArray()->all(),'id', 'nama');
 ?>
 
 <div class="project-form">

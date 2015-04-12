@@ -26,7 +26,7 @@ $model->klienId = $model->getClient($idClient);
             'id',
             'nama',
             'tanggal_mulai',
-            'klienId',
+            'klienId'
         ],
     ]) ?>
     

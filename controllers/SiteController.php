@@ -8,7 +8,7 @@ use app\models\SiteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * SiteController implements the CRUD actions for Site model.
  */
@@ -95,26 +95,23 @@ class SiteController extends Controller
 		
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
 		
 		if ($model->load(Yii::$app->request->post())){
 		 	
 			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
-			
+			 //return $imageName;
+			// return $imageName;
+			//$model=new Site();
 			 if(!isset($imageName)){
 			 	if($model->save()){
 			 		return $this->redirect(['view', 'id'=>$model->id]);
 			 	}
+				//return "foto gak kebaca";
 			 }
 			 else{
 			 	$model->foto = $imageName->name;
+				// return $imageName->name;
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
