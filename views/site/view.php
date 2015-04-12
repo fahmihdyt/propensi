@@ -14,7 +14,7 @@ $idProject = $model->proyek;
 $model->proyek = $model->getProject($idProject);
 
 ?>
-<div class="site-view col-lg-12">
+<div class="site-view">
 
 	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -68,6 +68,7 @@ $model->proyek = $model->getProject($idProject);
 		</tr>
 	</table>
 	
+	<div class='row'>
 	<div class='col-lg-4' style='margin-left:-15px; margin-top:5px;'>
 	    <div class="panel panel-red" style='margin-top:10px;'>
 	        <div class="panel-heading">
@@ -141,6 +142,7 @@ $model->proyek = $model->getProject($idProject);
 			<a href="<?php echo Yii::$app->params['url']?>site/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
 			<?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     	</p>
+   </div>
    </div>
 
 </div>
