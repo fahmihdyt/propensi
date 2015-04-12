@@ -47,36 +47,32 @@ $model->klienId = $model->getClient($idClient);
     <div class='col-lg-7' style='margin-left:-15px; margin-top:5px;'>
 	    <div class="panel panel-red" style='margin-top:10px;'>
 	        <div class="panel-heading">
-	             Site on Project
+	            <strong>Site on Project</strong>
 	        </div>
 	        <div class="panel-body">
-	            <table class='table table-striped'>
+	        	<table class='table table-striped'>
 	            	<thead>
 	            		<th>Site Name</th>
 	            		<th>Nominal Coordinates</th>
-	            		<th>Ownership</th>
+	            		<th>Work Status</th>
 	            	</thead>
 	            	<?php foreach($site as $row){ ?>
 	            	<tr>
 	            		<td><a href="<?php echo Yii::$app->params['url']."site/view?id=$row[id]"?>"><?php echo $row['nama']; ?></a></td>
 	            		<td><?php echo $row['titik_nominal']; ?></td>
-	            		<td><?php echo $row['status_kepemilikan']; ?></td>            		
+	            		<td><?php echo $row['status_kerja']; ?></td>            		
 	            	</tr><?php } ?>
 	            </table>
+	            <a href="<?php echo Yii::$app->params['url']?>site/create" class='btn btn-primary' style='color:white; float:right;'>Create New Site</a>&nbsp;
+		        
 	        </div>
 	    </div>
     </div>
-
-	<p>
-	    <a href="<?php echo Yii::$app->params['url']?>project/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
-		<a href="<?php echo Yii::$app->params['url']?>project/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this site?')">Delete </a>&nbsp;
-		<?= Html::a('OK', ['index'], ['class' => 'btn btn-default']) ?>
-    </p>
-    
-    <!--<p>
+       
+   <div class='col-lg-12' style='margin-left:-15px;'>
         <a href="<?php echo Yii::$app->params['url']?>project/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
 		<a href="<?php echo Yii::$app->params['url']?>project/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
-		<?= Html::a('OK', ['index'], ['class' => 'btn btn-default']) ?>
-    </p>-->
+		<?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
+   </div>
     
 </div>
