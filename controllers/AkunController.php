@@ -39,7 +39,7 @@ class AkunController extends Controller
         	return $this->redirect('/propensi/web');
         }
 		
-		$data = Akun::find()->orderBy('jabatan')->all();
+		$data = Akun::find()->orderBy(['jabatan' => 'ASC', 'username' => 'ASC'])->all();
 		
         return $this->render('index', ['data' => $data]);
     }

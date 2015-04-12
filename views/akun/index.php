@@ -45,13 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
     		foreach($data as $row){ ?>
     			<tr>
     				<td><?= $i++ ?></td>
-    				<td><?= $row->username ?></td>
+    				<td>
+    					<a href="<?php echo Yii::$app->params['url']?>akun/view?id=<?php echo $row->nik ?>"><?= $row->username ?></a>
+    				</td>
     				<td><?= $row->nama ?></td>
     				<td><?= $row->jabatan ?></td>
     				<td>
-    					<a href="<?php echo Yii::$app->params['url']?>akun/view?id=<?php echo $row->nik ?>">
-    						<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span> View  
-    					</a>&nbsp;
     					<?php if($privilege == "Administrator" || $user == $row->nik){ ?>
     					<a href="<?php echo Yii::$app->params['url']?>akun/update?id=<?php echo $row->nik ?>">
     						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit  

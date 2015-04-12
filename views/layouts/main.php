@@ -33,6 +33,7 @@
     <![endif]-->
     
     <link rel="shortcut icon" href="http://localhost/propensi/views/layouts/semi-logo.png" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300&subset=latin,latin-ext">
 
 </head>
 
@@ -81,6 +82,7 @@
                         	$urlName = $_SERVER['REQUEST_URI'];
                         	$url = explode('/', $urlName);
 							$currentUrl = $url[4];
+							$privilege = Yii::$app->user->identity->jabatan;
 							{
                          ?>
                         <li>
@@ -99,14 +101,15 @@
                             <a <?php if ($currentUrl == "issue") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-warning fa-lg"></i> &nbsp;Issue</a>
                         </li>
                         <li>
-                            <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-suitcase fa-lg"></i> &nbsp;Client</a>
+                            <a <?php if ($currentUrl == "klien") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>klien"><i class="fa fa-suitcase fa-lg"></i> &nbsp;Client</a>
                         </li>
+                        <?php if($privilege == "Administrator") { ?>
                         <li>
                             <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bar-chart-o fa-lg"></i> &nbsp;Report</a>
                         </li>
                         <li>
                             <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bullhorn fa-lg"></i> &nbsp;Announcement</a>
-                        </li>
+                        </li><?php } ?>
                         <?php } ?>
                       </ul>
                 </div>

@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Ok', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     </p>
 
 </div>
