@@ -10,8 +10,6 @@ $this->title = 'View Project: '.$model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$idClient = $model->klienId;
-$model->klienId = $model->getClient($idClient);
 
 ?>
 <div class="project-view">

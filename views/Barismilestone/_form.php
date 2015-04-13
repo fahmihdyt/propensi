@@ -20,12 +20,14 @@ $data2=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <?= $form->field($model, 'tanggal')->textInput(['class' => 'date form-control']) ?>
     <!-- form-class dari bootstrap date itu namanya-->
 
-   	<?= $form->field($model, 'kategori')->dropDownList($data,['id'=>'nama']) ?> 
+    <?= $form->field($model, 'kategoriId')->dropDownList($data, ['id' => 'id']) ?>  
       
-    <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="http://localhost/propensi1/web/index.php/kategori/create">click this</a> </div>
-    	<?= $form->field($model, 'site')->dropDownList($data2,['id'=>'nama']) ?> 
+    <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="http://localhost/propensi/web/index.php/kategori/create">click this</a> </div>
+    <?= $form->field($model, 'site')->dropDownList($data2,['id'=>'nama']) ?> 
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+    	<?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

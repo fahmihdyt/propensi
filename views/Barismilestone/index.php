@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="barismilestone-index">
 
+	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
+    <hr></div>
+       	
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -41,9 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				</td>
 				
 				<td>
-					<a href="<?php echo Yii::$app->params['url']?>barismilestone/view?id=<?php echo $row['id']?>">
-						<?= $row['tanggal'] ?>
-					</a>
+					<?= $row['tanggal'] ?>
 				</td>
 																						
 				<td><?= $model->getKategoriName($row['kategoriId'])?>
