@@ -20,17 +20,17 @@ $privilige= Yii::$app->user->identity->jabatan;
 	<hr>
 
     <p>
-        <?= Html::a('Create Klien', ['create'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Create New Client', ['create'], ['class' => 'btn btn-primary']) ?>
         <!-- membuat button-->
     </p>
 
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>No</th>
-				<th>Nama</th>
+				<th>No.</th>
+				<th>Name</th>
 				<th>E-mail</th>
-				<th>No-Telp</th>	
+				<th>Phone Number</th>	
 			
 			</tr>
 		</thead>
