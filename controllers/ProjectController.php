@@ -32,11 +32,18 @@ class ProjectController extends Controller
      * Lists all Project models.
      * @return mixed
      */
+     
     public function actionIndex()
     {
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
@@ -52,6 +59,11 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+    	if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
     	$model=$this->findModel($id);
     	$site=Site::findAll(['proyek' =>$id]);
 		$klien=Klien::findOne(['id'=>$model['klienId']]);
@@ -76,6 +88,11 @@ class ProjectController extends Controller
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
+
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
 		
         $model = new Project();
 
@@ -100,6 +117,11 @@ class ProjectController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -119,7 +141,11 @@ class ProjectController extends Controller
      */
     public function actionDelete($id)
     {
-    	
+    	$jabatan=Yii::$app->user->identity->jabatan;
+    	if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

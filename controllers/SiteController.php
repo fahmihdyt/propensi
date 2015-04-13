@@ -39,6 +39,11 @@ class SiteController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $searchModel = new SiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -57,6 +62,12 @@ class SiteController extends Controller
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
 		$barisms=Barismilestone::findAll(['siteId' => $id]);
     	$activity=Aktivitas::findAll(['siteId' => $id]);
 		$issue=Issue::findAll(['siteId' => $id]);
@@ -78,6 +89,11 @@ class SiteController extends Controller
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
 		
         $model = new Site();
 
@@ -128,6 +144,11 @@ class SiteController extends Controller
     		return $this->redirect('/propensitmp/web');
     	}
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $model = $this->findModel($id);
 
 		
@@ -172,6 +193,11 @@ class SiteController extends Controller
      */
     public function actionDelete($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

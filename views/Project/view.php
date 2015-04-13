@@ -10,7 +10,7 @@ $this->title = 'View Project: '.$model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-
+$jabatan=Yii::$app->user->identity->jabatan;
 ?>
 <div class="project-view">
 
@@ -69,8 +69,10 @@ $this->params['breadcrumbs'][] = $this->title;
        
    <div class='col-lg-12' style='margin-left:-15px;'>
     	<p>
-    		<a href="<?php echo Yii::$app->params['url']?>project/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
-			<a href="<?php echo Yii::$app->params['url']?>project/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
+    		<?php if($jabatan == "Project Manager"){ ?>
+	    		<a href="<?php echo Yii::$app->params['url']?>project/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
+				<a href="<?php echo Yii::$app->params['url']?>project/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
+			<?php } ?>
 			<?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     	</p>
    </div>
