@@ -91,9 +91,10 @@
                         <li>
                             <a <?php if ($currentUrl == "akun") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>akun"><i class="fa fa-user fa-lg"></i> &nbsp;Account</a>
                         </li>
+                        <?php if($privilege == "Supervisor" || $privilege == "Project Manager") { ?>
                         <li>
                             <a <?php if ($currentUrl == "project") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>project"><i class="fa fa-folder-open fa-lg"></i> &nbsp;Project</a>
-                        </li>
+                        </li><?php } ?>
                         <li>
                             <a <?php if ($currentUrl == "aktivitas") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>aktivitas"><i class="fa fa-list-alt fa-lg"></i> &nbsp;Activity</a>
                         </li>

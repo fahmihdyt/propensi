@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     	<thead>
     		<tr>
     			<th>No.</th>
-    			<th>Username</th>
     			<th>Name</th>
     			<th>Role</th>
     			<th>Action</th>		
@@ -45,10 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
     		foreach($data as $row){ ?>
     			<tr>
     				<td><?= $i++ ?></td>
-    				<td>
-    					<a href="<?php echo Yii::$app->params['url']?>akun/view?id=<?php echo $row->nik ?>"><?= $row->username ?></a>
-    				</td>
-    				<td><?= $row->nama ?></td>
+    				<td><a href="<?php echo Yii::$app->params['url']?>akun/view?id=<?php echo $row->nik ?>"><?= $row->nama ?></a></td>
     				<td><?= $row->jabatan ?></td>
     				<td>
     					<?php if($privilege == "Administrator" || $user == $row->nik){ ?>
@@ -56,9 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
     						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit  
     					</a>&nbsp;
     					<?php } ?>
+
     					<?php if($privilege == "Administrator"){ ?>
     					<a href="<?php echo Yii::$app->params['url']?>akun/delete?id=<?php echo $row->nik ?>" onClick="return confirm('Are you sure you want to delete this account?')">
-    						<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete  
+    						<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete
     					</a>
 						<?php } ?>
 					</td>
@@ -66,6 +63,12 @@ $this->params['breadcrumbs'][] = $this->title;
     		<?php } ?>
     	</tbody>
     </table>
+    <br><br>
     
-
+    <?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
+    
 </div>

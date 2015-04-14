@@ -79,7 +79,8 @@ class AkunController extends Controller
         $model = new Akun();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nik]);
+        	\Yii::$app->getSession()->setFlash('success', "Account is successfully created.");
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -103,6 +104,7 @@ class AkunController extends Controller
 		
 		if(\Yii::$app->user->identity->nik == $model->nik || \Yii::$app->user->identity->jabatan == "Administrator" )	 {
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            	\Yii::$app->getSession()->setFlash('success', "Account is successfully updated.");
             	return $this->redirect(['view', 'id' => $model->nik]);
         	} else {
             	return $this->render('update', [
@@ -110,6 +112,7 @@ class AkunController extends Controller
             	]);
         	}	
 		} else {
+			\Yii::$app->getSession()->setFlash('danger', "Account can't be updated.");
 			return $this->redirect('/propensi/web/index.php/akun');	
 		}
 		
@@ -135,10 +138,12 @@ class AkunController extends Controller
 
 		if(\Yii::$app->user->identity->nik !== $id){
         	$this->findModel($id)->delete();
+			\Yii::$app->getSession()->setFlash('success', "Account is successfully deleted.");
         	return $this->redirect(['index']);
 		}
 		
 		else{
+			\Yii::$app->getSession()->setFlash('danger', "Account can't be deleted.");
 			return $this->redirect(['index']);
 		}
     }

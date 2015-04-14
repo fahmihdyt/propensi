@@ -41,5 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     </p>
-
+	
+	<?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
 </div>
