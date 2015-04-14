@@ -17,8 +17,10 @@ $privilege = Yii::$app->user->identity->jabatan;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php if($privilege == "Administrator") { ?>
     <?= $form->field($model, 'nik')->textInput(['maxlength' => 12, 'autocomplete' => 'off', 'placeholder' => 'Nomor Induk Kependudukan']) ?>
-
+	<?php } ?>
+	
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'autocomplete' => 'off', 'placeholder' => 'Nama Lengkap']) ?>
 
     <?= $form->field($model, 'gender')->dropDownList(['Laki-laki' => 'Laki-laki', 'Perempuan' => 'Perempuan']) ?>

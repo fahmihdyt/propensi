@@ -21,6 +21,7 @@ AppAsset::register($this);
     <title>Login - SIMANPRO PT JAL</title>
     <link rel="shortcut icon" href="http://localhost/propensi/views/layouts/semi-logo.png" />
     <link href="<?php echo Yii::$app->params['base']?>css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300&subset=latin,latin-ext">
     
     <?php $this->head() ?>
 </head>
@@ -29,14 +30,17 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
     <div class="line" style="top: 0px; height: 50px;"></div>
     
-    <center><img class="img-logo-login" src="http://localhost/propensi/views/layouts/logo.png"></center>
+    <center style='font-family: "Roboto"; font-size: 16px; color: #cbcbcb;'>
+    	<img class="img-logo-login" src="http://localhost/propensi/views/layouts/logo.png"><br>
+    	Sistem Informasi Manajemen Proyek PT JAL
+    </center>
     
-    <div class="login-box" style="margin-top: 10px; padding-bottom: 3px;">
+    <div class="login-box" style='margin-top: 10px; padding-bottom: 3px; font-family: "Roboto";'>
     	<?= $content ?>
     </div>
   
 
-    <footer class="line">
+    <footer class="line" style='font-family:"Roboto";'>
         <p class="pull-left">&copy; PT Jaya Anugrah Lestari <?= date('Y') ?></p>
     </footer>
 
