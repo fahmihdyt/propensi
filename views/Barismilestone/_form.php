@@ -23,7 +23,7 @@ $data2=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <?= $form->field($model, 'kategoriId')->dropDownList($data, ['id' => 'id']) ?>  
       
     <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="http://localhost/propensi/web/index.php/kategori/create">click this</a> </div>
-    <?= $form->field($model, 'site')->dropDownList($data2,['id'=>'nama']) ?> 
+    <?= $form->field($model, 'siteId')->dropDownList($data2,['id'=>'id']) ?>
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>

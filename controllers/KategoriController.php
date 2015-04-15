@@ -68,7 +68,7 @@ class KategoriController extends Controller
         $model = new Kategori();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect("/propensi1/web/index.php/barismilestone/create");
+            return $this->redirect("/propensi/web/index.php/barismilestone/create");
 			
 			
         } else {

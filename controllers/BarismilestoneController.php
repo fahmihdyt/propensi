@@ -77,7 +77,7 @@ class BarismilestoneController extends Controller
     public function actionCreate()
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
@@ -101,7 +101,7 @@ class BarismilestoneController extends Controller
     public function actionUpdate($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
@@ -125,7 +125,7 @@ class BarismilestoneController extends Controller
     public function actionDelete($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
@@ -144,7 +144,7 @@ class BarismilestoneController extends Controller
     protected function findModel($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
