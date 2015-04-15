@@ -33,7 +33,7 @@ class BarismilestoneController extends Controller
     public function actionIndex()
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
@@ -60,7 +60,7 @@ class BarismilestoneController extends Controller
     public function actionView($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
