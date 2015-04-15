@@ -101,7 +101,7 @@ class AktivitasController extends Controller
 		 	 
 			 //store File
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
-							 			 
+			 $model->creator=Yii::$app->user->identity->nik;				 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
 			 		return $this->redirect(['view', 'id'=>$model->id]);
@@ -168,6 +168,7 @@ class AktivitasController extends Controller
 		 	
 			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
+			 $model->creator=Yii::$app->user->identity->nik;
 			
 			 if(!isset($imageName)){
 			 	if($model->save()){

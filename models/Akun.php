@@ -62,7 +62,7 @@ class Akun extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'nik' => 'SSN',
+            'nik' => 'Employee ID',
             'nama' => 'Full Name',
             'gender' => 'Gender',
             'email' => 'Email',

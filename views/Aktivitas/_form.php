@@ -40,17 +40,18 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 10]) ?>
           
-    <div style='display:none '>
+    <!--<div style='display:none '>
     	<?= $form->field($model, 'creator')->textInput(['maxlength' => 200,'type'=>'hidden','value'=>Yii::$app->user->identity->nik]) ?>
-    </div>  
+    </div> --> 
     
+    <!--
     <div style='display:none '>
     	<?= $form->field($model, 'status_approval_supervi')->textInput(['maxlength' => 200,'type'=>'hidden']) ?>
     </div>  
     
     <div style='display:none '>
     	<?= $form->field($model, 'status_approval_pm')->textInput(['maxlength' => 200,'type'=>'hidden']) ?>
-    </div>  
+    </div> --> 
          
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
