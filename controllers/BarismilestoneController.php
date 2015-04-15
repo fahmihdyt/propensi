@@ -8,7 +8,7 @@ use app\models\BarismilestoneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use app\models\Site;
 /**
  * BarismilestoneController implements the CRUD actions for Barismilestone model.
  */
@@ -84,7 +84,9 @@ class BarismilestoneController extends Controller
         $model = new Barismilestone();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect("/propensi/web/index.php/site/view?id=$model[siteId]");
+          //  return "/propensi/web/index.php/site/view?id=$model[siteId]";
         } else {
             return $this->render('create', [
                 'model' => $model,

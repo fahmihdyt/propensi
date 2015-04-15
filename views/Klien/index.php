@@ -15,10 +15,10 @@ $privilige= Yii::$app->user->identity->jabatan;
 ?>
 <div class="klien-index">
 
-    <h1 style= "margin-top: 0px; padding-top: 15px;"><?= Html::encode($this->title) ?></h1> 
- 	<!-- menampilkan judulnya, bisa pake html bisa pake PHP -->
-	<hr>
-
+	<div style="margin-top: 0px; padding-top: 10px;">
+    <h1><?= Html::encode($this->title) ?></h1>
+    <hr></div>
+       	
     <p>
         <?= Html::a('Create New Client', ['create'], ['class' => 'btn btn-primary']) ?>
         <!-- membuat button-->
@@ -58,7 +58,7 @@ $privilige= Yii::$app->user->identity->jabatan;
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Edit
 					</a>
 					
-					<a href="<?php echo Yii::$app->params['url']?>klien/delete?id=<?php echo $row['id']?>">
+					<a href="<?php echo Yii::$app->params['url']?>klien/delete?id=<?php echo $row['id']?>" onClick="return confirm('Are you sure want to delete this project?')">
 					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete
 					</a>
 					
@@ -69,4 +69,7 @@ $privilige= Yii::$app->user->identity->jabatan;
 		</tbody>
 		
 	</table>
+	
+	    <br><br>
+
 </div>

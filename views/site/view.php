@@ -84,6 +84,15 @@ $model->proyek = $model->getProject($idProject);
 	            	<tr>
 	            		<td><?php echo $row['tanggal']; ?></td> 
 	            		<td><a href="<?php echo Yii::$app->params['url']."barismilestone/view?id=$row[id]"?>"><?php echo $row->getKategoriName($row->kategoriId); ?></a></td>         		
+	            				<td>
+					<a href="<?php echo Yii::$app->params['url']?>barismilestone/update?id=<?php echo $row['id']?>">
+						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
+					
+					<a href="<?php echo Yii::$app->params['url']?>barismilestone/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this project?')">
+					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+					
+				</td>
+	            	
 	            	</tr><?php } ?>
 	            </table>
 	            <a href="<?php echo Yii::$app->params['url']?>barismilestone/create" class='btn btn-primary' style='color:white; float:right;'>Create New Milestone</a>&nbsp;

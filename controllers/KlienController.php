@@ -66,7 +66,7 @@ class KlienController extends Controller
     	 $privilige= Yii::$app->user->identity->jabatan;
 		 
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi1/web');
+    		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
 		
