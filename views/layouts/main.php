@@ -86,7 +86,7 @@
 							{
                          ?>
                         <li>
-                            <a href="index.html"><i class="fa fa-home fa-lg"></i> &nbsp;Home</a>
+                            <a <?php if ($currentUrl == "home") { ?> class="selected" <?php } ?> href="<?= Yii::$app->params['url']?>home"><i class="fa fa-home fa-lg"></i> &nbsp;Home</a>
                         </li>
                         <li>
                             <a <?php if ($currentUrl == "akun") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>akun"><i class="fa fa-user fa-lg"></i> &nbsp;Account</a>

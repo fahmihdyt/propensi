@@ -53,7 +53,7 @@ class loginController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web/index.php/aktivitas');
+            return $this->redirect('/propensi/web/index.php/home');
         }
 
         $model = new LoginForm();
@@ -70,6 +70,8 @@ class loginController extends Controller
 		Yii::$app->user->logout();
 		return $this->goHome();
 	}
+	
+	
 	  
 }
 
