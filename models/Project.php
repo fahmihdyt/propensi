@@ -81,4 +81,10 @@ class Project extends \yii\db\ActiveRecord
 		return $result['nama'];
 	}
 	
+	public static function getProjectName($id){
+		$result=Yii::$app->db->createCommand("select nama from proyek where id=$id")->queryOne();
+		return $result['nama'];
+		
+	}
+	
 }
