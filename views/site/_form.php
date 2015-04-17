@@ -20,7 +20,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'titik_nominal')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'status_kepemilikan')->textInput(['maxlength' => 50]) ?>
+    <?= $form->field($model, 'status_kepemilikan')->dropDownList(['pemda'=>'Pemda', 'private'=>'Private', 'kawasan'=>'Kawasan','developer'=>'Developer']) ?>
 
     <?= $form->field($model, 'tipe_antena')->textInput(['maxlength' => 20]) ?>
 
@@ -28,7 +28,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'foto')->fileinput() ?>
 
-    <?= $form->field($model, 'status_kerja')->dropDownList(['Start'=>'Start','On Process'=>'On Process','Done'=>'Done']) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'survey','rehunting'=>'Rehunting','rfc'=>'RFC']) ?>
 	<!--<?php if(isset($_GET['id'])){
 		echo $form->field($model, 'proyek')->textInput(['value'=>Project::getProjectName($_GET['id']),'readonly'=>'readonly']);
 	}else{

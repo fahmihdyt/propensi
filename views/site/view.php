@@ -27,11 +27,11 @@ $model->proyek = $model->getProject($idProject);
 			<td>: <?php echo $model->id;?></td>
 		</tr>
 		<tr height='20'>
-			<td width="190"><label>Project Name</label></td>
+			<td width="190"><label>Site Name</label></td>
 			<td>: <?php echo $model->nama;?></td>
 		</tr>
 		<tr height='20'>
-			<td width="190"><label>Nominal Point</label></td>
+			<td width="190"><label>Final Coordinate</label></td>
 			<td>: <?php echo $model->titik_nominal;?></td>
 		</tr>
 		<tr height='20'>
@@ -109,7 +109,7 @@ $model->proyek = $model->getProject($idProject);
 	        	<table class='table table-striped'>
 	            	<thead>
 	            		<th>Activity Name</th>
-	            		<th>Creator</th>
+	            		<th>PIC</th>
 	            	</thead>
 	            	<?php foreach($activity as $row){ ?>
 	            	<tr>
@@ -131,7 +131,7 @@ $model->proyek = $model->getProject($idProject);
 	        	<table class='table table-striped'>
 	            	<thead>
 	            		<th>Title</th>
-	            		<th>Creator</th>
+	            		<th>PIC</th>
 	            	</thead>
 	            	<?php foreach($issue as $row){ ?>
 	            	<tr>
@@ -149,7 +149,9 @@ $model->proyek = $model->getProject($idProject);
     	<p>
     		<a href="<?php echo Yii::$app->params['url']?>site/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
 			<a href="<?php echo Yii::$app->params['url']?>site/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
-			<?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
+			<a href="<?php echo Yii::$app->params['url']?>project/view?id=<?php echo $idProject ?>" class='btn btn-default'>Back </a>&nbsp;
+			
+			
     	</p>
    </div>
    </div>

@@ -51,7 +51,7 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	        	<table class='table table-striped'>
 	            	<thead>
 	            		<th>Site Name</th>
-	            		<th>Nominal Coordinates</th>
+	            		<th>Final Coordinate</th>
 	            		<th>Work Status</th>
 	            	</thead>
 	            	<?php foreach($site as $row){ ?>

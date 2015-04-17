@@ -108,7 +108,7 @@ class SiteController extends Controller
 							 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
-			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 		return $this->redirect("/propensi/web/index.php/project/view?id=$id");
 			 	}
 			 }
 			 else{
@@ -123,7 +123,7 @@ class SiteController extends Controller
 				if($model->validate())	{			
 			 	if($model->save() ){
                 	$imageName->saveAs($path);
-                	return $this->redirect(['view', 'id'=>$model->id]);
+                	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
             	} 
             	else {
             		return 'gagal';

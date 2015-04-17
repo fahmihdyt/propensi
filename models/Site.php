@@ -57,7 +57,7 @@ class Site extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama' => 'Site Name',
-            'titik_nominal' => 'Nominal Point',
+            'titik_nominal' => 'Final Coordinate',
             'status_kepemilikan' => 'Ownership Status',
             'tipe_antena' => 'Antenna Type',
             'keterangan' => 'Description',
