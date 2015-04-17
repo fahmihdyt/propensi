@@ -23,7 +23,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['get'],
                 ],
             ],
         ];
@@ -86,6 +86,7 @@ class SiteController extends Controller
      */
     public function actionCreate()
     {
+    	//return $id;
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
@@ -121,7 +122,9 @@ class SiteController extends Controller
                 	$imageName->saveAs($path);
                 	return $this->redirect(['view', 'id'=>$model->id]);
             	} 
-            	else {}
+            	else {
+            		return 'gagal';
+            	}
 				}}
 			 	 
 		 }
