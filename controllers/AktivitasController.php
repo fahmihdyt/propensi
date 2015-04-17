@@ -39,6 +39,7 @@ class AktivitasController extends Controller
      */
     public function actionIndex()
     {
+    	//validasi: Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
@@ -47,30 +48,45 @@ class AktivitasController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
 		$model=new Aktivitas();
+		
+		//Validasi : ketika kordinator -> hanya menampilkan miliknya
 		if(Yii::$app->user->identity->jabatan == 'Coordinator'){
-			$data=$model->getAllCoor(Yii::$app->user->identity->nik);
+			$data=$model->findAll(["creator" => Yii::$app->user->identity->nik]);
 		}
 		else{
-			$data=$model->getAll();
+			$data=$model->find()->all();
 		}
 		
-        return $this->render('index', [
+        return $this->render('index',[
             'data' => $data
         ]);
     }
 
     /**
      * Displays a single Aktivitas model.
+	 * Hanya bisa dilihat oleh yang punyanya saja klo dia supervisor
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
+    	$model=$this->findModel($id);
+		
+		//validasi: Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
-		$model=$this->findModel($id);
+		
+		//validasi: ketika coor, hanya mampu melihat yang dibuatnya saja
+		if(Yii::$app->user->identity->jabatan=='Coordinator'){
+			if($model['creator']!=Yii::$app->user->identity->nik){
+				Yii::$app->getSession()->setFlash('warning','Forbidden to view!');
+				return $this->redirect(['index']);
+			}
+		}	
+		
 		$name=$model->getNameCreator();
+		
         return $this->render('view', [
             'model' => $model,
             'name'=>$name
@@ -86,40 +102,52 @@ class AktivitasController extends Controller
     public function actionCreate()
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
+		
+		//Validasi : Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
 		
+		//Validasi : hanya dapat dilakukan oleh PM, Supervisor, Admin (temp)
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Create Project');
+			return $this->redirect(['index']);
 		}
 			
         $model = new Aktivitas();
 		$modelSite=Site::find()->all();
 		
-		 if ($model->load(Yii::$app->request->post()) ){
-		 	 
+		 if ($model->load(Yii::$app->request->post()) ){		 	 
 			 //store File
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
 			 $model->creator=Yii::$app->user->identity->nik;				 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
-			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 		\Yii::$app->getSession()->setFlash('success', "Activity is successfully created");
+            	    return $this->redirect(['index']);
 			 	}
 			 }
 			 else{
 			 	 //get file extension
 				$hasil=explode('.',$imageName);
 				$ext=$hasil[count($hasil)-1];
+				
+				//validasi file : file format
+				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
+					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
+					return $this->render('create',['model'=>$model,'site'=>$modelSite]);
+					//return $this->redirect(['create']);
+				}
 				 
 			 	$model->foto = $imageName->name;
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
 				if($model->foto && $model->validate()){			
-				 	if($model->save() ){
+				 	if($model->save()){
 	                	$imageName->saveAs($path);
-	                	return $this->redirect(['view', 'id'=>$model->id]);
+						\Yii::$app->getSession()->setFlash('success', "Activity is successfully created");
+            	       	return $this->redirect(['index']);
 	            	} 
 	            	else {}
 					}
@@ -149,18 +177,35 @@ class AktivitasController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		
+		//validasi : hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensi/web');
         }
 		
+		//validasi : hanya dapat dilakukan oleh PM, Supervisor, Admin
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Create Project');
+			return $this->redirect(['index']);
 		}
 		
         $model = $this->findModel($id);
 		
+		//set default foto file
+		if(!is_null($model['foto'])){
+			$foto=$model['foto'];
+		}
+		
+		
+		//Validasi : hanya dapat dilakukan ketika belum diapprove!
 		if($model->status_approval_supervi=='1' || $model->status_approval_pm=='1'){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			Yii::$app->getSession()->setFlash('danger','Activity Has Been Approved!');	
+			return $this->redirect(['index']);
+		}
+		
+		//Validasi : hanya dapat dilakukan oleh pemilik aktivitas
+		if($model['creator']!=Yii::$app->user->identity->nik){
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Update!');	
+			return $this->redirect(['index']);
 		}
 		
 		//mulai proses upload photo
@@ -171,17 +216,36 @@ class AktivitasController extends Controller
 			 $model->creator=Yii::$app->user->identity->nik;
 			
 			 if(!isset($imageName)){
-			 	if($model->save()){
-			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 	//set foto link before
+			 	if(isset($foto)){
+			 		$model->foto=$foto;
+			 	}
+			 	if($model->save()){			 		
+			 		\Yii::$app->getSession()->setFlash('success', "Activity is successfully updated.");
+            		return $this->redirect(['view', 'id'=>$model->id]);
 			 	}
 			 }
 			 else{
+			 	
+			 	//get file extension
+				$hasil=explode('.',$imageName);
+				$ext=$hasil[count($hasil)-1];
+				
+				//validasi file : file format
+				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
+					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
+					return $this->render('update',['model'=>$model]);
+					//return $this->redirect(['create']);
+				}
+				
+				
 			 	$model->foto = $imageName->name;
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
 				if($model->save()){
                 	$imageName->saveAs($path);
+					\Yii::$app->getSession()->setFlash('success', "Activity is successfully updated.");
                 	return $this->redirect(['view', 'id'=>$model->id]);
             	} else {
                 // error in saving model
@@ -210,17 +274,24 @@ class AktivitasController extends Controller
         }
 		
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Delete!');		
+			return $this->redirect(['index']);
 		}
 		
 		$model = $this->findModel($id);
-		
+				
 		if($model->status_approval_supervi=='1' || $model->status_approval_pm=='1'){
+			Yii::$app->getSession()->setFlash('danger','Activity Has Been Approved!');	
 			return $this->redirect('/propensi/web/index.php/aktivitas');
 		}	
 		
+		if($model['creator']!=Yii::$app->user->identity->nik){
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Delete!');	
+			return $this->redirect(['index']);
+		}
+		
         $this->findModel($id)->delete();
-
+		Yii::$app->getSession()->setFlash('success','Activity is succesfully Deleted');
         return $this->redirect(['index']);
     }
 	
@@ -240,9 +311,10 @@ class AktivitasController extends Controller
 		}
 						
 		$model=$this->findModel($id);
-		if(!Yii::$app->user->identity->jabatan=='Supervisor' || !Yii::$app->user->identity->jabatan=='Project Manager')
+		if(!(Yii::$app->user->identity->jabatan=='Supervisor' || Yii::$app->user->identity->jabatan=='Project Manager'))
 		{
-			return $this->redirect('/propensi/web');
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Approve!');	
+			return $this->redirect(['index']);
 		}	
 		
 		return $this->render('approve',['data'=>$model]);
@@ -278,10 +350,12 @@ class AktivitasController extends Controller
 		 //Approval Supervisor
 		 if($data['user']=='Supervisor'){
 		 	if($model->approve($data)=='1'){
-		 		if($data['status']=='approve')
-		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesApprove");
-		 		if($data['status']=='reject')
-					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesReject");
+		 		if($data['status']=='approve'){
+		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Approved!');
+		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+		 		if($data['status']=='reject'){
+		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Rejected!');
+					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
 				}			
 		 }
 		 //return $model->approve($data)
@@ -289,13 +363,17 @@ class AktivitasController extends Controller
 		 //Approval PM
 		 if($data['user']=='Project Manager'){
 		 	if($data['statusApproval']!=1){
-		 		$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=failApprove");
-		 	}
+		 		//$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=failApprove");
+		 		Yii::$app->getSession()->setFlash('danger','Activity Should be Approved by Supervisor before!');
+				$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");
+			}
 			else if($model->approve($data)=='1'){
-				if($data['status']=='approve')
-		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesApprove");
-		 		if($data['status']=='reject')
-					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=suksesReject");
+				if($data['status']=='approve'){
+		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Approved!');
+		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+		 		if($data['status']=='reject'){
+					Yii::$app->getSession()->setFlash('success','Activity Succesfully Rejected!');
+					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
 				}	
 			}
 		 }

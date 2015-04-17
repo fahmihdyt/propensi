@@ -76,6 +76,7 @@ class IssueController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         	$model->creator=Yii::$app->user->identity->nik;
         	if($model->save()){
+        		Yii::$app->getSession()->setFlash('success','Issue Sucessfully Created!');
         		return $this->redirect(['view', 'id' => $model->id]);
         	}
 			else{
@@ -104,9 +105,15 @@ class IssueController extends Controller
 		
         $model = $this->findModel($id);
 
+		if($model['creator']!=Yii::$app->user->identity->nik){
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Update!');	
+			return $this->redirect(['index']);
+		}
+
         if ($model->load(Yii::$app->request->post())) {
         	$model->creator=Yii::$app->user->identity->nik;
         	if($model->save()){
+        		 Yii::$app->getSession()->setFlash('success','Issue Sucessfully Updated!');
         		 return $this->redirect(['view', 'id' => $model->id]);
         	}
 			else{
@@ -133,6 +140,12 @@ class IssueController extends Controller
     	if (\Yii::$app->user->isGuest) {
             return $this->redirect('/propensiTemp/web');
         }
+		
+		$model=$this->findModel($id);
+		if($model['creator']!=Yii::$app->user->identity->nik){
+			Yii::$app->getSession()->setFlash('danger','Forbidden to Delete!');	
+			return $this->redirect(['index']);
+		}
 		
         $this->findModel($id)->delete();
 

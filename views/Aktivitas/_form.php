@@ -19,6 +19,7 @@ $sites=substr($sites, 0,strlen($sites)-1);*/
 $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 ?>
 
+
 <div class="aktivitas-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?> <!--Enctype untuk allow upload photo-->

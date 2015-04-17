@@ -97,30 +97,12 @@ $model=new Aktivitas();
 		</tbody>
 	</table>
 	
+	<?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
+	
 </div>
 
-<!-- Notifikasi jika approval by Supervisor sukses-->
-<?php if(isset($_GET['status']) && $_GET['status']=='ApproveSukses'){?>
-	<script> approveSV(); </script>
-<?php } ?>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                   <h4 class="modal-title" id="myModalLabel">Approval Activity</h4>
-              </div>
-              <div class="modal-body">
-	          </div>
-	          <div class="modal-footer">
-	               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	               <button type="button" class="btn btn-primary">Save changes</button>
-	          </div>
-	     </div>
-               <!-- /.modal-content -->
-     </div>
-         <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

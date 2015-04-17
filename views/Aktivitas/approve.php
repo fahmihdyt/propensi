@@ -48,16 +48,8 @@
 
 <?php
 	//notification
-	if(isset($_GET['status'])){
-		$status=$_GET['status'];
-		if($status=='suksesApprove'){
-			echo "<div class='alert alert-success' style='line-height:0px'>Activity Has Been Approved!</div>";
-		}
-		if($status=='suksesReject'){
-			echo "<div class='alert alert-warning' style='line-height:0px'>Activity Has Been Rejected!</div>";
-		}
-		if($status=='failApprove'){
-			echo "<div class='alert alert-danger' style='line-height:0px'>Activity Should Be Approved by Supervisor Before!</div>";
-		}
+	foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+		echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
 	}
+	
 ?>

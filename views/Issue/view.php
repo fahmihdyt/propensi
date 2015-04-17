@@ -17,6 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1 style='margin-top:0px; padding-top:15px;'>View Issue : <?= Html::encode($this->title) ?></h1>
     <hr>
     
+    <!--Notifikasi-->
+    <?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
+    
     <!--Detail Body-->
 	<table style='font-size:14px;'>
 		<tr height='20'>
