@@ -28,7 +28,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'foto')->fileinput() ?>
 
-    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'survey','rehunting'=>'Rehunting','rfc'=>'RFC']) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'Survey','rehunting'=>'Rehunting','rfc'=>'RFC','sitac on going'=>'SITAC on Going','cme on going'=>'CME on Going','rfi'=>'RFI','drop'=>'Drop']) ?>
 	<!--<?php if(isset($_GET['id'])){
 		echo $form->field($model, 'proyek')->textInput(['value'=>Project::getProjectName($_GET['id']),'readonly'=>'readonly']);
 	}else{
