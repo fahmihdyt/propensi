@@ -84,7 +84,7 @@ class SiteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
     	//return $id;
     	if(Yii::$app->user->isGuest){
@@ -100,6 +100,9 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) ){
 		 	 
+			 //store project value
+			 $model->proyek=$id;
+			 
 			 //store File
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
 							 			 
