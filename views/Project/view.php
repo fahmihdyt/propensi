@@ -61,7 +61,7 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	            		<td><?php echo $row['status_kerja']; ?></td>            		
 	            	</tr><?php } ?>
 	            </table>
-	            <a href="<?php echo Yii::$app->params['url']?>site/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Create New Site</a>&nbsp;
+	            <a href="<?php echo Yii::$app->params['url']?>site/create" class='btn btn-primary' style='color:white; float:right;'>Create New Site</a>&nbsp;
 		        
 	        </div>
 	    </div>
