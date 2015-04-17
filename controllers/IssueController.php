@@ -148,7 +148,7 @@ class IssueController extends Controller
 		}
 		
         $this->findModel($id)->delete();
-
+		Yii::$app->getSession()->setFlash('success','Issue Successfully Deleted!');	
         return $this->redirect(['index']);
     }
 
