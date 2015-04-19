@@ -35,6 +35,11 @@ class BarismilestoneController extends Controller
     	if (\Yii::$app->user->isGuest) {
     		return $this->redirect('/propensi/web');
     	}
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
 		//supaya org non guest gabisa akses yg lain
 		
         $searchModel = new BarismilestoneSearch();
@@ -64,6 +69,12 @@ class BarismilestoneController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -80,6 +91,11 @@ class BarismilestoneController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
 		
         $model = new Barismilestone();
 
@@ -118,6 +134,11 @@ class BarismilestoneController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -141,7 +162,10 @@ class BarismilestoneController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
-		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

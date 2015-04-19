@@ -41,6 +41,11 @@ class KlienController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         $searchModel = new KlienSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -70,6 +75,11 @@ class KlienController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -87,6 +97,12 @@ class KlienController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
 		
         $model = new Klien();
 
@@ -112,6 +128,11 @@ class KlienController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
 		
         $model = $this->findModel($id);
 
@@ -140,6 +161,11 @@ class KlienController extends Controller
     		return $this->redirect('/propensi/web');
     	}
 		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
 		
         $this->findModel($id)->delete();
 

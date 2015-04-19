@@ -37,6 +37,11 @@ class KategoriController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Project Manager' || $jabatan=='Supervisor' ||$jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+				
         $searchModel = new KategoriSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -53,9 +58,21 @@ class KategoriController extends Controller
      */
     public function actionView($id)
     {
+    	if (\Yii::$app->user->isGuest) {
+    		return $this->redirect('/propensi/web');
+    	}
+		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Project Manager' || $jabatan=='Supervisor' ||$jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+		
+		
     }
 
     /**
@@ -65,6 +82,16 @@ class KategoriController extends Controller
      */
     public function actionCreate()
     {
+    	if (\Yii::$app->user->isGuest) {
+    		return $this->redirect('/propensi/web');
+    	}
+		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         $model = new Kategori();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,6 +113,17 @@ class KategoriController extends Controller
      */
     public function actionUpdate($id)
     {
+    	if (\Yii::$app->user->isGuest) {
+    		return $this->redirect('/propensi/web');
+    	}
+		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -105,6 +143,17 @@ class KategoriController extends Controller
      */
     public function actionDelete($id)
     {
+    	
+		if (\Yii::$app->user->isGuest) {
+    		return $this->redirect('/propensi/web');
+    	}
+		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if($jabatan=='Coordinator'){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
