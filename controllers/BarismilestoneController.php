@@ -74,7 +74,7 @@ class BarismilestoneController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
     	if (\Yii::$app->user->isGuest) {
     		return $this->redirect('/propensi/web');
@@ -83,16 +83,27 @@ class BarismilestoneController extends Controller
 		
         $model = new Barismilestone();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect("/propensi/web/index.php/site/view?id=$model[siteId]");
-          //  return "/propensi/web/index.php/site/view?id=$model[siteId]";
-        } else {
+        if ($model->load(Yii::$app->request->post())) {
+        	
+			//store project value
+			 $model->siteId=$id;
+			
+			if($model->save()){
+			 		 return $this->redirect("/propensi/web/index.php/site/view?id=$id");
+			}
+			else{
+				return $this->render('create', [
+                'model' => $model,
+            ]);
+			}
+		}
+           else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-    }
+    
+	}
 
     /**
      * Updates an existing Barismilestone model.
