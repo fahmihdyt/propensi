@@ -38,7 +38,6 @@ AppAsset::register($this);
     <div class="login-box" style='margin-top: 10px; padding-bottom: 3px; font-family: "Roboto";'>
     	<?= $content ?>
     </div>
-  
 
     <footer class="line" style='font-family:"Roboto";'>
         <p class="pull-left">&copy; PT Jaya Anugrah Lestari <?= date('Y') ?></p>

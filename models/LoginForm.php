@@ -56,6 +56,7 @@ class LoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(),3600*24*30);
         } else {
+            \Yii::$app->getSession()->setFlash('danger', "Incorrect username or password.");
             return false;
         }
     }
