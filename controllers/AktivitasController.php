@@ -51,10 +51,11 @@ class AktivitasController extends Controller
 		
 		//Validasi : ketika kordinator -> hanya menampilkan miliknya
 		if(Yii::$app->user->identity->jabatan == 'Coordinator'){
-			$data=$model->findAll(["creator" => Yii::$app->user->identity->nik]);
+			//$data=$model->findAll(["creator" => Yii::$app->user->identity->nik]);
+			$data=$model->find()->where(['creator'=>Yii::$app->user->identity->nik])->orderBy('id DESC')->all();
 		}
 		else{
-			$data=$model->find()->all();
+			$data=$model->find()->orderBy('id DESC')->all();
 		}
 		
         return $this->render('index',[
