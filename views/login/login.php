@@ -26,9 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::submitButton('LOGIN', ['class' => 'btn login-button', 'name' => 'login-button',]) ?>
         </div>
     </div>
-
     <?php ActiveForm::end(); ?>
-
-  
 </div>
+ 
+ <?php 
+ 		if(Yii::$app->getSession()->hasFlash('danger'))
+ 			echo '<div class="alert-login">' . Yii::$app->getSession()->getFlash('danger') . '</div>'; 
+ ?>
+ 	
 </center>

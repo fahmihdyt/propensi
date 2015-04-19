@@ -117,9 +117,10 @@ class user extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return null;
     }
 	
-	public function validatePassword($password,$username)
-    {	
-    	$password=User::findOne(['username' => $username, 'password' => $password]);
+	public function validatePassword($passwords,$username)
+    {
+    	$passwords = md5($passwords);	
+    	$password=User::findOne(['username' => $username, 'password' => $passwords]);
         if(count($password)==0){
         	return false;
         }
@@ -137,4 +138,5 @@ class user extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->authKey === $authKey;
     }
+	
 }

@@ -42,15 +42,15 @@ class Akun extends \yii\db\ActiveRecord
     {
         	
         return [
-            [['nik', 'username', 'password', 'jabatan'], 'required'],
+            [['nik', 'username', 'password', 'jabatan','repeatPassword'], 'required'],
             [['nik', 'username'], 'unique', 'message' => '{attribute}: {value} already exists!'],
             [['jabatan'], 'string'],
             [['nik'], 'string', 'max' => 12],
             [['nama', 'username', 'no_telp'], 'string', 'max' => 30],
             [['gender'], 'string', 'max' => 14],
             [['email'], 'string', 'max' => 50,],
-            [['password'], 'string', 'max' => 255],
-            [['repeatPassword'], 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match!"],
+            [['password'], 'string', 'max' => 255, 'min' => 8,],
+            [['repeatPassword'], 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match!",],
             [['alamat'], 'string', 'max' => 200],
             [['email'], 'email']
         ];
@@ -119,4 +119,12 @@ class Akun extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Projectteam::className(), ['nik' => 'nik']);
     }
+	
+	public function beforeSave($insert)
+	{
+		$return = parent::beforeSave($insert);
+		$this->password = md5($this->password);
+		
+		return $return;
+	}
 }

@@ -17,7 +17,7 @@ $privilege = Yii::$app->user->identity->jabatan;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php if($privilege == "Administrator") { ?>
+    <?php if($model->isNewRecord) { ?>
     <?= $form->field($model, 'nik')->textInput(['maxlength' => 12, 'autocomplete' => 'off', 'placeholder' => 'Nomor Induk Pegawai']) ?>
 	<?php } ?>
 	
@@ -31,7 +31,7 @@ $privilege = Yii::$app->user->identity->jabatan;
 	
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => 32, 'placeholder' => 'Password']) ?>
     
-    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => 32, 'placeholder' => 'Re-enter Password']) ?>
+    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => 32, 'placeholder' => 'Re-enter Password'])->hint('<i>Password should be at least contains 8 characters.</i>') ?>
 	
 	<?php if($privilege == "Administrator") { ?>
     <?= $form->field($model, 'jabatan')->dropDownList(['Administrator' => 'Administrator', 'Project Manager' => 'Project Manager', 'Supervisor' => 'Supervisor', 'Coordinator' => 'Coordinator']) ?>
@@ -45,7 +45,6 @@ $privilege = Yii::$app->user->identity->jabatan;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
         <?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
+    
 </div>

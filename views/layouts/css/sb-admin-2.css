@@ -432,3 +432,14 @@ table.dataTable thead .sorting:after {
 	background-color: #ca4e45;
 	color: #fff;
 }
+
+.alert-login{
+	padding: 10px 15px 10px 15px;
+  	width: 350px;
+  	margin: 10px auto 0px;
+  	color: #a94442;
+  	background-color: #f2dede;
+  	border-color: #ebccd1;
+  	border: 1px solid transparent;
+  	border-radius: 4px;
+}
