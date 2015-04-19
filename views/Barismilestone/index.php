@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Edit
 					</a>
 					
-					<a href="<?php echo Yii::$app->params['url']?>barismilestone/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this project?')">
+					<a href="<?php echo Yii::$app->params['url']?>barismilestone/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this deadline?')">
 					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete
 					</a>
 					

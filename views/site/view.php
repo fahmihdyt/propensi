@@ -88,7 +88,7 @@ $model->proyek = $model->getProject($idProject);
 					<a href="<?php echo Yii::$app->params['url']?>barismilestone/update?id=<?php echo $row['id']?>">
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
 					
-					<a href="<?php echo Yii::$app->params['url']?>barismilestone/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this project?')">
+					<a href="<?php echo Yii::$app->params['url']?>barismilestone/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this deadline')">
 					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
 					
 				</td>

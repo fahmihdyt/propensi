@@ -48,10 +48,10 @@ class Klien extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nama' => 'Nama',
-            'alamat' => 'Alamat',
+            'nama' => 'Name',
+            'alamat' => 'Address',
             'email' => 'Email',
-            'no_telp' => 'No Telp',
+            'no_telp' => 'Phone Number',
         ];
     }
 

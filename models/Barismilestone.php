@@ -44,8 +44,8 @@ class Barismilestone extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal' => 'Tanggal',
-            'kategoriId' => 'Kategori ID',
+            'tanggal' => 'Date',
+            'kategoriId' => 'Deadline Name',
             'siteId' => 'Site ID',
         ];
     }

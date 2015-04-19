@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
    <div class='col-lg-12' style='margin-left:-15px;'>
     	<p>
-    		<a href="<?php echo Yii::$app->params['url']?>project/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
-			<a href="<?php echo Yii::$app->params['url']?>project/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this project?')">Delete </a>&nbsp;
+    		<a href="<?php echo Yii::$app->params['url']?>klien/update?id=<?php echo $model->id ?>" class='btn btn-primary'> Edit </a>&nbsp;
+			<a href="<?php echo Yii::$app->params['url']?>klien/delete?id=<?php echo $model->id ?>" class='btn btn-danger' onClick="return confirm('Are you sure want to delete this client?')">Delete </a>&nbsp;
 			<?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
     	</p>
    </div>

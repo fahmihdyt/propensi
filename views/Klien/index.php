@@ -58,7 +58,7 @@ $privilige= Yii::$app->user->identity->jabatan;
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Edit
 					</a>
 					
-					<a href="<?php echo Yii::$app->params['url']?>klien/delete?id=<?php echo $row['id']?>" onClick="return confirm('Are you sure want to delete this project?')">
+					<a href="<?php echo Yii::$app->params['url']?>klien/delete?id=<?php echo $row['id']?>" onClick="return confirm('Are you sure want to delete this client?')">
 					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete
 					</a>
 					

@@ -88,14 +88,14 @@ class KategoriController extends Controller
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
-		if($jabatan=='Coordinator'){
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
 			return $this->redirect('/propensi/web/index.php/home');
 		}
 		
         $model = new Kategori();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect("/propensi/web/index.php/barismilestone/create");
+            return $this->goBack();
 			
 			
         } else {
