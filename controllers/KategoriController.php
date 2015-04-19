@@ -174,4 +174,30 @@ class KategoriController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+	public function actionCreates($id)
+    {
+    	if (\Yii::$app->user->isGuest) {
+    		return $this->redirect('/propensi/web');
+    	}
+		//supaya org non guest gabisa akses yg lain
+		
+		$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
+			return $this->redirect('/propensi/web/index.php/home');
+		}
+		
+        $model = new Kategori();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect("/propensi/web/index.php/barismilestone/create?id=$id");
+			
+			
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
 }
