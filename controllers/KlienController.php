@@ -107,7 +107,8 @@ class KlienController extends Controller
         $model = new Klien();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        	\Yii::$app->getSession()->setFlash('success', "Client is successfully created.");
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -137,8 +138,11 @@ class KlienController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+            \Yii::$app->getSession()->setFlash('success', "Client is successfully updated.");
+            return $this->redirect(['index']);
+        }
+		
+		 else {
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -169,6 +173,7 @@ class KlienController extends Controller
 		
         $this->findModel($id)->delete();
 
+		\Yii::$app->getSession()->setFlash('success', "Client is successfully deleted.");
         return $this->redirect(['index']);
 		
 		
