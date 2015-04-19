@@ -60,7 +60,7 @@
                <li><?php 	$fullName = explode(' ', Yii::$app->user->identity->nama);
 			   				$firstName = $fullName[0];
                				echo "Hello, ".$firstName."!" ?></li>
-               <li><a href="<?php echo Yii::$app->params['url']?>login/logout"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+               <li><a href="<?php echo Yii::$app->params['url']?>login/logout" onClick="return confirm('Are you sure you want to log out?')"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
             </ul>
             <!-- /.navbar-top-links -->
 
