@@ -77,7 +77,7 @@ class IssueController extends Controller
         	$model->creator=Yii::$app->user->identity->nik;
         	if($model->save()){
         		Yii::$app->getSession()->setFlash('success','Issue Sucessfully Created!');
-        		return $this->redirect(['view', 'id' => $model->id]);
+        		return $this->redirect(['index']);
         	}
 			else{
 				return $this->render('create', [
@@ -114,7 +114,7 @@ class IssueController extends Controller
         	$model->creator=Yii::$app->user->identity->nik;
         	if($model->save()){
         		 Yii::$app->getSession()->setFlash('success','Issue Sucessfully Updated!');
-        		 return $this->redirect(['view', 'id' => $model->id]);
+        		 return $this->redirect(['index']);
         	}
 			else{
 				 return $this->render('update', [
@@ -142,6 +142,7 @@ class IssueController extends Controller
         }
 		
 		$model=$this->findModel($id);
+		
 		if($model['creator']!=Yii::$app->user->identity->nik){
 			Yii::$app->getSession()->setFlash('danger','Forbidden to Delete!');	
 			return $this->redirect(['index']);

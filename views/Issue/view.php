@@ -58,8 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div id='keterangan' style='border:1px solid black; padding:5px; border-radius:5px; margin-bottom:5px;'>
 			<?php echo $model->keterangan?>
 		</div>
-		 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-success']) ?><br><br>
+		 <?php
+		 	if($model['creator']==Yii::$app->user->identity->nik){ ?>
+		 		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		 		<?= Html::a('Delete', ['delete','id'=>$model->id], ['class' => 'btn btn-primary','onClick'=>"return confirm('Are you sure want to delete this Issue?')"]) ?> 
+		  	<?php }
+		 ?>
+		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?><br><br>
 
    
 

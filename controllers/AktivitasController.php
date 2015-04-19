@@ -117,17 +117,19 @@ class AktivitasController extends Controller
         $model = new Aktivitas();
 		$modelSite=Site::find()->all();
 		
-		 if ($model->load(Yii::$app->request->post()) ){		 	 
+		 if ($model->load(Yii::$app->request->post()) && $model->validate()){
+		 		 	 
 			 //store File
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
-			 $model->creator=Yii::$app->user->identity->nik;				 			 
+			 $model->creator=Yii::$app->user->identity->nik;	
+			 			 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
+			 		// return "masuk";	
 			 		\Yii::$app->getSession()->setFlash('success', "Activity is successfully created");
             	    return $this->redirect(['index']);
 			 	}
-			 }
-			 else{
+			 }else{
 			 	 //get file extension
 				$hasil=explode('.',$imageName);
 				$ext=$hasil[count($hasil)-1];
@@ -143,21 +145,19 @@ class AktivitasController extends Controller
 			 	$path = 'upload/'.$model->foto;
 			 
 				//proses save dan upload
-				if($model->foto && $model->validate()){			
-				 	if($model->save()){
-	                	$imageName->saveAs($path);
-						\Yii::$app->getSession()->setFlash('success', "Activity is successfully created");
-            	       	return $this->redirect(['index']);
-	            	} 
-	            	else {}
-					}
-				else{
-					return 'gagal upload';
-				}
-				}
-			 	 
-		 }
-		 else{
+				if($model->save()){
+	               	$imageName->saveAs($path);
+					\Yii::$app->getSession()->setFlash('success', "Activity is successfully created");
+            	   	return $this->redirect(['index']);
+	            }else {
+	            	return $this->render('create', [
+	                'model' => $model,
+	                'site'=>$modelSite,
+	            ]);
+	            }
+			}
+				
+		 }else{
 		 	return $this->render('create', [
                 'model' => $model,
                 'site'=>$modelSite,
@@ -209,7 +209,7 @@ class AktivitasController extends Controller
 		}
 		
 		//mulai proses upload photo
-		if ($model->load(Yii::$app->request->post())){
+		if ($model->load(Yii::$app->request->post())&&$model->validate()){
 		 	
 			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');
@@ -222,7 +222,7 @@ class AktivitasController extends Controller
 			 	}
 			 	if($model->save()){			 		
 			 		\Yii::$app->getSession()->setFlash('success', "Activity is successfully updated.");
-            		return $this->redirect(['view', 'id'=>$model->id]);
+            		return $this->redirect(['index']);
 			 	}
 			 }
 			 else{
@@ -246,7 +246,7 @@ class AktivitasController extends Controller
 				if($model->save()){
                 	$imageName->saveAs($path);
 					\Yii::$app->getSession()->setFlash('success', "Activity is successfully updated.");
-                	return $this->redirect(['view', 'id'=>$model->id]);
+                	return $this->redirect(['index']);
             	} else {
                 // error in saving model
             	}

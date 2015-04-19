@@ -41,6 +41,7 @@ class Site extends \yii\db\ActiveRecord
         return [
             [['keterangan'], 'string'],
             [['proyek'], 'integer'],
+            ['nama','required'],
             [['nama', 'status_kerja'], 'string', 'max' => 100],
             [['titik_nominal'], 'string', 'max' => 10],
             [['status_kepemilikan'], 'string', 'max' => 50],

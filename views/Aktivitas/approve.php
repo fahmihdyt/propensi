@@ -39,6 +39,7 @@
 		<tr height='50'>
 			
 			<td width="140">
+				<button type='submit'class='btn btn-primary' onclick="return confirm('Are you sure want to approve this activity?')">Save</button> &nbsp;
 	</form>
 				<a href='<?php echo Yii::$app->params['url']?>aktivitas'><button class='btn btn-default'>Back</button>
 			</td><td></td>

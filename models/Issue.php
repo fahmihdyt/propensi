@@ -35,7 +35,7 @@ class Issue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanggal', 'judul'], 'required'],
+            [['tanggal', 'judul','keterangan'], 'required'],
             [['tanggal'], 'safe'],
             [['keterangan'], 'string'],
             [['siteId'], 'integer'],

@@ -89,8 +89,10 @@ $this->title = $model->judul;
 		
 		 <?php if($model['creator']==Yii::$app->user->identity->nik && !($model['status_approval_pm']==1 || $model['status_approval_supervi']==1)){ ?>
 		 	<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+			<?= Html::a('Delete', ['delete','id'=>$model->id], ['class' => 'btn btn-primary','onClick'=>"return confirm('Are you sure want to delete this Activity?')"]) ?> 
 		 <?php } ?>
 		 <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>
+		  
     	<br><br>
 
     
