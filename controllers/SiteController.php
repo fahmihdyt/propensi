@@ -98,7 +98,7 @@ class SiteController extends Controller
 		
         $model = new Site();
 
-        if ($model->load(Yii::$app->request->post()) ){
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
 		 	 
 			 //store project value
 			 $model->proyek=$id;
@@ -158,7 +158,7 @@ class SiteController extends Controller
         $model = $this->findModel($id);
 
 		
-		if ($model->load(Yii::$app->request->post())){
+		if ($model->load(Yii::$app->request->post()) && $model->validate()){
 		 	
 			 //store file
 		 	 $imageName = UploadedFile::getInstance($model, 'foto');

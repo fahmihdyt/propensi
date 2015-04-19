@@ -13,8 +13,8 @@ use Yii;
  * @property string $status
  * @property string $foto
  * @property string $keterangan
- * @property integer $status_approval_pm
- * @property integer $status_approval_supervi
+ * @property string $status_approval_pm
+ * @property string $status_approval_supervi
  * @property string $creator
  * @property integer $siteId
  *
@@ -38,13 +38,14 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             [['tanggal'], 'safe'],
-            [['judul','tanggal', 'status', 'keterangan'], 'required'],
+            [['judul', 'status', 'keterangan','tanggal'], 'required'],
             [['keterangan'], 'string'],
-            [['status_approval_pm', 'status_approval_supervi', 'siteId'], 'integer'],
+            [['siteId'], 'integer'],
             [['judul'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 30],
-            [['foto'], 'string', 'max' => 200],
-            [['creator'], 'string', 'max' => 12]
+            [['status_approval_pm', 'status_approval_supervi'], 'string', 'max' => 10],
+            [['creator'], 'string', 'max' => 12],
+            
         ];
     }
 
@@ -55,15 +56,15 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal' => 'Tanggal',
-            'judul' => 'Judul',
+            'tanggal' => 'Date',
+            'judul' => 'Activity',
             'status' => 'Status',
-            'foto' => 'Foto',
-            'keterangan' => 'Keterangan',
+            'foto' => 'Photo',
+            'keterangan' => 'Notes',
             'status_approval_pm' => 'Status Approval Pm',
             'status_approval_supervi' => 'Status Approval Supervi',
             'creator' => 'Creator',
-            'siteId' => 'Site ID',
+            'siteId' => 'Site',
         ];
     }
 
@@ -142,4 +143,8 @@ class Aktivitas extends \yii\db\ActiveRecord
 		 
 	 	
 	 }
+	
+
+
+
 }
