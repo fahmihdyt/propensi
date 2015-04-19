@@ -72,18 +72,18 @@ $model->proyek = $model->getProject($idProject);
 	<div class='col-lg-4' style='margin-left:-15px; margin-top:5px;'>
 	    <div class="panel panel-red" style='margin-top:10px;'>
 	        <div class="panel-heading">
-	            <strong>Milestone Line</strong>
+	            <strong>Deadline</strong>
 	        </div>
 	        <div class="panel-body">
 	        	<table class='table table-striped'>
 	            	<thead>
 	            		<th>Date</th>
-	            		<th>Milestone Name</th>
+	            		<th>Deadline Name</th>
 	            	</thead>
 	            	<?php foreach($barisms as $row){ ?>
 	            	<tr>
 	            		<td><?php echo $row['tanggal']; ?></td> 
-	            		<td><a href="<?php echo Yii::$app->params['url']."barismilestone/view?id=$row[id]"?>"><?php echo $row->getKategoriName($row->kategoriId); ?></a></td>         		
+	            		<td><?php echo $row->getKategoriName($row->kategoriId); ?></td>         		
 	            				<td>
 					<a href="<?php echo Yii::$app->params['url']?>barismilestone/update?id=<?php echo $row['id']?>">
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
@@ -95,7 +95,7 @@ $model->proyek = $model->getProject($idProject);
 	            	
 	            	</tr><?php } ?>
 	            </table>
-	            <a href="<?php echo Yii::$app->params['url']?>barismilestone/create" class='btn btn-primary' style='color:white; float:right;'>Create New Milestone</a>&nbsp;
+	            <a href="<?php echo Yii::$app->params['url']?>barismilestone/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Create New Deadline</a>&nbsp;
 		        
 	        </div>
 	    </div>
@@ -117,8 +117,7 @@ $model->proyek = $model->getProject($idProject);
 	            		<td><?php echo $row->findCreator($row->creator); ?></td>       		
 	            	</tr><?php } ?>
 	            </table>
-	            <a href="<?php echo Yii::$app->params['url']?>aktivitas/create" class='btn btn-primary' style='color:white; float:right;'>Create New Activity</a>&nbsp;
-		        
+	           
 	        </div>
 	    </div>
     </div>
