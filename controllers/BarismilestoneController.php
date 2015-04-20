@@ -93,7 +93,7 @@ class BarismilestoneController extends Controller
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
-		if($jabatan=='Coordinator'){
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
 			return $this->redirect('/propensi/web/index.php/home');
 		}
 		
@@ -129,21 +129,25 @@ class BarismilestoneController extends Controller
      */
     public function actionUpdate($id)
     {
+    	//supaya org non guest gabisa akses yg lain
     	if (\Yii::$app->user->isGuest) {
     		return $this->redirect('/propensi/web');
     	}
-		//supaya org non guest gabisa akses yg lain
 		
-		$jabatan=Yii::$app->user->identity->jabatan;
-		if($jabatan=='Coordinator'){
+				$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
 			return $this->redirect('/propensi/web/index.php/home');
 		}
 		
+		//$model = new Barismilestone();
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			$id=$model->siteId;
+			return $this->redirect("/propensi/web/index.php/site/view?id=$id");			
+		}
+			
+        else {
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -163,12 +167,17 @@ class BarismilestoneController extends Controller
     	}
 		//supaya org non guest gabisa akses yg lain
 		$jabatan=Yii::$app->user->identity->jabatan;
-		if($jabatan=='Coordinator'){
+		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
 			return $this->redirect('/propensi/web/index.php/home');
 		}
+		
+		$model = $this->findModel($id);
+        $id2=$model->siteId;
+		
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+	
+		
+        return $this->redirect("/propensi/web/index.php/site/view?id=$id2");
     }
 
     /**
