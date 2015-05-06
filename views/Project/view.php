@@ -24,10 +24,6 @@ $jabatan=Yii::$app->user->identity->jabatan;
     		<td><label>: <?= $model['nama'] ?></label></td>
     	</tr>
     	<tr>
-    		<td><label>Date Started</label></td>
-    		<td><label>: <?= $model['tanggal_mulai'] ?></label></td>
-    	</tr>
-    	<tr>
     		<td><label>Client Name</label></td>
     		<td><label>: <?= $klien['nama']?></label></td>	
     	</tr>
@@ -66,6 +62,27 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	        </div>
 	    </div>
     </div>
+    <?php if($jabatan == "Project Manager"){ ?>
+    <div class='col-lg-5' style='margin-left:-15px; margin-top:5px;'>
+	    <div class="panel panel-red" style='margin-top:10px;'>
+	        <div class="panel-heading">
+	            <strong>Employees</strong>
+	        </div>
+	        <div class="panel-body">
+	        	<table class='table table-striped'>
+	            	<thead>
+	            		<th>Employee Name</th>
+	            		<th>Role</th>
+	            		<th>Action</th>
+	            	</thead>
+	            	
+	            </table>
+	            <a href="" class='btn btn-primary' style='color:white; float:right;'>Assign New Employee</a>&nbsp;
+		        
+	        </div>
+	    </div>
+    </div>
+    <?php } ?>
        
    <div class='col-lg-12' style='margin-left:-15px;'>
     	<p>

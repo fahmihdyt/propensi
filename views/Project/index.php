@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			<tr>
 				<th>No.</th>
 				<th>Project Name</th>
-				<th>Starting Date</th>
 				<th>Client</th>
 				<?php if($jabatan == "Project Manager"){ ?>
 				<th>Action</th>
@@ -44,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					<tr>
 						<td><?= $i++ ?></td>							
 						<td><a href="<?php echo Yii::$app->params['url']?>project/view?id=<?php echo $row->id ?>"><?= $row->nama ?></a></td>
-						<td><?= $row->tanggal_mulai ?></td>
 						<td><?= $row->getClient($row->klienId) ?></td>
 						<td>
 							<?php if($jabatan == "Project Manager"){ ?>

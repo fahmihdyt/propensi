@@ -16,8 +16,6 @@ $data = ArrayHelper::map(Klien::find()->asArray()->all(),'id', 'nama');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tanggal_mulai')->textInput(['class'=>'date form-control']) ?>
-
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 200]) ?>
 
     <?= $form->field($model, 'klienId')->dropDownList($data, ['id' => 'klienId']) ?>
