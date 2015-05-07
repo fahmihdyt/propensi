@@ -112,4 +112,9 @@ class Site extends \yii\db\ActiveRecord
 		$result = Yii::$app->db->createCommand("select nama from proyek where id=$idproject")->queryOne();
 		return $result['nama'];
 	}
+	
+	public function getAktivitas($id){
+		$aktivitas=Aktivitas::findAll(['siteID'=>$id]);
+		return $aktivitas;
+	}
 }

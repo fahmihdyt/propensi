@@ -60,7 +60,13 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	            <a href="<?php echo Yii::$app->params['url']?>site/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Create New Site</a>&nbsp;
 		        
 	        </div>
+	        
 	    </div>
+	    <?php
+				foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+					echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+				}
+			?>
     </div>
     <?php if($jabatan == "Project Manager"){ ?>
     <div class='col-lg-5' style='margin-left:-15px; margin-top:5px;'>

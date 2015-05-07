@@ -97,7 +97,8 @@ class ProjectController extends Controller
         $model = new Project();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        	Yii::$app->getSession()->setFlash('success','Project has been created');
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -125,7 +126,8 @@ class ProjectController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        	Yii::$app->getSession()->setFlash('success','Project has been Updated');
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -147,7 +149,7 @@ class ProjectController extends Controller
 		}
 		
         $this->findModel($id)->delete();
-
+		Yii::$app->getSession()->setFlash('success','Project has been Deleted');
         return $this->redirect(['index']);
     }
 

@@ -108,6 +108,7 @@ class SiteController extends Controller
 							 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
+			 		Yii::$app->getSession()->setFlash('success','Project has been Created');
 			 		return $this->redirect("/propensi/web/index.php/project/view?id=$id");
 			 	}
 			 }
@@ -122,6 +123,7 @@ class SiteController extends Controller
 				//proses save dan upload
 				if($model->validate())	{			
 			 	if($model->save() ){
+			 		Yii::$app->getSession()->setFlash('success','Site has been Created');
                 	$imageName->saveAs($path);
                 	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
             	} 
@@ -167,7 +169,9 @@ class SiteController extends Controller
 			//$model=new Site();
 			 if(!isset($imageName)){
 			 	if($model->save()){
-			 		return $this->redirect(['view', 'id'=>$model->id]);
+			 		Yii::$app->getSession()->setFlash('success','Site has been Updated');
+			 		//return $this->redirect(['view', 'id'=>$model->id]);
+			 		return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
 			 	}
 				//return "foto gak kebaca";
 			 }
@@ -178,8 +182,10 @@ class SiteController extends Controller
 			 
 				//proses save dan upload
 				if($model->save()){
+					Yii::$app->getSession()->setFlash('success','Site has been Updated');
                 	$imageName->saveAs($path);
-                	return $this->redirect(['view', 'id'=>$model->id]);
+                	//return $this->redirect(['view', 'id'=>$model->id]);
+					return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
             	} else {
                 // error in saving model
             	}
@@ -203,10 +209,11 @@ class SiteController extends Controller
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
 			return $this->redirect('/propensi/web/index.php/aktivitas');
 		}
-		
+		$model=$this->findModel($id);
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+		Yii::$app->getSession()->setFlash('success','Site has been Deleted');
+        //return $this->redirect(['index']);
+        return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
     }
 
     /**

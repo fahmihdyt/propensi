@@ -33,7 +33,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             [['tanggal_mulai'], 'safe'],
-            [['nama'], 'required'],
+            
             [['klienId'], 'integer'],
             [['nama'], 'string', 'max' => 200]
         ];
@@ -46,7 +46,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal_mulai' => 'Starting Date',
+         
             'nama' => 'Project Name',
             'klienId' => 'Client',
         ];

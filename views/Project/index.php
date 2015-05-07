@@ -59,5 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			
 		</tbody>
 	</table>
+	
+	<?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
 
 </div>
