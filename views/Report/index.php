@@ -10,9 +10,10 @@ use app\models\Project;
 <hr>
 
 <div class='row'>
+	<!------------------------ Dropdown Pemilihan Project -------------------->
 	<!-- Dropdown -->
 	<div class='col-lg-4'>
-		<form method='get' action='<?= Yii::$app->params['url']?>filter'>
+		<form method='get' action='<?= Yii::$app->params['url']?>report/filter'>
 			<select name='id' class='form-control'>
 				<?php foreach($project as $row){?>
 					<option value='<?= $row['id'] ?>'><?= $row['nama'] ?></option>
@@ -23,7 +24,7 @@ use app\models\Project;
 	<div class='col-lg-4' style='margin-left: -20px'>
 		<button type='submit' class='btn btn-primary'>Report</button>
 		</form>	
-		<?= Html::a('Download as DOCX', ['#'], ['class' => 'btn btn-primary']) ?>
+		
 	</div>
 </div>
 	

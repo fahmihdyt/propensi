@@ -41,8 +41,16 @@ class ReportController extends Controller
 	public function actionFilter(){
 		$id=$_GET['id'];
 		
+		$projectList=Project::find()->all();
 		$site=Site::findAll(['proyek'=>$id]);
-		return $this->render('index',['project'=>$models]);
+		$project=Project::findOne(['id'=>$id]);
+		
+		
+		return $this->render('filter',[
+			'projectList'=>$projectList,
+			'site'=>$site,
+			'project'=>$project
+		]);
 		
 	}
 	

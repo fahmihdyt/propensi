@@ -125,7 +125,6 @@ class Site extends \yii\db\ActiveRecord
 	public function getActivity($id){
 		$model=new Aktivitas();
 		$aktivitas=$model->findAll(['siteID'=>$id]);
-		//$aktivitas=Aktivitas::findAll(['siteID'=>$id]);
 		return $aktivitas;
 	}
 }
