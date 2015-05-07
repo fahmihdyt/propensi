@@ -8,7 +8,10 @@ use Yii;
  * This is the model class for table "site".
  *
  * @property integer $id
+ * @property string $tanggal_mulai
+ * @property string $siteID
  * @property string $nama
+ * @property string $alamat
  * @property string $titik_nominal
  * @property string $status_kepemilikan
  * @property string $tipe_antena
@@ -39,14 +42,17 @@ class Site extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+        	['nama','required'],
+            [['tanggal_mulai'], 'safe'],
             [['keterangan'], 'string'],
             [['proyek'], 'integer'],
-            ['nama','required'],
+            [['siteID'], 'string', 'max' => 30],
             [['nama', 'status_kerja'], 'string', 'max' => 100],
+            [['alamat'], 'string', 'max' => 255],
             [['titik_nominal'], 'string', 'max' => 10],
             [['status_kepemilikan'], 'string', 'max' => 50],
             [['tipe_antena'], 'string', 'max' => 20],
-            ['foto', 'file','extensions' => ['png','jpg']]
+            [['foto'], 'string', 'max' => 200]
         ];
     }
 
@@ -57,14 +63,17 @@ class Site extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nama' => 'Site Name',
-            'titik_nominal' => 'Final Coordinate',
-            'status_kepemilikan' => 'Ownership Status',
+            'tanggal_mulai' => 'Start Date',
+            'siteID' => 'Site ID',
+            'nama' => 'Name',
+            'alamat' => 'Address',
+            'titik_nominal' => 'Final Point',
+            'status_kepemilikan' => 'Ownership',
             'tipe_antena' => 'Antenna Type',
-            'keterangan' => 'Description',
+            'keterangan' => 'Notes',
             'foto' => 'Photo',
             'status_kerja' => 'Status',
-            'proyek' => 'Project',
+            'proyek' => 'Proyek',
         ];
     }
 
@@ -113,8 +122,10 @@ class Site extends \yii\db\ActiveRecord
 		return $result['nama'];
 	}
 	
-	public function getAktivitas($id){
-		$aktivitas=Aktivitas::findAll(['siteID'=>$id]);
+	public function getActivity($id){
+		$model=new Aktivitas();
+		$aktivitas=$model->findAll(['siteID'=>$id]);
+		//$aktivitas=Aktivitas::findAll(['siteID'=>$id]);
 		return $aktivitas;
 	}
 }

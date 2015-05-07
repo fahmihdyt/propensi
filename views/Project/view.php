@@ -46,12 +46,14 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	        <div class="panel-body">
 	        	<table class='table table-striped'>
 	            	<thead>
+	            		<th>Starting Date</th>
 	            		<th>Site Name</th>
 	            		<th>Final Coordinate</th>
 	            		<th>Work Status</th>
 	            	</thead>
 	            	<?php foreach($site as $row){ ?>
 	            	<tr>
+	            		<td><?php echo $row['tanggal_mulai']; ?></td>
 	            		<td><a href="<?php echo Yii::$app->params['url']."site/view?id=$row[id]"?>"><?php echo $row['nama']; ?></a></td>
 	            		<td><?php echo $row['titik_nominal']; ?></td>
 	            		<td><?php echo $row['status_kerja']; ?></td>            		

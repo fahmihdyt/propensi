@@ -19,7 +19,7 @@ class ProjectSearch extends Project
     {
         return [
             [['id', 'klienId'], 'integer'],
-            [['tanggal_mulai', 'nama'], 'safe'],
+            [['nama'], 'safe'],
         ];
     }
 
@@ -57,7 +57,6 @@ class ProjectSearch extends Project
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'tanggal_mulai' => $this->tanggal_mulai,
             'klienId' => $this->klienId,
         ]);
 

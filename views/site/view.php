@@ -23,12 +23,24 @@ $model->proyek = $model->getProject($idProject);
     <!--Detail Body-->
 	<table style='font-size:14px;'>
 		<tr height='20'>
-			<td><label>ID</label></td>
-			<td>: <?php echo $model->id;?></td>
+			<td><label>Site ID</label></td>
+			<td>: <?php echo $model->siteID;?></td>
+		</tr>
+		<tr height='20'>
+			<td><label>Start Date</label></td>
+			<td>: <?php echo $model->tanggal_mulai;?></td>
+		</tr>
+		<tr height='20'>
+			<td><label>Status</label></td>
+			<td>: <?php echo $model->status_kerja;?></td>
 		</tr>
 		<tr height='20'>
 			<td width="190"><label>Site Name</label></td>
 			<td>: <?php echo $model->nama;?></td>
+		</tr>
+		<tr height='20'>
+			<td width="190"><label>Site Address</label></td>
+			<td>: <?php echo $model->alamat;?></td>
 		</tr>
 		<tr height='20'>
 			<td width="190"><label>Final Coordinate</label></td>
@@ -45,10 +57,6 @@ $model->proyek = $model->getProject($idProject);
 		<tr height='20'>
 			<td width="190"><label>Project</label></td>
 			<td>: <?php echo $model->proyek;?></td>
-		</tr>
-		<tr height='20'>
-			<td width="190"><label>Working Status</label></td>
-			<td>: <?php echo $model->status_kerja;?></td>
 		</tr>
 		<tr height='20'>
 			<td colspan='1'><label>Photo</label></td>
