@@ -32,8 +32,7 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanggal_mulai'], 'safe'],
-            
+                      
             [['klienId'], 'integer'],
             [['nama'], 'string', 'max' => 200]
         ];
@@ -45,8 +44,7 @@ class Project extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-         
+            'id' => 'ID',         
             'nama' => 'Project Name',
             'klienId' => 'Client',
         ];
