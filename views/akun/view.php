@@ -15,13 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
 	<hr></div>
-    
-    <?php
-		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
-			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
-		}
-	?>
-	
+  
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -40,9 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Update', ['update', 'id' => $model->nik], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->nik], [
             'class' => 'btn btn-primary',
+            'onClick' => 'return confirm("Are you sure you want to delete this account?")',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
+
             ],
         ]) ?>
         <?= Html::a('Back', ['index'], ['class' => 'btn btn-default']) ?>

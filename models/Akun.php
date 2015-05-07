@@ -28,7 +28,9 @@ class Akun extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public $repeatPassword; 
+    public $repeatPassword;
+	// public $oldPassword;
+	// public $newPassword; 
      
     public static function tableName()
     {
@@ -42,17 +44,20 @@ class Akun extends \yii\db\ActiveRecord
     {
         	
         return [
-            [['nik', 'username', 'password', 'jabatan','repeatPassword'], 'required'],
+            [['nik', 'username', 'password', 'repeatPassword', 'jabatan'], 'required'],
             [['nik', 'username'], 'unique', 'message' => '{attribute}: {value} already exists!'],
             [['jabatan'], 'string'],
             [['nik'], 'string', 'max' => 12],
             [['nama', 'username', 'no_telp'], 'string', 'max' => 30],
             [['gender'], 'string', 'max' => 14],
             [['email'], 'string', 'max' => 50,],
-            [['password'], 'string', 'max' => 255, 'min' => 8,],
-            [['repeatPassword'], 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match!",],
             [['alamat'], 'string', 'max' => 200],
-            [['email'], 'email']
+            [['email'], 'email'],
+            // [['oldPassword', 'newPassword', 'repeatPassword'], 'required', 'on' => 'changePassword'],
+            [['password'], 'string', 'max' => 255, 'min' => 8],
+            // [['oldPassword'], 'findPassword', 'on' => 'changePassword'],
+            [['repeatPassword'], 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match!"],
+            
         ];
     }
 
@@ -67,7 +72,9 @@ class Akun extends \yii\db\ActiveRecord
             'gender' => 'Gender',
             'email' => 'Email',
             'username' => 'Username',
+            // 'oldPassword' => 'Old Password',
             'password' => 'Password',
+            // 'newPassword' => 'New Password',
             'repeatPassword' => 'Confirm Password',
             'alamat' => 'Address',
             'jabatan' => 'Role',
@@ -127,4 +134,10 @@ class Akun extends \yii\db\ActiveRecord
 		
 		return $return;
 	}
+	
+	// public function findPassword($attribute, $params)
+    // {
+        // if (Yii::$app->user->identity->password != ($this->oldPassword))
+            // return Yii::$app->user->identity->password;
+    // }
 }

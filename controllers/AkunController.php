@@ -105,7 +105,7 @@ class AkunController extends Controller
 		if(\Yii::$app->user->identity->nik == $model->nik || \Yii::$app->user->identity->jabatan == "Administrator" )	 {
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
             	\Yii::$app->getSession()->setFlash('success', "Account is successfully updated.");
-            	return $this->redirect(['view', 'id' => $model->nik]);
+            	return $this->redirect(['index']);
         	} else {
             	return $this->render('update', [
                 	'model' => $model,
@@ -147,6 +147,19 @@ class AkunController extends Controller
 			return $this->redirect(['index']);
 		}
     }
+	
+	// public function actionChangepassword($id)
+ 	// {      
+    	// $model = $this->findModel($id);
+    	// $model->setScenario('changePassword');
+//  
+        // $model->password = ($model->newPassword);
+//  
+        // if($model->load(Yii::$app->request->post()) && $model->save())
+        	// return $this->redirect(['index']);
+       	// else
+        	// return $this->render('changepassword', ['model' => $model]);
+ // }
 
     /**
      * Finds the Akun model based on its primary key value.
@@ -163,4 +176,6 @@ class AkunController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	
 }

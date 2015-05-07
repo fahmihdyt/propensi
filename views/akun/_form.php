@@ -27,11 +27,11 @@ $privilege = Yii::$app->user->identity->jabatan;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 50, 'autocomplete' => 'off', 'placeholder' => 'E-mail']) ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => 30, 'autocomplete' => 'off', 'placeholder' => 'Username']) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => 30, 'autocomplete' => 'off', 'placeholder' => 'Username',]) ?>
 	
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => 32, 'placeholder' => 'Password']) ?>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => 32, 'placeholder' => 'Password', 'value' => ""])->hint('<i>Password should contain at least 8 characters.</i>') ?>
     
-    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => 32, 'placeholder' => 'Re-enter Password'])->hint('<i>Password should be at least contains 8 characters.</i>') ?>
+    <?= $form->field($model, 'repeatPassword')->passwordInput(['maxlength' => 32, 'placeholder' => 'Re-enter Password']) ?>
 	
 	<?php if($privilege == "Administrator") { ?>
     <?= $form->field($model, 'jabatan')->dropDownList(['Administrator' => 'Administrator', 'Project Manager' => 'Project Manager', 'Supervisor' => 'Supervisor', 'Coordinator' => 'Coordinator']) ?>
