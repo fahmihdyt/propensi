@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
+use app\models\Barismilestone;
 
 /**
  * AktivitasController implements the CRUD actions for Aktivitas model.
@@ -380,6 +381,28 @@ class AktivitasController extends Controller
 			}
 		 }
 	  
+	 public function actionLists($id)
+    {
+        $countPosts = Barismilestone::find()
+                ->where(['siteId' => $id])
+                ->count();
+ 
+        $posts = Barismilestone::find()
+                ->where(['siteId' => $id])
+                ->orderBy('id DESC')
+                ->all();
+ 
+        if($countPosts>0){
+        	echo "<option value=''></option>";
+            foreach($posts as $post){
+                echo "<option value='".$post->id."'>".$post->getKategoriName($post['kategoriId'])."</option>";
+            }
+        }
+        else{
+            echo "<option>-</option>";
+        }
+ 
+    }
 
     /**
      * Finds the Aktivitas model based on its primary key value.

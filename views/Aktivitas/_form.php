@@ -46,7 +46,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 	<?= $form->field($model, 'siteId')->dropDownList($data,[
 			'prompt'=>'-Choose a Category-',
             'onchange'=>'
-             $.get( "'.Url::toRoute('report/lists').'", { id: $(this).val() } )
+             $.get( "'.Url::toRoute('aktivitas/lists').'", { id: $(this).val() } )
                             .done(function( data )
                    {
                               $( "select#tanggal" ).html( data );
