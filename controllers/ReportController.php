@@ -12,6 +12,7 @@ use app\models\Site;
 use app\models\Klien;
 use PhpOffice\PhpWord\Autoloader;
 use PhpOffice\PhpWord\PhpWord;
+use app\models\Barismilestone;
 
 
 
@@ -61,6 +62,30 @@ class ReportController extends Controller
 		]);
 		
 	}
+	
+	
+	public function actionLists($id)
+    {
+        $countPosts = Barismilestone::find()
+                ->where(['siteId' => $id])
+                ->count();
+ 
+        $posts = Barismilestone::find()
+                ->where(['siteId' => $id])
+                ->orderBy('id DESC')
+                ->all();
+ 
+        if($countPosts>0){
+            foreach($posts as $post){
+                echo "<option value='".$post->id."'>".$post->tanggal."</option>";
+            }
+        }
+        else{
+            echo "<option>-</option>";
+        }
+ 
+    }
+	
 	
 	public function actionExport($id){
 		

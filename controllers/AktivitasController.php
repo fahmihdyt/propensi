@@ -190,6 +190,7 @@ class AktivitasController extends Controller
 		}
 		
         $model = $this->findModel($id);
+		//$model->project='cobacoba';
 		
 		//set default foto file
 		if(!is_null($model['foto'])){

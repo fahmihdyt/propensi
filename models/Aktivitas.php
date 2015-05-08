@@ -24,6 +24,11 @@ use app\models\Barismilestone;
  */
 class Aktivitas extends \yii\db\ActiveRecord
 {
+	//Variable pembantu
+	
+	public $project;
+	
+		
     /**
      * @inheritdoc
      */
@@ -39,8 +44,9 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             [['tanggal'], 'safe'],
-            [['judul','tanggal', 'status', 'keterangan'], 'required'],
+            [['judul','tanggal', 'status', 'keterangan','siteId'], 'required'],
             [['keterangan'], 'string'],
+            [['type'], 'string'],
             [['status_approval_pm', 'status_approval_supervi', 'siteId'], 'integer'],
             [['judul'], 'string', 'max' => 100],
             [['status'], 'string', 'max' => 30],
@@ -56,15 +62,17 @@ class Aktivitas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'tanggal' => 'Tanggal',
-            'judul' => 'Judul',
+            'tanggal' => 'Date',
+            'judul' => 'Activity',
             'status' => 'Status',
-            'foto' => 'Foto',
-            'keterangan' => 'Keterangan',
+            'foto' => 'Photo',
+            'keterangan' => 'Notes',
             'status_approval_pm' => 'Status Approval Pm',
             'status_approval_supervi' => 'Status Approval Supervi',
-            'creator' => 'Creator',
-            'siteId' => 'Site ID',
+            'creator' => 'PIC',
+            'siteId' => 'Site Location',
+            'type' => 'Works for',
+            'project' => 'project'
         ];
     }
 

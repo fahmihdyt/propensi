@@ -23,7 +23,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     
     <?= $form->field($model, 'status')->textInput(['maxlength' => 30]) ?>
     
-    <?= $form->field($model, 'siteId')->dropDownList($data,['id'=>'nama']) ?>
+    <?= $form->field($model, 'siteId')->dropDownList($data,['prompt'=>'-Choose a Site-']) ?>
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 10]) ?>
 	

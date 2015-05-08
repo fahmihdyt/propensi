@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Site;
+use app\models\Project;
+use app\models\Barismilestone;
+use yii\helpers\Url;
 //use yii\widgets\FileInput;
 
 /* @var $this yii\web\View */
@@ -21,14 +24,45 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 
 
 <div class="aktivitas-form">
+	
+	<?php
+		if($model->isNewRecord){
+			$project='';
+		}
+		else{
+			$site=Site::findOne(['id'=>$model->siteId]);
+			$project=Project::findOne(['id'=>$site->proyek]);
+			$project=$project->nama;
+		}		
+	?>
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?> <!--Enctype untuk allow upload photo-->
 
+	<?= $form->field($model, 'tanggal')->textInput(['class'=>'date form-control','placeholder'=>'Tanggal Aktivitas']) ?>
+	
 	<?= $form->field($model, 'judul')->textInput(['maxlength' => 100,'placeholder'=>'Nama Aktivitas']) ?>
 	
-    <?= $form->field($model, 'tanggal')->textInput(['class'=>'date form-control','placeholder'=>'Tanggal Aktivitas']) ?>
-
-    <?= $form->field($model, 'status')->dropDownList(['Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
+	
+	<?= $form->field($model, 'siteId')->dropDownList($data,[
+			'prompt'=>'-Choose a Category-',
+            'onchange'=>'
+             $.get( "'.Url::toRoute('report/lists').'", { id: $(this).val() } )
+                            .done(function( data )
+                   {
+                              $( "select#tanggal" ).html( data );
+                            });
+                        ']); ?> 
+	
+	<?php 
+	$dataPost=ArrayHelper::map(Barismilestone::find()->asArray()->all(), 'id', 'tanggal');
+    echo $form->field($model, 'type')->dropDownList(
+            $dataPost,           
+            ['prompt'=>'-Choose one-','id'=>'tanggal']
+        ); ?>
+        
+	<!-- <?= $form->field($model, 'type')->textInput(['maxlength' => 100,'placeholder'=>'Works for']) ?> -->
+	
+    <?= $form->field($model, 'status')->dropDownList([''=>'','Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
 
     <?= $form->field($model, 'foto')->fileInput() ?> <!--Form untuk upload photo-->
     <?php 
@@ -37,7 +71,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 		//]); 
 	?>
     
-    <?= $form->field($model, 'siteId')->dropDownList($data,['id'=>'nama']) ?>
+    
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 10,'require'=>'require']) ?>
           
