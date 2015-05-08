@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Barismilestone;
 
 /**
  * This is the model class for table "aktivitas".
@@ -103,6 +104,11 @@ class Aktivitas extends \yii\db\ActiveRecord
 
 	public function getAllCoor($nik){
 		return Yii::$app->db->createCommand("select * from aktivitas where creator='$nik'")->queryAll();
+	}
+	
+	public function getDeadline($id){
+		$deadline=Barismilestone::findOne(['id'=>$id]);
+		return $deadline;
 	}
 	
 	/*

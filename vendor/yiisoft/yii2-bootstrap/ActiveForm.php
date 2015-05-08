@@ -31,7 +31,7 @@ use yii\base\InvalidConfigException;
  * ```php
  * [
  *     'offset' => 'col-sm-offset-3',
- *     'label' => 'col-sm-1',
+ *     'label' => 'col-sm-3',
  *     'wrapper' => 'col-sm-6',
  *     'error' => '',
  *     'hint' => 'col-sm-3',
