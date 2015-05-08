@@ -43,8 +43,14 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 	<?= $form->field($model, 'judul')->textInput(['maxlength' => 100,'placeholder'=>'Nama Aktivitas']) ?>
 	
 	
-	<?= $form->field($model, 'siteId')->dropDownList($data,[
-			'prompt'=>'-Choose a Category-',
+	<?= $form->field($model, 'siteId')->dropDownList(
+				ArrayHelper::map(Site::find()->asArray()->all(),
+			    'id',
+			    function($model, $defaultValue) {
+			        return 'Site '.$model['nama'].' - '.Site::getProject($model['proyek']);
+			    }
+			),
+			['prompt'=>'-Choose a Category-',
             'onchange'=>'
              $.get( "'.Url::toRoute('aktivitas/lists').'", { id: $(this).val() } )
                             .done(function( data )
@@ -56,7 +62,10 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 	<?php 
 	$dataPost=ArrayHelper::map(Barismilestone::find()->asArray()->all(), 'id', 'tanggal');
     echo $form->field($model, 'type')->dropDownList(
-            $dataPost,           
+            ArrayHelper::map(Barismilestone::find()->asArray()->all(), 'id', 
+            	function($model, $defaultValue) {
+			        return Barismilestone::getKategoriNames($model['id']);
+			    }),           
             ['prompt'=>'-Choose one-','id'=>'tanggal']
         ); ?>
         

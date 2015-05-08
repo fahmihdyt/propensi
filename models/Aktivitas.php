@@ -71,7 +71,7 @@ class Aktivitas extends \yii\db\ActiveRecord
             'status_approval_supervi' => 'Status Approval Supervi',
             'creator' => 'PIC',
             'siteId' => 'Site Location',
-            'type' => 'Works for',
+            'type'=> 'Works for',
             'project' => 'project'
         ];
     }

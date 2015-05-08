@@ -22,7 +22,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 100]) ?>
     
-    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'Survey','rehunting'=>'Rehunting','rfc'=>'RFC','sitac on going'=>'SITAC on Going','cme on going'=>'CME on Going','rfi'=>'RFI','drop'=>'Drop']) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'Survey','rehunting'=>'Rehunting','rfc'=>'RFC','sitac on going'=>'SITAC on Going','cme on going'=>'CME on Going','rfi'=>'RFI','drop'=>'Drop'],['prompt'=>'-Choose a Site-']) ?>
 	    
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => 100]) ?>
 

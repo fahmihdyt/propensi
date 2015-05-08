@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Kategori;
 
 /**
  * This is the model class for table "barismilestone".
@@ -61,6 +62,13 @@ class Barismilestone extends \yii\db\ActiveRecord
 	public function getKategoriName($KategoriId){
 		$result = Yii::$app->db->createCommand("select nama from Kategori where id= '$KategoriId'") -> queryOne();
 		return $result['nama'];
+		//return nama dari kategori 
+	}
+	
+	public function getKategoriNames($id){
+		$result = Barismilestone::findOne(['id'=>$id]);
+		$result2= Kategori::findOne(['id'=>$result['kategoriId']]);
+		return $result2['nama'];
 		//return nama dari kategori 
 	}
     /**

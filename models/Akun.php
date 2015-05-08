@@ -130,8 +130,7 @@ class Akun extends \yii\db\ActiveRecord
 	public function beforeSave($insert)
 	{
 		$return = parent::beforeSave($insert);
-		$this->password = md5($this->password);
-		
+		$this->password = md5($this->password);		
 		return $return;
 	}
 	
