@@ -20,7 +20,7 @@ class PengumumanController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['get'],
                 ],
             ],
         ];
@@ -32,13 +32,17 @@ class PengumumanController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PengumumanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if(\Yii::$app->user->isGuest) {
+        	return $this->redirect('/propensi/web');
+        }
+		
+		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
+			return $this->redirect('/propensi/web/index.php/home');	
+		}
+		
+		$data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
+		
+        return $this->render('index', ['data' => $data]);
     }
 
     /**
@@ -60,10 +64,21 @@ class PengumumanController extends Controller
      */
     public function actionCreate()
     {
+        if(\Yii::$app->user->isGuest) {
+        	return $this->redirect('/propensi/web');
+        }
+		
+		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
+			return $this->redirect('/propensi/web/index.php/home');	
+		}
+		
         $model = new Pengumuman();
-
+		$model->tanggal = date("Y-m-d");
+		//$model->creator = Yii::$app->user->identity->nama;
+		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        	\Yii::$app->getSession()->setFlash('success', "Announcement is successfully created.");
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -98,9 +113,18 @@ class PengumumanController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->isGuest) {
+        	return $this->redirect('/propensi/web');
+        }
+		
+		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
+        	return $this->redirect('/propensi/web');
+        }
 
+        $this->findModel($id)->delete();
+		\Yii::$app->getSession()->setFlash('success', "Account is successfully deleted.");
         return $this->redirect(['index']);
+		
     }
 
     /**

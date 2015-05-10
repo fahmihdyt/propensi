@@ -66,9 +66,7 @@ AppAsset::register($this);
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-               <li><?php 	$fullName = explode(' ', Yii::$app->user->identity->nama);
-			   				$firstName = $fullName[0];
-               				echo "Hello, ".$firstName."!" ?></li>
+               <li><?php echo Yii::$app->user->identity->nama ."&nbsp;(".Yii::$app->user->identity->jabatan.")"; ?></li>
                <li><a href="<?php echo Yii::$app->params['url']?>login/logout" onClick="return confirm('Are you sure you want to log out?')"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -116,11 +114,20 @@ AppAsset::register($this);
                         </li><?php } ?>
                         <?php if($privilege == "Administrator" || $privilege == "Project Manager") { ?>
                         <li>
-                            <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bar-chart-o fa-lg"></i> &nbsp;Report</a>
+                            <a><i class="fa fa-bar-chart-o fa-lg"></i> &nbsp;Report 
+                            	<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo Yii::$app->params['url']?>report"> &nbsp;Project Report </a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                           	</ul>
                         </li><?php } ?>
                         <?php if($privilege == "Administrator") { ?>
                         <li>
-                            <a href="<?php echo Yii::$app->params['url']?>issue"><i class="fa fa-bullhorn fa-lg"></i> &nbsp;Announcement</a>
+                            <a <?php if ($currentUrl == "pengumuman") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>pengumuman"><i class="fa fa-bullhorn fa-lg"></i> &nbsp;Announcement</a>
                         </li><?php } ?>
                         <?php } ?>
                       </ul>

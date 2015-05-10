@@ -47,8 +47,8 @@ class Pengumuman extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'tanggal' => 'Tanggal',
-            'judul' => 'Judul',
-            'isi' => 'Isi',
+            'judul' => 'Subject',
+            'isi' => 'Content',
             'creator' => 'Creator',
         ];
     }
@@ -60,4 +60,23 @@ class Pengumuman extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Akun::className(), ['nik' => 'creator']);
     }
+	
+	public function getAdmin()
+	{
+		$result = Yii::$app->db->createCommand('select nik,nama from akun where jabatan="Administrator"')->queryAll();
+		return $result;
+	}
+	
+	public function getCreator($nik)
+	{
+		$result = Yii::$app->db->createCommand("select nama from akun where nik=$nik")->queryOne();
+		return $result['nama'];
+	}
+	
+	public function beforeSave($insert)
+	{
+		$return = parent::beforeSave($insert);
+		$this->creator = Yii::$app->user->identity->nik;		
+		return $return;
+	}
 }
