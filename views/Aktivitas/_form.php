@@ -20,12 +20,14 @@ foreach($site as $row){
 }
 $sites=substr($sites, 0,strlen($sites)-1);*/
 $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
+
 ?>
 
 
 <div class="aktivitas-form">
 	
 	<?php
+		$site=new Site();
 		if($model->isNewRecord){
 			$project='';
 		}
