@@ -9,7 +9,9 @@ use app\models\Project;
 /* @var $this yii\web\View */
 /* @var $model app\models\Projectteam */
 /* @var $form yii\widgets\ActiveForm */
-$data=ArrayHelper::map(Akun::find()->asArray()->all(),'nik','nama');
+
+$jabatan = 'Administrator';
+$data=ArrayHelper::map(Akun::find()->where('jabatan != :jabatan', [':jabatan' => $jabatan])->asArray()->all(),'nik','nama');
 $data2=ArrayHelper::map(Project::find()->asArray()->all(),'id','nama');
 ?>
 

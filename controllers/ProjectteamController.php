@@ -32,6 +32,11 @@ class ProjectteamController extends Controller
      */
     public function actionIndex()
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $searchModel = new ProjectteamSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +53,11 @@ class ProjectteamController extends Controller
      */
     public function actionView($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +70,11 @@ class ProjectteamController extends Controller
      */
     public function actionCreate($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $model = new Projectteam();
 
         /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,6 +113,11 @@ class ProjectteamController extends Controller
      */
     public function actionUpdate($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -118,6 +138,11 @@ class ProjectteamController extends Controller
      */
     public function actionDelete($id)
     {
+    	$jabatan=Yii::$app->user->identity->jabatan;
+		if(!($jabatan=='Project Manager')){
+			return $this->redirect('/propensi/web/index.php/aktivitas');
+		}
+		
     	$model = $this->findModel($id);
         $id2=$model->proyekId;    	
 			
