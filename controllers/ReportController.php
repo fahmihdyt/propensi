@@ -40,6 +40,11 @@ class ReportController extends Controller
      */
     public function actionIndex()
     {
+    	//validasi: Hanya untuk yang sudah login
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+            return $this->redirect('/propensi/web');
+        }
+		
     	$model=new Project();
 		$models=$model->find()->all();
 		
@@ -47,6 +52,12 @@ class ReportController extends Controller
     }
 	
 	public function actionFilter(){
+		
+		//validasi: Hanya untuk yang sudah login
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+            return $this->redirect('/propensi/web');
+        }
+		
 		$id=$_GET['id'];
 		
 		$projectList=Project::find()->all();
@@ -69,6 +80,10 @@ class ReportController extends Controller
 	
 	public function actionExport($id){
 		
+		//validasi: Hanya untuk yang sudah login
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+            return $this->redirect('/propensi/web');
+        }
 			
 		$site=Site::findAll(['proyek'=>$id]);
 		$project=Project::findOne(['id'=>$id]);
