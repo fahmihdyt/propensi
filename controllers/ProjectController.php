@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Site;
 use app\models\Klien;
+use app\models\Projectteam;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -71,8 +72,11 @@ class ProjectController extends Controller
     	if(Yii::$app->user->isGuest){
     		return $this->redirect('/propensi/web');
     	}
+		
+		$prjteam=Projectteam::findAll(['proyekId' => $id]);
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
+            'prjteam' => $prjteam,
             'site' => $site,
             'klien'=> $klien
         ]);

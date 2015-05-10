@@ -79,13 +79,25 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	        <div class="panel-body">
 	        	<table class='table table-striped'>
 	            	<thead>
-	            		<th>Employee Name</th>
+	            		<th>Name</th>
 	            		<th>Role</th>
-	            		<th>Action</th>
 	            	</thead>
+	            	<?php foreach($prjteam as $row){ ?>
+	            	<tr> 
+	            		<td><?php echo $row->getEmployee($row->nik); ?></td>
+	            		<td><?php echo $row->getRole($row->nik); ?></td>         		
+	            				<td>
+					<a href="<?php echo Yii::$app->params['url']?>projectteam/update?id=<?php echo $row['id']?>">
+						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
+					
+					<a href="<?php echo Yii::$app->params['url']?>projectteam/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to unassign this empolyee?')">
+					<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+					
+				</td>
 	            	
+	            	</tr><?php } ?>
 	            </table>
-	            <a href="" class='btn btn-primary' style='color:white; float:right;'>Assign New Employee</a>&nbsp;
+	            <a href="<?php echo Yii::$app->params['url']?>projectteam/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Assign New Assign</a>&nbsp;
 		        
 	        </div>
 	    </div>
