@@ -94,15 +94,31 @@ class PengumumanController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if(\Yii::$app->user->isGuest) {
+        	return $this->redirect('/propensi/web');
         }
+		
+		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
+			return $this->redirect('/propensi/web/index.php/home');	
+		}
+		
+        $model = $this->findModel($id);
+		
+		if(\Yii::$app->user->identity->nik == $model->nik) {
+			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				\Yii::$app->getSession()->setFlash('success', "Announcement is successfully updated.");
+            	return $this->redirect(['view', 'id' => $model->id]);
+        	} else {
+            	return $this->render('update', [
+                	'model' => $model,
+            	]);
+        	}
+		}
+		else{
+			\Yii::$app->getSession()->setFlash('danger', "Announcement can't be updated.");
+			return $this->redirect('/propensi/web/index.php/pengumuman');	
+		}
+        
     }
 
     /**
@@ -118,14 +134,21 @@ class PengumumanController extends Controller
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect('/propensi/web/home');
         }
 
         $this->findModel($id)->delete();
-		\Yii::$app->getSession()->setFlash('success', "Account is successfully deleted.");
+		\Yii::$app->getSession()->setFlash('success', "Announcement is successfully deleted.");
         return $this->redirect(['index']);
 		
     }
+	
+	public function actionHome()
+	{
+		$data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
+		
+        return $this->render('/propensi/web/home', ['data' => $data]);
+	}
 
     /**
      * Finds the Pengumuman model based on its primary key value.
