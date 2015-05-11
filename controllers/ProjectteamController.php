@@ -86,11 +86,25 @@ class ProjectteamController extends Controller
         }*/
         if ($model->load(Yii::$app->request->post())) {
         	
+			
 			//store project value
 			 $model->proyekId=$id;
+			 //return $model->nik;
+			 //$cekproyek = $model->findAll(array('proyekId'=>$model->proyekId));
+			 $prjteam=Projectteam::findAll(['proyekId' => $id]);
+			 foreach($prjteam as $row){
+			 	$nik_saved = $row->nik;
+				$nik_entering = $model->nik;
+				if ($nik_saved == $nik_entering){
+					Yii::$app->getSession()->setFlash('error','The employee cannot be assigned because he/she has been assigned before.');	
+					return $this->render('create', [
+                	'model' => $model,
+            		]);
+				}
+			 }
 			
 			if($model->save()){
-			 		 return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+			 	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
 			}
 			else{
 				return $this->render('create', [

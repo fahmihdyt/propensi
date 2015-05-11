@@ -30,6 +30,7 @@ class Projectteam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+        	['nik','required'],
             [['proyekId'], 'integer'],
             [['nik'], 'string', 'max' => 12]
         ];
@@ -43,7 +44,7 @@ class Projectteam extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'proyekId' => 'Proyek ID',
-            'nik' => 'Nik',
+            'nik' => 'Employee Name',
         ];
     }
 

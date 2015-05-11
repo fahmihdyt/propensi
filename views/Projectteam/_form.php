@@ -19,9 +19,15 @@ $data2=ArrayHelper::map(Project::find()->asArray()->all(),'id','nama');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nik')->dropDownList($data, ['nik' => 'nik']) ?>
+    <?= $form->field($model, 'nik')->dropDownList($data, ['prompt'=>'-Choose a Category-', 'nik' => 'nik']); ?>
     
     <?php $id=$_GET['id'];    	?>
+
+	<?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
