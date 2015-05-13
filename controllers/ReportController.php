@@ -41,7 +41,7 @@ class ReportController extends Controller
     public function actionIndex()
     {
     	//validasi: Hanya untuk yang sudah login
-    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan!='Project Manager') {
             return $this->redirect('/propensi/web');
         }
 		
@@ -54,7 +54,7 @@ class ReportController extends Controller
 	public function actionFilter(){
 		
 		//validasi: Hanya untuk yang sudah login
-    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan!='Project Manager') {
             return $this->redirect('/propensi/web');
         }
 		
@@ -81,7 +81,7 @@ class ReportController extends Controller
 	public function actionExport($id){
 		
 		//validasi: Hanya untuk yang sudah login
-    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan=='Project Manager') {
+    	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan!='Project Manager') {
             return $this->redirect('/propensi/web');
         }
 			
