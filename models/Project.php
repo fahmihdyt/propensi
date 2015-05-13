@@ -32,7 +32,8 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-                      
+            ['nama', 'required'],
+            ['klienId', 'required'],        
             [['klienId'], 'integer'],
             [['nama'], 'string', 'max' => 200]
         ];

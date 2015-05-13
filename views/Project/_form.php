@@ -18,7 +18,7 @@ $data = ArrayHelper::map(Klien::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 200]) ?>
 
-    <?= $form->field($model, 'klienId')->dropDownList($data, ['id' => 'klienId']) ?>
+    <?= $form->field($model, 'klienId')->dropDownList($data, ['prompt'=>'-Choose a Client-','id' => 'klienId']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>

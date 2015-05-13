@@ -19,7 +19,7 @@ $data2=ArrayHelper::map(Project::find()->asArray()->all(),'id','nama');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nik')->dropDownList($data, ['prompt'=>'-Choose a Category-', 'nik' => 'nik']); ?>
+    <?= $form->field($model, 'nik')->dropDownList($data, ['prompt'=>'-Choose an Employee-', 'nik' => 'nik']); ?>
     
     <?php $id=$_GET['id'];    	?>
 
