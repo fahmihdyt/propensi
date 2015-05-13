@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2015 at 05:37 AM
+-- Generation Time: May 13, 2015 at 07:47 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -41,22 +41,23 @@ CREATE TABLE IF NOT EXISTS `aktivitas` (
   `siteId` int(11) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `deadline` (`type`),
   KEY `creator` (`creator`),
-  KEY `siteId` (`siteId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+  KEY `siteId` (`siteId`),
+  KEY `deadline` (`type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `aktivitas`
 --
 
 INSERT INTO `aktivitas` (`id`, `tanggal`, `judul`, `status`, `foto`, `keterangan`, `status_approval_pm`, `status_approval_supervi`, `creator`, `siteId`, `type`) VALUES
-(36, '2015-04-20', 'Menggali Lobang', 'Start', 'narupi_by_edumander-d51cwpa.png', '<p>Capek :''(</p>', NULL, NULL, '1234567', 20, NULL),
-(37, '2015-04-20', 'Mengecor Galian', 'Start', '', '<p>alhamdulillah.</p>', NULL, NULL, '1234567', 21, NULL),
-(38, '2015-04-21', 'Instalasi kabel', 'On Process', '', '<p>YEAY</p><p>\r\n		 	<strong>Approval Notes:<br></strong>\r\n		 	20/04/2015 - Ghaisani Kusumo :Selamat, yah.\r\n		 	<br >\r\n		  </p><p>\n		 	<strong>Approval Notes:<br></strong>\n		 	20/04/2015 - Mitra Surya :lanjutkan pak!\n		 	<br >\n		  </p>', 1, 1, '1234567', 1, NULL),
-(39, '2015-04-19', 'Survey tempat', 'Start', '', '<p>YEYEYE</p><p>\n		 	<strong>Approval Notes:<br></strong>\n		 	20/04/2015 - Ghaisani Kusumo :\n		 	<br >\n		  </p>', NULL, 1, '123', 1, NULL),
-(41, '2015-04-19', 'asasa', 'Start', '', '<p>sasas</p>', NULL, NULL, '1206208776', 1, NULL),
-(42, '2015-05-06', 'Bermain Bola', 'Start', '', '<p>Tak Ada yang Abadi</p>', NULL, NULL, '1234567', 33, NULL);
+(42, '2015-05-06', 'Bermain Bola', 'Start', '', '<p>Tak Ada yang Abadi</p>', NULL, NULL, '1234567', 33, NULL),
+(43, '2015-05-06', 'Mengecor Galian', 'On Process', '', '<p>asasa</p>', NULL, NULL, '1234567', 33, NULL),
+(44, '2015-05-08', 'Menggali Lobang', 'Start', '', '<p>Dodododo</p>', NULL, NULL, '1234567', 30, 9),
+(45, '2015-05-05', 'Menggali Lobang', 'Start', 'narupi_by_edumander-d51cwpa.png', '<p>ada deh</p>', NULL, NULL, '1234567', 30, 11),
+(46, '2015-05-12', 'asasasas', 'Start', '', '<p>asasas</p>', NULL, NULL, '1234567', 30, 12),
+(47, '2015-05-08', 'baru2', 'Start', '', '<p>asasas</p>', NULL, NULL, '1234567', 30, NULL),
+(49, '2015-05-12', 'Menggali Lobang', 'On Process', '', '<p>asasasas</p>', NULL, NULL, '1234567', 30, 12);
 
 -- --------------------------------------------------------
 
@@ -139,11 +140,6 @@ CREATE TABLE IF NOT EXISTS `barismilestone` (
 --
 
 INSERT INTO `barismilestone` (`id`, `tanggal`, `kategoriId`, `siteId`) VALUES
-(1, '2015-04-08', 1, 5),
-(3, '2015-04-22', 1, 1),
-(4, '2015-04-18', 1, 9),
-(5, '2015-04-19', 2, 9),
-(7, '2015-04-19', 1, 21),
 (8, '2015-04-19', 5, 30),
 (9, '2015-04-20', 2, 30),
 (11, '2015-04-19', 7, 30),
@@ -167,15 +163,7 @@ CREATE TABLE IF NOT EXISTS `issue` (
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`),
   KEY `siteId` (`siteId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `issue`
---
-
-INSERT INTO `issue` (`id`, `tanggal`, `judul`, `jenis`, `keterangan`, `status`, `creator`, `siteId`) VALUES
-(7, '2015-04-20', 'Konflik dengan ketua RT', '', '<p>Cedih</p>', '', '1234567', 1),
-(8, '2015-04-20', 'Capek banget, Pak. Tapi Semangat', '', '<p>HIHIHI</p>', '', '1234567', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -244,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `klien` (
 
 INSERT INTO `klien` (`id`, `nama`, `alamat`, `email`, `no_telp`) VALUES
 (2, 'PT Telkom  x', '<p>JalanCengkeh</p>', 'telkom@y.com', '081219'),
-(5, 'PT Indosat', '<p>Jalan Cengkeh</p>', 'indosat@yahoo.com', '02187797884');
+(5, 'PT Indosat', 'Jalan Cengkeh', 'indosat@yahoo.com', '02187797884');
 
 -- --------------------------------------------------------
 
@@ -260,7 +248,14 @@ CREATE TABLE IF NOT EXISTS `pengumuman` (
   `creator` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pengumuman`
+--
+
+INSERT INTO `pengumuman` (`id`, `tanggal`, `judul`, `isi`, `creator`) VALUES
+(1, '2015-05-11', 'Libur Cuti Bersama', '<p><strong>Semua kegiatan di liburkan coyyyy</strong></p>', '1206208776');
 
 -- --------------------------------------------------------
 
@@ -290,7 +285,18 @@ CREATE TABLE IF NOT EXISTS `projectteam` (
   PRIMARY KEY (`id`),
   KEY `proyekId` (`proyekId`),
   KEY `nik` (`nik`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `projectteam`
+--
+
+INSERT INTO `projectteam` (`id`, `proyekId`, `nik`) VALUES
+(1, 11, '120920'),
+(2, 11, '123'),
+(3, 11, '1212121'),
+(4, 11, '121212'),
+(5, 13, '121212');
 
 -- --------------------------------------------------------
 
@@ -303,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `proyek` (
   `nama` varchar(200) NOT NULL,
   `klienId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `klienId` (`klienId`)
+  KEY `proyek_ibfk_1` (`klienId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
@@ -312,7 +318,8 @@ CREATE TABLE IF NOT EXISTS `proyek` (
 
 INSERT INTO `proyek` (`id`, `nama`, `klienId`) VALUES
 (11, 'Percobaan', 5),
-(12, 'Pembangunan proyek Pembangunan', 5);
+(12, 'Pembangunan proyek Pembangunan', 5),
+(13, 'halo', 2);
 
 -- --------------------------------------------------------
 
@@ -335,36 +342,17 @@ CREATE TABLE IF NOT EXISTS `site` (
   `proyek` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `site_ibfk_1` (`proyek`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `site`
 --
 
 INSERT INTO `site` (`id`, `tanggal_mulai`, `siteID`, `nama`, `alamat`, `titik_nominal`, `status_kepemilikan`, `tipe_antena`, `keterangan`, `foto`, `status_kerja`, `proyek`) VALUES
-(1, NULL, NULL, 'Gang Dahlia', NULL, '', '', '', '', '', 'Start', NULL),
-(2, NULL, NULL, 'Jl Rajawali', NULL, '', '', '', '<p>asas</p>', '', 'Start', NULL),
-(3, NULL, NULL, 'Fasilkom', NULL, '', '', '', '', '', 'Start', NULL),
-(4, NULL, NULL, 'Masjid Jami', NULL, '', '', '', '', '', 'Start', NULL),
-(5, NULL, NULL, 'Jalan Kembang', NULL, '', '', '', '', '', 'Start', NULL),
-(6, NULL, NULL, 'Fasilkom', NULL, '100', 'Milik pemerintah', 'XYZ', '<p>Test</p>', 'narupi_by_edumander-d51cwpa.png', 'Start', NULL),
-(7, NULL, NULL, 'Hehe', NULL, '', '', '', '', 'narupi_by_edumander-d51cwpa.png', 'Start', NULL),
-(8, NULL, NULL, 'as', NULL, '09', 'Milik pemerintah', '', '', '', 'Start', NULL),
-(9, NULL, NULL, 'asas', NULL, 'asasa', 'AaA', 'aA', '', '', 'On Process', NULL),
-(14, NULL, NULL, 'coba1', NULL, '', '', '', '', '', 'Start', NULL),
-(15, NULL, NULL, 'coba5', NULL, '', '', '', '', '', 'Start', NULL),
-(16, NULL, NULL, 'coba6', NULL, '', '', '', '', '', 'Start', NULL),
-(17, NULL, NULL, 'coba7', NULL, '', '', '', '', '', 'Start', NULL),
-(18, NULL, NULL, 'Rajawali 4', NULL, '', '', '', '', '', 'Start', NULL),
-(19, NULL, NULL, 'Rajawali 2', NULL, '', '', '', '', '', 'Start', NULL),
-(20, NULL, NULL, 'Rajawali', NULL, '', 'pemda', '', '', '', 'survey', NULL),
-(21, NULL, NULL, 'Rajawali1', NULL, '', 'pemda', '', '', '', 'survey', NULL),
-(26, NULL, NULL, 'asasas', NULL, '', 'pemda', '', '', '', 'survey', NULL),
-(27, NULL, NULL, 'rajawali', NULL, '', 'pemda', '', '', 'Risk Assesment.docx', 'survey', NULL),
-(28, NULL, NULL, 'Rajawali45', NULL, '', 'pemda', '', '', '', 'survey', NULL),
 (30, NULL, '', 'Rajawali 1', 'Jl.Rajawali 3 no.15', '', 'pemda', '', '', '', 'survey', 11),
 (32, '2015-05-06', '', 'Rajawali 2', '', '', 'pemda', '', '', '', 'survey', 11),
-(33, NULL, '', 'rajawali12345', '', '', 'pemda', '', '', '', 'survey', 11);
+(33, NULL, '', 'rajawali12345', '', '', 'pemda', '', '', '', 'survey', 11),
+(34, NULL, '', 'asasas', '', '', 'pemda', '', '', '', '', 13);
 
 -- --------------------------------------------------------
 
@@ -429,13 +417,13 @@ ALTER TABLE `projectteam`
 -- Constraints for table `proyek`
 --
 ALTER TABLE `proyek`
-  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`klienId`) REFERENCES `klien` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`klienId`) REFERENCES `klien` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `site`
 --
 ALTER TABLE `site`
-  ADD CONSTRAINT `site_ibfk_1` FOREIGN KEY (`proyek`) REFERENCES `proyek` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `site_ibfk_1` FOREIGN KEY (`proyek`) REFERENCES `proyek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `titikkandidat`

@@ -42,7 +42,7 @@ class Site extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-        	[['nama','siteID'],'required'],
+        	[['nama'],'required'],
             [['tanggal_mulai'], 'safe'],
             [['keterangan'], 'string'],
             [['proyek'], 'integer'],
