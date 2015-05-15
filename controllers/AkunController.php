@@ -39,7 +39,7 @@ class AkunController extends Controller
         	return $this->redirect('/propensi/web');
         }
 		
-		$data = Akun::find()->orderBy(['jabatan' => 'ASC', 'username' => 'ASC'])->all();
+		$data = Akun::find()->orderBy(['jabatan' => 'ASC', 'nama' => 'ASC'])->all();
 		
         return $this->render('index', ['data' => $data]);
     }
@@ -73,6 +73,7 @@ class AkunController extends Controller
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
+			\Yii::$app->getSession()->setFlash('danger', "You have no privilege to create a new account.");
 			return $this->redirect('/propensi/web/index.php/akun');	
 		}
 		
@@ -112,7 +113,7 @@ class AkunController extends Controller
             	]);
         	}	
 		} else {
-			\Yii::$app->getSession()->setFlash('danger', "Account can't be updated.");
+			\Yii::$app->getSession()->setFlash('danger', "You have no privilege to update this account.");
 			return $this->redirect('/propensi/web/index.php/akun');	
 		}
 		
@@ -133,7 +134,8 @@ class AkunController extends Controller
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
-        	return $this->redirect('/propensi/web');
+        	\Yii::$app->getSession()->setFlash('danger', "You have no privilege to delete this account.");
+        	return $this->redirect(['index']);
         }
 
 		if(\Yii::$app->user->identity->nik !== $id){

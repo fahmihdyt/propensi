@@ -10,7 +10,8 @@ use app\models\Pengumuman;
 
 $this->title = 'Welcome to Sistem Manajemen Proyek PT JAL';
 $this->params['breadcrumbs'][] = $this->title;
-$data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
+$data = Pengumuman::find()->all();
+
 ?>
 <head>
 	<link href="<?php echo Yii::$app->params['base']?>css/sb2-admin.css" rel="stylesheet">
@@ -23,6 +24,11 @@ $data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
     <hr></div><br>
 </center>
 
+<?php foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+		echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+	  }
+?>
+	
 <?php foreach ($data as $line) { ?>
 	<div class="panel panel-red">
 		<div class="panel-heading">

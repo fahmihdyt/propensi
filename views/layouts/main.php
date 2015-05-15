@@ -59,14 +59,16 @@ AppAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
-                	<img class="img-logo" src="http://localhost/propensi/views/layouts/logo.png">
+                <a class="navbar-brand" href="/propensi/web">
+                	<img class="img-logo" src="/propensi/views/layouts/logo.png">
                 </a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-               <li><?php echo Yii::$app->user->identity->nama ."&nbsp;(".Yii::$app->user->identity->jabatan.")"; ?></li>
+               <li style="color: #e0754d;"><a href="<?php echo Yii::$app->params['url']?>akun/view?id=<?php echo Yii::$app->user->identity->nik ?>">
+               	<?php echo Yii::$app->user->identity->nama ."&nbsp;(".Yii::$app->user->identity->jabatan.")"; ?>
+               	</a></li>
                <li><a href="<?php echo Yii::$app->params['url']?>login/logout" onClick="return confirm('Are you sure you want to log out?')"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -74,7 +76,7 @@ AppAsset::register($this);
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                        <!-- <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -82,9 +84,9 @@ AppAsset::register($this);
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            </div>
+                            </div> -->
                             <!-- /input-group -->
-                        </li>
+                        <!-- </li> -->
                         <?php 
                         	$urlName = $_SERVER['REQUEST_URI'];
                         	$url = explode('/', $urlName);
@@ -118,7 +120,7 @@ AppAsset::register($this);
                             	<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo Yii::$app->params['url']?>report"> &nbsp;Project Report </a>
+                                    <a <?php if ($currentUrl == "report") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>report"> &nbsp;Project Report </a>
                                 </li>
                                 <li>
                                     <a href="#">Second Level Item</a>

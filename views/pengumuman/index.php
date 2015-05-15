@@ -44,9 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
     				<td><?= $row->getCreator($row->creator) ?></td>
     				<td><?= $row->tanggal ?></td>
     				<td>
+    					
     					<a href="<?php echo Yii::$app->params['url']?>pengumuman/update?id=<?php echo $row->id ?>">
     						<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span> Edit  
     					</a>&nbsp;
+    					
 
     					<a href="<?php echo Yii::$app->params['url']?>pengumuman/delete?id=<?php echo $row->id ?>" onClick="return confirm('Are you sure you want to delete this announcement?')">
     						<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Delete
