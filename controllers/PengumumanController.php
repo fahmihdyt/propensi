@@ -73,8 +73,6 @@ class PengumumanController extends Controller
 		}
 		
         $model = new Pengumuman();
-		$model->tanggal = date("Y-m-d");
-		//$model->creator = Yii::$app->user->identity->nama;
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
         	\Yii::$app->getSession()->setFlash('success', "Announcement is successfully created.");

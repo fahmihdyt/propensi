@@ -10,7 +10,7 @@ use app\models\Pengumuman;
 
 $this->title = 'Welcome to Sistem Manajemen Proyek PT JAL';
 $this->params['breadcrumbs'][] = $this->title;
-$data = Pengumuman::find()->all();
+$data = Pengumuman::find()->orderBy(['tanggal' => SORT_DESC])->all();
 
 ?>
 <head>
@@ -40,7 +40,7 @@ $data = Pengumuman::find()->all();
 		</div>
 		
 		<div class="panel-footer">
-			Posted by:&nbsp;<?= $line->getCreator($line->creator) ?>&nbsp;on&nbsp;<?= $line->tanggal ?>
+			Posted by:&nbsp;<?= $line->getCreator($line->creator) ?>&nbsp;on&nbsp;<?php $timestamp = strtotime($line->tanggal); echo date("l\, F jS Y h:i A", $timestamp) ?>
 		</div>
 	</div>
 <?php } ?>
