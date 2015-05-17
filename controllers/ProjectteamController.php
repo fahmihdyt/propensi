@@ -104,6 +104,7 @@ class ProjectteamController extends Controller
 			 }
 			
 			if($model->save()){
+				Yii::$app->getSession()->setFlash('success','Employee has been Assigned');
 			 	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
 			}
 			else{
@@ -134,9 +135,26 @@ class ProjectteamController extends Controller
 		
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $id=$model->proyekId;
-			return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+        if ($model->load(Yii::$app->request->post())) {
+        	$model->proyekId=$id;
+				$prjteam=Projectteam::findAll(['proyekId' => $id]);
+				 foreach($prjteam as $row){
+				 	$nik_saved = $row->nik;
+					$nik_entering = $model->nik;
+					
+					if ($nik_saved == $nik_entering){
+						Yii::$app->getSession()->setFlash('error','The employee has been assigned before.');	
+						return $this->render('create', [
+	                	'model' => $model,
+	            		]);
+					}
+				 }
+			if($model->save()){
+	        	Yii::$app->getSession()->setFlash('success','Employee has been Updated');
+	            $id=$model->proyekId;
+				return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+			
+			}
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -161,6 +179,8 @@ class ProjectteamController extends Controller
         $id2=$model->proyekId;    	
 			
         $this->findModel($id)->delete();
+		
+		Yii::$app->getSession()->setFlash('success','Employee has been Unassigned');
 
         return $this->redirect("/propensi/web/index.php/project/view?id=$id2");
     }

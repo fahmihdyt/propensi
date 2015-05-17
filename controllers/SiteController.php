@@ -108,7 +108,7 @@ class SiteController extends Controller
 							 			 
 			 if(!isset($imageName)){
 			 	if($model->save()){
-			 		Yii::$app->getSession()->setFlash('success','Project has been Created');
+			 		Yii::$app->getSession()->setFlash('success','Site has been Created');
 			 		return $this->redirect("/propensi/web/index.php/project/view?id=$id");
 			 	}
 			 }

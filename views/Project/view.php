@@ -18,6 +18,12 @@ $jabatan=Yii::$app->user->identity->jabatan;
     <h1><?= Html::encode($this->title) ?></h1>
     <hr></div>
     
+    <?php
+				foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+					echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+				}
+			?>
+    
     <table>
     	<tr>
     		<td width="130"><label>Project Name</label></td>
@@ -48,15 +54,20 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	            	<thead>
 	            		<th>Starting Date</th>
 	            		<th>Site Name</th>
-	            		<th>Final Coordinate</th>
 	            		<th>Work Status</th>
 	            	</thead>
 	            	<?php foreach($site as $row){ ?>
 	            	<tr>
 	            		<td><?php echo $row['tanggal_mulai']; ?></td>
 	            		<td><a href="<?php echo Yii::$app->params['url']."site/view?id=$row[id]"?>"><?php echo $row['nama']; ?></a></td>
-	            		<td><?php echo $row['titik_nominal']; ?></td>
-	            		<td><?php echo $row['status_kerja']; ?></td>            		
+	            		<td><?php echo $row['status_kerja']; ?></td>
+	            		<td>
+							<a href="<?php echo Yii::$app->params['url']?>site/update?id=<?php echo $row['id']?>">
+								<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>
+							
+							<a href="<?php echo Yii::$app->params['url']?>site/delete?id=<?php echo $row['id']?> " onClick="return confirm('Are you sure want to delete this site?')">
+								<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>
+						</td>          		
 	            	</tr><?php } ?>
 	            </table>
 	            <a href="<?php echo Yii::$app->params['url']?>site/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Create New Site</a>&nbsp;
@@ -64,11 +75,7 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	        </div>
 	        
 	    </div>
-	    <?php
-				foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
-					echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
-				}
-			?>
+	    
     </div>
     <?php if($jabatan == "Project Manager"){ ?>
     <div class='col-lg-5' style='margin-left:-15px; margin-top:5px;'>
@@ -97,7 +104,7 @@ $jabatan=Yii::$app->user->identity->jabatan;
 	            	
 	            	</tr><?php } ?>
 	            </table>
-	            <a href="<?php echo Yii::$app->params['url']?>projectteam/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Assign New Assign</a>&nbsp;
+	            <a href="<?php echo Yii::$app->params['url']?>projectteam/create?id=<?= $model->id?>" class='btn btn-primary' style='color:white; float:right;'>Assign New Employee</a>&nbsp;
 		        
 	        </div>
 	    </div>
