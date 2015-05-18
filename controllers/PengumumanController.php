@@ -104,7 +104,7 @@ class PengumumanController extends Controller
 		
         $model = $this->findModel($id);
 		
-		if(\Yii::$app->user->identity->nik == $model->nik) {
+		if(\Yii::$app->user->identity->nik == $model->creator) {
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
 				\Yii::$app->getSession()->setFlash('success', "Announcement is successfully updated.");
             	return $this->redirect(['view', 'id' => $model->id]);
