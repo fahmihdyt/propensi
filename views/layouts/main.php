@@ -1,12 +1,12 @@
 <?php
 use app\assets\AppAsset;
-
+use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
 ?>
-
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +17,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	
     <title>SIMANPRO PT JAL</title>
 
     <!-- Bootstrap Core CSS -->
@@ -44,11 +44,11 @@ AppAsset::register($this);
     
     <link rel="shortcut icon" href="http://localhost/propensi/views/layouts/semi-logo.png" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300&subset=latin,latin-ext">
-
+	
 </head>
 
 <body>
-
+	
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -193,4 +193,4 @@ AppAsset::register($this);
 </body>
 
 </html>
-
+<?php $this->endPage() ?>
