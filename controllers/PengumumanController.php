@@ -103,11 +103,9 @@ class PengumumanController extends Controller
 		
         $model = $this->findModel($id);
 		
-<<<<<<< HEAD
+
 		if(\Yii::$app->user->identity->nik == $model->creator) {
-=======
-		// if(\Yii::$app->user->identity->nik == $model->creator) {
->>>>>>> origin/master
+
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
 				\Yii::$app->getSession()->setFlash('success', "Announcement is successfully updated.");
             	return $this->redirect(['view', 'id' => $model->id]);
@@ -120,7 +118,7 @@ class PengumumanController extends Controller
 		// else{
 			// \Yii::$app->getSession()->setFlash('danger', "You have no privilege to update this announcement.");
 			// return $this->redirect('/propensi/web/index.php/pengumuman');	
-		// }
+		}
         
     }
 
