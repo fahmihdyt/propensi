@@ -15,6 +15,10 @@ use yii\filters\VerbFilter;
 class HomeController extends Controller
 {
    public function actionIndex(){
+   		if(\Yii::$app->user->isGuest) {
+        	return $this->redirect('/propensi/web');
+        }
+   		
    		return $this->render('home');
    }
 }

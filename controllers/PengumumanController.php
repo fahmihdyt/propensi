@@ -73,8 +73,6 @@ class PengumumanController extends Controller
 		}
 		
         $model = new Pengumuman();
-		$model->tanggal = date("Y-m-d");
-		//$model->creator = Yii::$app->user->identity->nama;
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
         	\Yii::$app->getSession()->setFlash('success', "Announcement is successfully created.");
@@ -99,12 +97,17 @@ class PengumumanController extends Controller
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
+			\Yii::$app->getSession()->setFlash('warning', "You have no privilege to update an announcement.");
 			return $this->redirect('/propensi/web/index.php/home');	
 		}
 		
         $model = $this->findModel($id);
 		
+<<<<<<< HEAD
 		if(\Yii::$app->user->identity->nik == $model->creator) {
+=======
+		// if(\Yii::$app->user->identity->nik == $model->creator) {
+>>>>>>> origin/master
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
 				\Yii::$app->getSession()->setFlash('success', "Announcement is successfully updated.");
             	return $this->redirect(['view', 'id' => $model->id]);
@@ -113,11 +116,11 @@ class PengumumanController extends Controller
                 	'model' => $model,
             	]);
         	}
-		}
-		else{
-			\Yii::$app->getSession()->setFlash('danger', "Announcement can't be updated.");
-			return $this->redirect('/propensi/web/index.php/pengumuman');	
-		}
+		// }
+		// else{
+			// \Yii::$app->getSession()->setFlash('danger', "You have no privilege to update this announcement.");
+			// return $this->redirect('/propensi/web/index.php/pengumuman');	
+		// }
         
     }
 
@@ -143,12 +146,12 @@ class PengumumanController extends Controller
 		
     }
 	
-	public function actionHome()
-	{
-		$data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
-		
-        return $this->render('/propensi/web/home', ['data' => $data]);
-	}
+	// public function actionHome()
+	// {
+		// $data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
+// 		
+        // return $this->render('/propensi/web/home', ['data' => $data]);
+	// }
 
     /**
      * Finds the Pengumuman model based on its primary key value.

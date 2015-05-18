@@ -35,7 +35,8 @@ class Pengumuman extends \yii\db\ActiveRecord
             [['judul', 'isi'], 'required'],
             [['isi'], 'string'],
             [['judul'], 'string', 'max' => 100],
-            [['creator'], 'string', 'max' => 12]
+            [['creator'], 'string', 'max' => 12],
+            [['tanggal'], 'date','format' => 'l jS \of F Y h:i A'],
         ];
     }
 
