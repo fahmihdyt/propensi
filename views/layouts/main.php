@@ -34,6 +34,7 @@ AppAsset::register($this);
     <!-- Custom Fonts -->
     <link href="<?php echo Yii::$app->params['base']?>font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+	<link href="<?=Yii::$app->params['base']?>js/datatable/css/jquery.dataTables.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -173,6 +174,19 @@ AppAsset::register($this);
 	<script>
 	$(document).ready(function(){
 		$( ".date" ).datepicker();
+	});
+	</script>
+	
+	<!--Custom Tables-->
+	<script src="<?=Yii::$app->params['base']?>js/datatable/jquery.dataTables.js"> </script>
+	<script>
+	$(document).ready(function(){
+		$('.tables').dataTable({
+	     	paging:true,
+		    ordering:false,
+		    info:false,
+		    "iDisplayLength": 25
+	     });
 	});
 	</script>
 	

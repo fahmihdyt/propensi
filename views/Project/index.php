@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?php } ?>
 	
-	<table class='table table-striped'>
+	<table class='table table-striped tables'>
 		<thead>
 			<tr>
 				<th>No.</th>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<th>Client</th>
 				<?php if($jabatan == "Project Manager"){ ?>
 				<th>Action</th>
-				<?php } ?>
+				<?php }else{ echo "<th></th>";} ?>
 			</tr>
 		</thead>
 		<tbody>

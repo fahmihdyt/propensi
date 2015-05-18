@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php } ?>
     </p>
 
-    <table class='table table-striped'>
+    <table class='table table-striped tables'>
     	<thead>
     		<tr>
     			<th>No.</th>

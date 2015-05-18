@@ -443,3 +443,12 @@ table.dataTable thead .sorting:after {
   	border: 1px solid transparent;
   	border-radius: 4px;
 }
+
+#DataTables_Table_0_length{
+	display:none
+}
+
+#DataTables_Table_0_filter{
+	
+	
+}

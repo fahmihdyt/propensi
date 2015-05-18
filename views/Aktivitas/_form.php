@@ -20,6 +20,13 @@ foreach($site as $row){
 }
 $sites=substr($sites, 0,strlen($sites)-1);*/
 $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
+$query="(";
+foreach($proyek as $row){
+	$query.="proyek='$row[proyekId]'||";
+}
+
+$query=substr($query,0,strlen($query)-2);
+$query.=')';
 
 ?>
 
@@ -46,7 +53,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
 	
 	
 	<?= $form->field($model, 'siteId')->dropDownList(
-				ArrayHelper::map(Site::find()->asArray()->all(),
+				ArrayHelper::map(Site::find()->where($query)->asArray()->all(),
 			    'id',
 			    function($model, $defaultValue) {
 			        return 'Site '.$model['nama'].' - '.Site::getProject($model['proyek']);

@@ -24,14 +24,14 @@ $privilige= Yii::$app->user->identity->jabatan;
         <!-- membuat button-->
     </p>
 
-	<table class="table table-striped">
+	<table class="table table-striped tables">
 		<thead>
 			<tr>
 				<th>No.</th>
 				<th>Name</th>
 				<th>E-mail</th>
 				<th>Phone Number</th>	
-			
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>

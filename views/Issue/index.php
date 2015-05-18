@@ -25,7 +25,7 @@ $model=new Issue();
     </p>
     
     <!--Table-->
-    <table class='table table-striped'>
+    <table class='table table-striped tables'>
     	<thead>
     		<tr>
     			<th>Date</th>

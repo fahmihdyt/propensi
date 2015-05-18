@@ -27,7 +27,7 @@ $model=new Aktivitas();
     </p><?php } ?>
 
 	<!--Proses Export Tabel-->
-	<table class='table table-striped'>
+	<table class='table table-striped tables'>
 		<thead style=''>
 			<tr>
 				<th rowspan='2'>Date</th>

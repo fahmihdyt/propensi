@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create New Announcement', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <table class='table table-striped'>
+    <table class='table table-striped tables'>
     	<thead>
     		<tr>
     			<th>No.</th>

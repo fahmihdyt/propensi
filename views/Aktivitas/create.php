@@ -20,7 +20,8 @@ use yii\helpers\Html;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'site' => $site
+        'site' => $site,
+        'proyek'=>$proyek,
     ]) ?>
 
 </div>

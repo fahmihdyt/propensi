@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use app\models\Barismilestone;
+use app\models\ProjectTeam;
 
 /**
  * AktivitasController implements the CRUD actions for Aktivitas model.
@@ -118,6 +119,7 @@ class AktivitasController extends Controller
 			
         $model = new Aktivitas();
 		$modelSite=Site::find()->all();
+		$project=ProjectTeam::findAll(['nik'=>Yii::$app->user->identity->nik]);
 		
 		 if ($model->load(Yii::$app->request->post()) && $model->validate()){
 		 		 	 
@@ -139,7 +141,7 @@ class AktivitasController extends Controller
 				//validasi file : file format
 				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
 					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
-					return $this->render('create',['model'=>$model,'site'=>$modelSite]);
+					return $this->render('create',['model'=>$model,'site'=>$modelSite,'proyek'=>$project]);
 					//return $this->redirect(['create']);
 				}
 				 
@@ -155,6 +157,7 @@ class AktivitasController extends Controller
 	            	return $this->render('create', [
 	                'model' => $model,
 	                'site'=>$modelSite,
+	                'proyek'=>$project
 	            ]);
 	            }
 			}
@@ -163,6 +166,7 @@ class AktivitasController extends Controller
 		 	return $this->render('create', [
                 'model' => $model,
                 'site'=>$modelSite,
+                'proyek'=>$project
             ]);
 		 }
     }
