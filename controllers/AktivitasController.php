@@ -195,6 +195,7 @@ class AktivitasController extends Controller
 		}
 		
         $model = $this->findModel($id);
+		$project=ProjectTeam::findAll(['nik'=>Yii::$app->user->identity->nik]);
 		//$model->project='cobacoba';
 		
 		//set default foto file
@@ -241,7 +242,7 @@ class AktivitasController extends Controller
 				//validasi file : file format
 				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
 					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
-					return $this->render('update',['model'=>$model]);
+					return $this->render('update',['model'=>$model,'project'=>$project]);
 					//return $this->redirect(['create']);
 				}
 				
@@ -261,7 +262,7 @@ class AktivitasController extends Controller
 		 }
 		 else{
 		 	return $this->render('update', [
-                'model' => $model]);
+                'model' => $model,'project'=>$project,'project'=>$project]);
 		 } //end proses upload photo
     }
 
