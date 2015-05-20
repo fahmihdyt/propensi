@@ -48,7 +48,7 @@ AppAsset::register($this);
 </head>
 
 <body>
-	
+	<?php $this->beginBody() ?>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -189,7 +189,7 @@ AppAsset::register($this);
 	     });
 	});
 	</script>
-	
+	<?php $this->endBody() ?>
 </body>
 
 </html>
