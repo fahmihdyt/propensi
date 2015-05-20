@@ -16,6 +16,12 @@ $model=new Aktivitas();
 	<div style='margin-top:0px;padding-top:10px;'>
     	<h1><?= Html::encode($this->title) ?></h1>
     	<hr>
+    	
+	<?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
     </div>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 	
@@ -97,11 +103,6 @@ $model=new Aktivitas();
 		</tbody>
 	</table>
 	
-	<?php
-		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
-			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
-		}
-	?>
 	
 </div>
 

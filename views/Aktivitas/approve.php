@@ -1,6 +1,12 @@
 <h1 style='padding-top:25px; margin-top: 0px;'>Activity Approval</h1>
 <hr>
-
+<?php
+	//notification
+	foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+		echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+	}
+	
+?>
 <table>
 	<form action="<?php echo Yii::$app->params['url']?>aktivitas/approveprocess" method='get'>
 		<tr height="30">
@@ -46,10 +52,3 @@
 		</tr>
 </table>
 
-<?php
-	//notification
-	foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
-		echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
-	}
-	
-?>
