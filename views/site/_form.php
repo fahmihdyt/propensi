@@ -22,13 +22,13 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 100]) ?>
     
-    <?= $form->field($model, 'status_kerja')->dropDownList(['survey'=>'Survey','rehunting'=>'Rehunting','rfc'=>'RFC','sitac on going'=>'SITAC on Going','cme on going'=>'CME on Going','rfi'=>'RFI','drop'=>'Drop'],['prompt'=>'-Choose a Status-']) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['Survey'=>'Survey','Rehunting'=>'Rehunting','RFC'=>'RFC','SITAC on Going'=>'SITAC on Going','CME on Going'=>'CME on Going','RFI'=>'RFI','drop'=>'Drop'],['prompt'=>'-Choose a Status-']) ?>
 	    
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => 100]) ?>
 
     <?= $form->field($model, 'titik_nominal')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'status_kepemilikan')->dropDownList(['pemda'=>'Pemda', 'private'=>'Private', 'kawasan'=>'Kawasan','developer'=>'Developer'],['prompt'=>'-Choose an Ownership-']) ?>
+    <?= $form->field($model, 'status_kepemilikan')->dropDownList(['Pemda'=>'Pemda', 'Private'=>'Private', 'Kawasan'=>'Kawasan','Developer'=>'Developer'],['prompt'=>'-Choose an Ownership-']) ?>
 
     <?= $form->field($model, 'tipe_antena')->textInput(['maxlength' => 20]) ?>
 
