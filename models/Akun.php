@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Aktivitas;
 
 /**
  * This is the model class for table "akun".
@@ -132,6 +133,30 @@ class Akun extends \yii\db\ActiveRecord
 		$return = parent::beforeSave($insert);
 		$this->password = md5($this->password);		
 		return $return;
+	}
+	
+	public function getAktivitaswork($id){
+		$return =Aktivitas::find()->where(['creator'=>$id])->all();
+		return $return;
+	}
+	
+	public function getAktivitasdone($id){
+		$return = Aktivitas::findAll(['creator'=>$id,'status'=>'done']);
+		return $return;
+	}
+	
+	public function getAktivitassukses($id){
+		$aktivitas=Aktivitas::find()->where(['creator'=>$id,'status'=>'done'])->all();
+		$i=0;
+		foreach($aktivitas as $row){
+			$deadline=$row->getDeadlinedate($row->type);
+			//$deadline=new DateTime($deadline);
+			//$date=new DateTime($row['tanggal']);
+			if((strtotime($row['tanggal'])-strtotime($deadline))<0){
+				$i=$i+1;
+			}
+		}
+		return $i;
 	}
 	
 	// public function findPassword($attribute, $params)

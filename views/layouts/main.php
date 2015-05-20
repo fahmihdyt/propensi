@@ -124,7 +124,7 @@ AppAsset::register($this);
                                     <a <?php if ($currentUrl == "report") { ?> class="selected" <?php } ?> href="<?php echo Yii::$app->params['url']?>report"> &nbsp;Project Report </a>
                                 </li>
                                 <li>
-                                    <a href="#">Second Level Item</a>
+                                    <a href="<?php echo Yii::$app->params['url']?>performance">Employee Performance</a>
                                 </li>
                            	</ul>
                         </li><?php } ?>

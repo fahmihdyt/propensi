@@ -119,6 +119,11 @@ class Aktivitas extends \yii\db\ActiveRecord
 		return $deadline;
 	}
 	
+	public function getDeadlinedate($id){
+		$deadline=Barismilestone::findOne(['id'=>$id]);
+		return $deadline->tanggal;
+	}
+	
 	/*
 	 * Method for set approval by supervisor true!
 	 * @param $id

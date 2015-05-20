@@ -20,7 +20,7 @@ use app\models\Barismilestone;
 /**
  * BarismilestoneController implements the CRUD actions for Barismilestone model.
  */
-class perfomanceController extends Controller
+class performanceController extends Controller
 {
     public function behaviors()
     {
@@ -51,22 +51,14 @@ class perfomanceController extends Controller
 		    			
 		return $this->render('index',['akun'=>$models]);
 		
-		$model=$this->findModel($id);
-    	$akun=Akun::findAll(['proyek' =>$id]);
-		$aktivitas=Aktivitas::findOne(['id'=>$model['klienId']]);
-
+	}
+	
+	public function actionDetailaktivitas($nik){
+		$model=new Akun();
+		$models=$model->find()->all();
 		
-		$prjteam=Projectteam::findAll(['proyekId' => $id]);
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-            'prjteam' => $prjteam,
-            'site' => $site,
-            'klien'=> $klien
-        ]);
-		
-		
-		
-    }
+		return "cekcek";
+	}
 	
   
 }

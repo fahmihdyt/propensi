@@ -23,12 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
     			<th>No.</th>
     			<th>Name</th>
     			<th>Role</th>
-    			<th>Number of Aktivity worked</th>
-    			<th>Number of Aktivity pending</th>	
-    			<th>Number of Aktivity done</th>	
+    			<th>Number of Activity Working</th>
+    			<th>Number of Activity Done</th>
+    			<th>Performance Score<br>(ontime Done Job/total done Job)</th>	
     		</tr>
     	</thead>
-    	
+        	
     	<tbody>
     		<?php 
     		$i=1;
@@ -40,6 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
     				<td><?= $i++ ?></td>
     				<td><?= $row->nama ?></td>
     				<td><?= $row->jabatan ?></td>
+    				<td><a onclick=getAktivitas(<?=$row->nik?>)><?= count($row->getAktivitaswork($row->nik)); ?></a></td>
+    				<td><?= count($row->getAktivitasdone($row->nik)); ?></td>
+    				<td><?php if(count($row->getAktivitasdone($row->nik))>0){
+    					echo $row->getAktivitassukses($row->nik)/count($row->getAktivitasdone($row->nik))*100;
+    					}else{
+    						echo "not available";
+    					}?></td>
     			</tr>
     		<?php } ?>
     	</tbody>
@@ -48,3 +55,4 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
 </div><br>
+
