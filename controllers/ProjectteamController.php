@@ -136,8 +136,8 @@ class ProjectteamController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-        	$model->proyekId=$id;
-				$prjteam=Projectteam::findAll(['proyekId' => $id]);
+        	//$model->proyekId=$id;
+				$prjteam=Projectteam::findAll(['proyekId' => $model->proyekId]);
 				 foreach($prjteam as $row){
 				 	$nik_saved = $row->nik;
 					$nik_entering = $model->nik;
