@@ -33,11 +33,11 @@ class PengumumanController extends Controller
     public function actionIndex()
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
-			return $this->redirect('/propensi/web/index.php/home');	
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');	
 		}
 		
 		$data = Pengumuman::find()->orderBy(['tanggal' => 'ASC'])->all();
@@ -65,11 +65,11 @@ class PengumumanController extends Controller
     public function actionCreate()
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
-			return $this->redirect('/propensi/web/index.php/home');	
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');	
 		}
 		
         $model = new Pengumuman();
@@ -93,17 +93,17 @@ class PengumumanController extends Controller
     public function actionUpdate($id)
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
 			\Yii::$app->getSession()->setFlash('warning', "You have no privilege to update an announcement.");
-			return $this->redirect('/propensi/web/index.php/home');	
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');	
 		}
 		
-        $model = $this->findModel($id);
-		
-
+        //$model = $this->findModel($id);
+		$model=Pengumuman::findOne(['id'=>$id]);
+		$model->tanggal=null;
 		if(\Yii::$app->user->identity->nik == $model->creator) {
 
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -131,11 +131,11 @@ class PengumumanController extends Controller
     public function actionDelete($id)
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
-        	return $this->redirect('/propensi/web/home');
+        	return $this->redirect(Yii::$app->params['default'].'home');
         }
 
         $this->findModel($id)->delete();
