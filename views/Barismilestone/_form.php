@@ -21,7 +21,7 @@ $data2=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <?= $form->field($model, 'tanggal')->textInput(['class' => 'date form-control']) ?>
     <!-- form-class dari bootstrap date itu namanya-->
 
-    <?= $form->field($model, 'kategoriId')->dropDownList($data, ['id' => 'id']) ?>  
+    <?= $form->field($model, 'kategoriId')->dropDownList($data, ['id' => 'id','prompt'=>'-Choose One-']) ?>  
      
     <?php $id=$_GET['id'];    	?>
     <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="<?=Yii::$app->params['default']?>index.php/kategori/creates?id=<?=$id ?>">click this</a> </div>
@@ -29,7 +29,7 @@ $data2=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <div class="form-group">
 
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
-    	<?= Html::a('Cancel', Yii::$app->params['default']."index.php/site/view?id=$id", ['class' => 'btn btn-default']) ?>
+    	<?= Html::a('Cancel', $model->isNewRecord ? Yii::$app->params['default']."index.php/site/view?id=$id" :Yii::$app->params['default']."index.php/site/view?id=".$model->siteId, ['class' => 'btn btn-default']) ?>
     	
     </div>
 

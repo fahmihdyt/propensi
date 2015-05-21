@@ -38,6 +38,7 @@ $data=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+   		<?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

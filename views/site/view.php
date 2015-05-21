@@ -145,8 +145,7 @@ $model->proyek = $model->getProject($idProject);
 	            		<td><?php echo $row->findCreator($row->creator); ?></td>
 	            	</tr><?php } ?>
 	            </table>
-	            <a href="<?php echo Yii::$app->params['url']?>issue/create" class='btn btn-primary' style='color:white; float:right;'>Create New Issue</a>&nbsp;
-		        
+	            
 	        </div>
 	    </div>
     </div>

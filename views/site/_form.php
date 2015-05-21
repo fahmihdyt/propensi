@@ -22,7 +22,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 100]) ?>
     
-    <?= $form->field($model, 'status_kerja')->dropDownList(['Survey'=>'Survey','Rehunting'=>'Rehunting','RFC'=>'RFC','SITAC on Going'=>'SITAC on Going','CME on Going'=>'CME on Going','RFI'=>'RFI','drop'=>'Drop'],['prompt'=>'-Choose a Status-']) ?>
+    <?= $form->field($model, 'status_kerja')->dropDownList(['Survey'=>'Survey','Rehunting'=>'Rehunting','RFC'=>'RFC','SITAC on Going'=>'SITAC on Going','CME on Going'=>'CME on Going','RFI'=>'RFI','Drop'=>'Drop'],['prompt'=>'-Choose a Status-']) ?>
 	    
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => 100]) ?>
 
@@ -46,7 +46,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
         
         <?php $id=$_GET['id'];    	?>
-        <?= Html::a('Cancel', $model->isNewRecord ? "/propensi/web/index.php/project/view?id=$id":"/propensi/web/index.php/site/view?id=$id", ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Cancel', $model->isNewRecord ? Yii::$app->params['default']."index.php/project/view?id=$id":"/propensi/web/index.php/site/view?id=$id", ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

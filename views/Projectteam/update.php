@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="projectteam-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1 style='margin-top:0px;padding-top: 25px'><?= Html::encode($this->title) ?></h1>
+	<hr>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
