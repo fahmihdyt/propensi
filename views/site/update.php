@@ -14,7 +14,14 @@ $this->params['breadcrumbs'][] = 'Update';
 
 	<div style="margin-top: 0px; padding-top: 10px;">
     <h1><?= Html::encode($this->title) ?></h1>
-    <hr></div>
+    <hr>
+    <!--Notifikasi-->
+    <?php
+		foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+			echo '<div class="alert alert-' . $key . '">' . $message . '<a href="#" class="close" data-dismiss="alert">&times;</a></div>';
+		}
+	?>
+    </div>
 
     <?= $this->render('_form', [
         'model' => $model,

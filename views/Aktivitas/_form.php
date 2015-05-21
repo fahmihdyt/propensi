@@ -77,35 +77,14 @@ $query.=')';
 			    }),           
             ['prompt'=>'-Choose one-','id'=>'tanggal']
         ); ?>
-        
-	<!-- <?= $form->field($model, 'type')->textInput(['maxlength' => 100,'placeholder'=>'Works for']) ?> -->
-	
+    	
     <?= $form->field($model, 'status')->dropDownList([''=>'','Start'=>'start','On Process'=>'on Process','Done'=>'Done']) ?>
 
-    <?= $form->field($model, 'foto')->fileInput() ?> <!--Form untuk upload photo-->
-    <?php 
-    	//echo $form->field($model, 'foto')->widget(FileInput::classname(), [
-	    //	'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']]
-		//]); 
-	?>
-    
-    
+    <?= $form->field($model, 'foto')->fileInput()->hint('<i>foto-foto harus dizip/rar terlebih dahulu</i>') ?> <!--Form untuk upload photo-->
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 10,'require'=>'require']) ?>
-          
-    <!--<div style='display:none '>
-    	<?= $form->field($model, 'creator')->textInput(['maxlength' => 200,'type'=>'hidden','value'=>Yii::$app->user->identity->nik]) ?>
-    </div> --> 
-    
-    <!--
-    <div style='display:none '>
-    	<?= $form->field($model, 'status_approval_supervi')->textInput(['maxlength' => 200,'type'=>'hidden']) ?>
-    </div>  
-    
-    <div style='display:none '>
-    	<?= $form->field($model, 'status_approval_pm')->textInput(['maxlength' => 200,'type'=>'hidden']) ?>
-    </div> --> 
-         
+      
+     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     	<?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>

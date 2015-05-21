@@ -36,12 +36,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $searchModel = new SiteSearch();
@@ -60,12 +60,12 @@ class SiteController extends Controller
     public function actionView($id)
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
 		$barisms=Barismilestone::findAll(['siteId' => $id]);
@@ -88,12 +88,12 @@ class SiteController extends Controller
     {
     	//return $id;
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = new Site();
@@ -109,13 +109,20 @@ class SiteController extends Controller
 			 if(!isset($imageName)){
 			 	if($model->save()){
 			 		Yii::$app->getSession()->setFlash('success','Site has been Created');
-			 		return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+			 		return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$id");
 			 	}
 			 }
 			 else{
-			 	 //get file extension
+			 		//get file extension
 				$hasil=explode('.',$imageName);
 				$ext=$hasil[count($hasil)-1];
+				
+				//validasi file : file format
+				if(!($ext=='rar' || $ext=='7z' || $ext=='zip')){
+					Yii::$app->getSession()->setFlash('danger','Foto harus di zip terlebih dahulu!');
+					return $this->render('update', ['model' => $model]);
+					//return $this->redirect(['create']);
+				}
 				 
 			 	$model->foto = $imageName->name;
 			 	$path = 'upload/'.$model->foto;
@@ -125,7 +132,7 @@ class SiteController extends Controller
 			 	if($model->save() ){
 			 		Yii::$app->getSession()->setFlash('success','Site has been Created');
                 	$imageName->saveAs($path);
-                	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+                	return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$id");
             	} 
             	else {
             		return 'gagal';
@@ -149,16 +156,20 @@ class SiteController extends Controller
     public function actionUpdate($id)
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensitmp/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = $this->findModel($id);
-
+		
+		//set default foto file
+		if(!is_null($model['foto'])){
+			$foto=$model['foto'];
+		}
 		
 		if ($model->load(Yii::$app->request->post()) && $model->validate()){
 		 	
@@ -168,14 +179,30 @@ class SiteController extends Controller
 			// return $imageName;
 			//$model=new Site();
 			 if(!isset($imageName)){
+			 	 //set foto link before
+			 	if(isset($foto)){
+			 		$model->foto=$foto;
+			 	}
 			 	if($model->save()){
 			 		Yii::$app->getSession()->setFlash('success','Site has been Updated');
 			 		//return $this->redirect(['view', 'id'=>$model->id]);
-			 		return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
+			 		return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$model[proyek]");
 			 	}
 				//return "foto gak kebaca";
 			 }
 			 else{
+			 	
+				//get file extension
+				$hasil=explode('.',$imageName);
+				$ext=$hasil[count($hasil)-1];
+				
+				//validasi file : file format
+				if(!($ext=='rar' || $ext=='7z' || $ext=='zip')){
+					Yii::$app->getSession()->setFlash('danger','Foto harus di zip terlebih dahulu!');
+					return $this->render('update', ['model' => $model]);
+					//return $this->redirect(['create']);
+				}
+				
 			 	$model->foto = $imageName->name;
 				// return $imageName->name;
 			 	$path = 'upload/'.$model->foto;
@@ -185,7 +212,7 @@ class SiteController extends Controller
 					Yii::$app->getSession()->setFlash('success','Site has been Updated');
                 	$imageName->saveAs($path);
                 	//return $this->redirect(['view', 'id'=>$model->id]);
-					return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
+					return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$model[proyek]");
             	} else {
                 // error in saving model
             	}
@@ -207,13 +234,13 @@ class SiteController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		$model=$this->findModel($id);
         $this->findModel($id)->delete();
 		Yii::$app->getSession()->setFlash('success','Site has been Deleted');
         //return $this->redirect(['index']);
-        return $this->redirect("/propensi/web/index.php/project/view?id=$model[proyek]");
+        return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$model[proyek]");
     }
 
     /**

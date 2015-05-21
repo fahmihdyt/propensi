@@ -34,7 +34,7 @@ $data = ArrayHelper::map(Project::find()->asArray()->all(),'id', 'nama');
 
     <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'foto')->fileinput() ?>
+    <?= $form->field($model, 'foto')->fileinput()->hint('<i>Foto-foto harus dizip/rar terlebih dahulu</i>') ?>
 
    <!--<?php if(isset($_GET['id'])){
 		echo $form->field($model, 'proyek')->textInput(['value'=>Project::getProjectName($_GET['id']),'readonly'=>'readonly']);

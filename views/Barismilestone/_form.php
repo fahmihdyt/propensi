@@ -24,12 +24,12 @@ $data2=ArrayHelper::map(Site::find()->asArray()->all(),'id','nama');
     <?= $form->field($model, 'kategoriId')->dropDownList($data, ['id' => 'id']) ?>  
      
     <?php $id=$_GET['id'];    	?>
-    <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="/propensi/web/index.php/kategori/creates?id=<?=$id ?>">click this</a> </div>
+    <div class = "addKategori"> kategori yang ada inginkan belum ada? <a href="<?=Yii::$app->params['default']?>index.php/kategori/creates?id=<?=$id ?>">click this</a> </div>
    
     <div class="form-group">
 
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
-    	<?= Html::a('Cancel', "/propensi/web/index.php/site/view?id=$id", ['class' => 'btn btn-default']) ?>
+    	<?= Html::a('Cancel', Yii::$app->params['default']."index.php/site/view?id=$id", ['class' => 'btn btn-default']) ?>
     	
     </div>
 

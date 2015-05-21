@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use app\models\Barismilestone;
-use app\models\ProjectTeam;
+use app\models\Projectteam;
 
 /**
  * AktivitasController implements the CRUD actions for Aktivitas model.
@@ -43,7 +43,7 @@ class AktivitasController extends Controller
     {
     	//validasi: Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
         $searchModel = new AktivitasSearch();
@@ -77,7 +77,7 @@ class AktivitasController extends Controller
 		
 		//validasi: Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		//validasi: ketika coor, hanya mampu melihat yang dibuatnya saja
@@ -108,8 +108,11 @@ class AktivitasController extends Controller
 		
 		//Validasi : Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
+		
+		//validasi kalo belum diassign dimana
+		
 		
 		//Validasi : hanya dapat dilakukan oleh PM, Supervisor, Admin (temp)
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
@@ -119,7 +122,14 @@ class AktivitasController extends Controller
 			
         $model = new Aktivitas();
 		$modelSite=Site::find()->all();
-		$project=ProjectTeam::findAll(['nik'=>Yii::$app->user->identity->nik]);
+		$project=Projectteam::findAll(['nik'=>Yii::$app->user->identity->nik]);
+		
+		
+		//validasi kalo belum diassign dimanamana
+		if(count($project)==0){
+			Yii::$app->getSession()->setFlash('danger','You`re not assigned in any project team');
+			return $this->redirect(['index']);
+		}
 		
 		 if ($model->load(Yii::$app->request->post()) && $model->validate()){
 		 		 	 
@@ -139,8 +149,8 @@ class AktivitasController extends Controller
 				$ext=$hasil[count($hasil)-1];
 				
 				//validasi file : file format
-				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
-					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
+				if(!($ext=='zip' || $ext=='zip' || $ext=='rar')){
+					Yii::$app->getSession()->setFlash('danger','Foto - foto harus di zip terlebih dahulu');
 					return $this->render('create',['model'=>$model,'site'=>$modelSite,'proyek'=>$project]);
 					//return $this->redirect(['create']);
 				}
@@ -185,7 +195,7 @@ class AktivitasController extends Controller
 		
 		//validasi : hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		//validasi : hanya dapat dilakukan oleh PM, Supervisor, Admin
@@ -195,8 +205,13 @@ class AktivitasController extends Controller
 		}
 		
         $model = $this->findModel($id);
-		$project=ProjectTeam::findAll(['nik'=>Yii::$app->user->identity->nik]);
+		$project=Projectteam::findAll(['nik'=>Yii::$app->user->identity->nik]);
 		//$model->project='cobacoba';
+		//validasi kalo belum diassign dimanamana
+		if(count($project)==0){
+			Yii::$app->getSession()->setFlash('danger','You`re not assigned in any project team`');
+			return $this->redirect(['index']);
+		}
 		
 		//set default foto file
 		if(!is_null($model['foto'])){
@@ -240,8 +255,8 @@ class AktivitasController extends Controller
 				$ext=$hasil[count($hasil)-1];
 				
 				//validasi file : file format
-				if(!($ext=='png' || $ext=='jpg' || $ext=='jpeg')){
-					Yii::$app->getSession()->setFlash('danger','Photo format must be png,jpg,jpeg!');
+				if(!($ext=='rar' || $ext=='7z' || $ext=='zip')){
+					Yii::$app->getSession()->setFlash('danger','Foto harus di zip terlebih dahulu!');
 					return $this->render('update',['model'=>$model,'project'=>$project]);
 					//return $this->redirect(['create']);
 				}
@@ -278,7 +293,7 @@ class AktivitasController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
@@ -290,7 +305,7 @@ class AktivitasController extends Controller
 				
 		if($model->status_approval_supervi=='1' || $model->status_approval_pm=='1'){
 			Yii::$app->getSession()->setFlash('danger','Activity Has Been Approved!');	
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}	
 		
 		if($model['creator']!=Yii::$app->user->identity->nik){
@@ -311,11 +326,11 @@ class AktivitasController extends Controller
 	 public function actionApprove($id){
 	 	$jabatan=Yii::$app->user->identity->jabatan;
 	 	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan='Administrator')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 						
 		$model=$this->findModel($id);
@@ -337,11 +352,11 @@ class AktivitasController extends Controller
 	  	$jabatan=Yii::$app->user->identity->jabatan;
 		
 		if(!($jabatan=='Supervisor' || $jabatan='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 
 		if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }		
 		
 	  	 $data=array();	
@@ -360,10 +375,10 @@ class AktivitasController extends Controller
 		 	if($model->approve($data)=='1'){
 		 		if($data['status']=='approve'){
 		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Approved!');
-		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+		 			$this->redirect(Yii::$app->params['default']."index.php/aktivitas/approve?id=$data[id]");}
 		 		if($data['status']=='reject'){
 		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Rejected!');
-					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+					$this->redirect(Yii::$app->params['default']."index.php/aktivitas/approve?id=$data[id]");}
 				}			
 		 }
 		 //return $model->approve($data)
@@ -373,15 +388,15 @@ class AktivitasController extends Controller
 		 	if($data['statusApproval']!=1){
 		 		//$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]&status=failApprove");
 		 		Yii::$app->getSession()->setFlash('danger','Activity Should be Approved by Supervisor before!');
-				$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");
+				$this->redirect(Yii::$app->params['default']."index.php/aktivitas/approve?id=$data[id]");
 			}
 			else if($model->approve($data)=='1'){
 				if($data['status']=='approve'){
 		 			Yii::$app->getSession()->setFlash('success','Activity Sucessfully Approved!');
-		 			$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+		 			$this->redirect(Yii::$app->params['default']."index.php/aktivitas/approve?id=$data[id]");}
 		 		if($data['status']=='reject'){
 					Yii::$app->getSession()->setFlash('success','Activity Succesfully Rejected!');
-					$this->redirect("/propensi/web/index.php/aktivitas/approve?id=$data[id]");}
+					$this->redirect(Yii::$app->params['default']."index.php/aktivitas/approve?id=$data[id]");}
 				}	
 			}
 		 }
@@ -404,7 +419,7 @@ class AktivitasController extends Controller
             }
         }
         else{
-            echo "<option>-</option>";
+            echo "<option value=''>-</option>";
         }
  
     }

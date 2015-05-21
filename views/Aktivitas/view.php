@@ -33,6 +33,10 @@ $this->title = $model->judul;
 			<td>: <?php echo $model->judul;?></td>
 		</tr>
 		<tr height='20'>
+			<td width="190"><label>Deadline</label></td>
+			<td>: <?php if(!(is_null($model->type)||strlen($model->type)==0)){echo $model->getDeadlinedate($model['type']);}else{ echo '-'; }?></td>
+		</tr>
+		<tr height='20'>
 			<td width="100"><label>Creator</label></td>
 			<td>: <?= $model->findCreator($model->creator) ?></td>
 		</tr>	
@@ -70,13 +74,11 @@ $this->title = $model->judul;
 					}?></td>
 		</tr>
 		<tr height='20'>
-			<td colspan='1'><label>Photo</label></td>
-			<td>: </td>
-		</tr>
-		<tr>
+			<td ><label>Photo</label></td>
+			<td>: 
 			<?php if($model['foto']!=''){?>
-			<td colspan='2'><img src='<?php echo Yii::$app->params['upload'].$model->foto;?>' width='300' height='300' style='border:1px solid black;'></td>
-			<?php }else{ echo "<td></td>";} ?>		
+			<a href='<?php echo Yii::$app->params['upload'].$model->foto;?>'>download</a></td>
+			<?php }else{ echo "</td>";} ?>	
 		</tr>
 		<tr height='40'>
 			<td><label>Notes</label></td>

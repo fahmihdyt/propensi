@@ -19,7 +19,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     
     <title>Login - SIMANPRO PT JAL</title>
-    <link rel="shortcut icon" href="http://localhost/propensi/views/layouts/semi-logo.png" />
+    <link rel="shortcut icon" href="<?php echo Yii::$app->params['base']?>img/semi-logo.png" />
     <link href="<?php echo Yii::$app->params['base']?>css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300&subset=latin,latin-ext">
     
@@ -31,7 +31,7 @@ AppAsset::register($this);
     <div class="line" style="top: 0px; height: 50px;"></div>
     
     <center style='font-family: "Roboto"; font-size: 16px; color: #cbcbcb;'>
-    	<img class="img-logo-login" src="http://localhost/propensi/views/layouts/logo.png"><br>
+    	<img class="img-logo-login" src="<?php echo Yii::$app->params['base']?>img/logo.png"><br>
     	Sistem Informasi Manajemen Proyek PT JAL
     </center>
     

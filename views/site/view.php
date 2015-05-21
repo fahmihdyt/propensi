@@ -58,14 +58,13 @@ $model->proyek = $model->getProject($idProject);
 			<td width="190"><label>Project</label></td>
 			<td>: <?php echo $model->proyek;?></td>
 		</tr>
+		
 		<tr height='20'>
-			<td colspan='1'><label>Photo</label></td>
-			<td>: </td>
-		</tr>
-		<tr>
+			<td ><label>Photo</label></td>
+			<td>: 
 			<?php if($model['foto']!=''){?>
-			<td colspan='2'><img src='<?php echo Yii::$app->params['upload'].$model->foto;?>' width='300' height='300' style='border:1px solid black;'></td>
-			<?php }else{ echo "<td></td>";} ?>		
+			<a href='<?php echo Yii::$app->params['upload'].$model->foto;?>'>download</a></td>
+			<?php }else{ echo "</td>";} ?>	
 		</tr>
 		<tr height='20'>
 			<td width="190" colspan='2'><label>Description</label></td>

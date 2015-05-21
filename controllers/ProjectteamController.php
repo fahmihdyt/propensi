@@ -34,7 +34,7 @@ class ProjectteamController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $searchModel = new ProjectteamSearch();
@@ -55,7 +55,7 @@ class ProjectteamController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         return $this->render('view', [
@@ -72,7 +72,7 @@ class ProjectteamController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = new Projectteam();
@@ -105,7 +105,7 @@ class ProjectteamController extends Controller
 			
 			if($model->save()){
 				Yii::$app->getSession()->setFlash('success','Employee has been Assigned');
-			 	return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+			 	return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$id");
 			}
 			else{
 				return $this->render('create', [
@@ -130,7 +130,7 @@ class ProjectteamController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = $this->findModel($id);
@@ -152,7 +152,7 @@ class ProjectteamController extends Controller
 			if($model->save()){
 	        	Yii::$app->getSession()->setFlash('success','Employee has been Updated');
 	            $id=$model->proyekId;
-				return $this->redirect("/propensi/web/index.php/project/view?id=$id");
+				return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$id");
 			
 			}
         } else {
@@ -172,7 +172,7 @@ class ProjectteamController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
     	$model = $this->findModel($id);
@@ -182,7 +182,7 @@ class ProjectteamController extends Controller
 		
 		Yii::$app->getSession()->setFlash('success','Employee has been Unassigned');
 
-        return $this->redirect("/propensi/web/index.php/project/view?id=$id2");
+        return $this->redirect(Yii::$app->params['default']."index.php/project/view?id=$id2");
     }
 
     /**

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
     				<td><?= $i++ ?></td>
     				<td><?= $row->nama ?></td>
     				<td><?= $row->jabatan ?></td>
-    				<td><a onclick=getAktivitas(<?=$row->nik?>)><?= count($row->getAktivitaswork($row->nik)); ?></a></td>
+    				<td><?= count($row->getAktivitaswork($row->nik)); ?></td>
     				<td><?= count($row->getAktivitasdone($row->nik)); ?></td>
     				<td><?php if(count($row->getAktivitasdone($row->nik))>0){
     					echo $row->getAktivitassukses($row->nik)/count($row->getAktivitasdone($row->nik))*100;

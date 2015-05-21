@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Aktivitas;
 
 /**
  * This is the model class for table "site".

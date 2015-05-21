@@ -6,11 +6,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\loginForm;
+use app\models\LoginForm;
 use yii\web\session;
 
 
-class loginController extends Controller
+class LoginController extends Controller
 {
 		
 	public $layout='login';
@@ -53,7 +53,7 @@ class loginController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensi/web/index.php/home');
+            return $this->redirect(Yii::$app->params['default'].'index.php/home');
         }
 
         $model = new LoginForm();

@@ -37,12 +37,12 @@ class ProjectController extends Controller
     public function actionIndex()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $searchModel = new ProjectSearch();
@@ -62,7 +62,7 @@ class ProjectController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
     	if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
     	$model=$this->findModel($id);
@@ -70,7 +70,7 @@ class ProjectController extends Controller
 		$klien=Klien::findOne(['id'=>$model['klienId']]);
 		
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$prjteam=Projectteam::findAll(['proyekId' => $id]);
@@ -90,12 +90,12 @@ class ProjectController extends Controller
     public function actionCreate()
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = new Project();
@@ -119,12 +119,12 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
     	if(Yii::$app->user->isGuest){
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $model = $this->findModel($id);
@@ -149,7 +149,7 @@ class ProjectController extends Controller
     {
     	$jabatan=Yii::$app->user->identity->jabatan;
     	if(!($jabatan=='Project Manager')){
-			return $this->redirect('/propensi/web/index.php/aktivitas');
+			return $this->redirect(Yii::$app->params['default'].'index.php/aktivitas');
 		}
 		
         $this->findModel($id)->delete();

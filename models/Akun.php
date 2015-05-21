@@ -150,8 +150,6 @@ class Akun extends \yii\db\ActiveRecord
 		$i=0;
 		foreach($aktivitas as $row){
 			$deadline=$row->getDeadlinedate($row->type);
-			//$deadline=new DateTime($deadline);
-			//$date=new DateTime($row['tanggal']);
 			if((strtotime($row['tanggal'])-strtotime($deadline))<0){
 				$i=$i+1;
 			}

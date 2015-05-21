@@ -43,7 +43,7 @@ class performanceController extends Controller
     {
     	//validasi: Hanya untuk yang sudah login
     	if (\Yii::$app->user->isGuest || Yii::$app->user->identity->jabatan!='Project Manager') {
-            return $this->redirect('/propensi/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		$model=new Akun();

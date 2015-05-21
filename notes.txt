@@ -1,0 +1,25 @@
+[config]	1.folder views Issue -> issue	[config]
+[config]	2.loginController -> LoginController [config]
+[ok]		3.logo di main hilang -> ada kesalahan di href navbar	
+[config]	4.folder view Aktivitas->aktivitas
+[ok]		4.params default -> mulai dari http://localhost
+[ok]		6.activity -> model ProjectTeam jadi Projectteam
+[ok]			6.activityForm -> kasih constrain kalo dia belom diassign apa2
+[ok]		7.barismilestone model -> tabel Kategori -> kategori
+[ok]		8.form barismilestone -> link dan tombol cancel belom params['default]
+[ok]		9.aktivitasController -> list untuk '-' dikasih value ''
+[ok]		10.database -> change pengumuman, jadi timestamp dan default itu current
+[ok]		11.performance -> hilangkan link
+
+[optional]
+[ok]		issue-> kalo bisa nama site itu dikasih nama proyek-nya juga
+
+return [
+    'adminEmail' => 'admin@example.com',
+    'base' => 'http://152.118.26.115/b04/propensi/views/layouts/',
+    'url'=> 'http://152.118.26.115/b04/propensi/web/index.php/',
+    'upload'=>'http://152.118.26.115/b04/propensi/web/upload/',
+    'vendor'=>'http://152.118.26.115/b04/propensi/vendor/',
+    'default'=>'http://152.118.26.115/b04/propensi/web/'
+];
+ 

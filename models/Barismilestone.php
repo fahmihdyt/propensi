@@ -60,7 +60,8 @@ class Barismilestone extends \yii\db\ActiveRecord
     }
 
 	public function getKategoriName($KategoriId){
-		$result = Yii::$app->db->createCommand("select nama from Kategori where id= '$KategoriId'") -> queryOne();
+		$result=Kategori::findOne(['id'=>$KategoriId]);
+		//$result = Yii::$app->db->createCommand("select nama from kategori where id= '$KategoriId'") -> queryOne();
 		return $result['nama'];
 		//return nama dari kategori 
 	}

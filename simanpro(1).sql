@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2015 at 07:47 AM
+-- Generation Time: May 20, 2015 at 01:39 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -44,20 +44,14 @@ CREATE TABLE IF NOT EXISTS `aktivitas` (
   KEY `creator` (`creator`),
   KEY `siteId` (`siteId`),
   KEY `deadline` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `aktivitas`
 --
 
 INSERT INTO `aktivitas` (`id`, `tanggal`, `judul`, `status`, `foto`, `keterangan`, `status_approval_pm`, `status_approval_supervi`, `creator`, `siteId`, `type`) VALUES
-(42, '2015-05-06', 'Bermain Bola', 'Start', '', '<p>Tak Ada yang Abadi</p>', NULL, NULL, '1234567', 33, NULL),
-(43, '2015-05-06', 'Mengecor Galian', 'On Process', '', '<p>asasa</p>', NULL, NULL, '1234567', 33, NULL),
-(44, '2015-05-08', 'Menggali Lobang', 'Start', '', '<p>Dodododo</p>', NULL, NULL, '1234567', 30, 9),
-(45, '2015-05-05', 'Menggali Lobang', 'Start', 'narupi_by_edumander-d51cwpa.png', '<p>ada deh</p>', NULL, NULL, '1234567', 30, 11),
-(46, '2015-05-12', 'asasasas', 'Start', '', '<p>asasas</p>', NULL, NULL, '1234567', 30, 12),
-(47, '2015-05-08', 'baru2', 'Start', '', '<p>asasas</p>', NULL, NULL, '1234567', 30, NULL),
-(49, '2015-05-12', 'Menggali Lobang', 'On Process', '', '<p>asasasas</p>', NULL, NULL, '1234567', 30, 12);
+(7, '2015-02-02', 'menggali', 'Start', '', '<p>asasasas</p><p>\r\n		 	<strong>Approval Notes:<br></strong>\r\n		 	20/05/2015 - Voldemort :\r\n		 	<br >\r\n		  </p>', NULL, 1, '123', 35, 13);
 
 -- --------------------------------------------------------
 
@@ -112,12 +106,11 @@ CREATE TABLE IF NOT EXISTS `akun` (
 --
 
 INSERT INTO `akun` (`nik`, `nama`, `gender`, `email`, `username`, `password`, `alamat`, `jabatan`, `no_telp`) VALUES
-('1206208776', 'Fahmi Hidayat', 'L', '', 'admin', 'c93ccd78b2076528346216b3b2f701e6', '', 'Administrator', ''),
-('120920', 'Administrator''s Name', 'L', 'fahmi@gmail.com', 'fahmi12', 'c93ccd78b2076528346216b3b2f701e6', 'Jl.Bungur', 'Administrator', '0861712881212'),
-('121212', 'Ghaisani Kusumo', 'L', '', 'sp', '1b2753dfcb111675497b08509b09e5d2', '', 'Supervisor', ''),
-('1212121', 'Mitra Surya', 'L', '', 'pm1', '48028e7eb3282307e3c20f1f3f79952a', '', 'Project Manager', ''),
-('123', 'Inuyasha', 'L', 'kagome@inuyasha.com', 'inu', '005c6f6e8780ed95a83f0b8d195201dc', '', 'Coordinator', ''),
-('1234567', 'Khoirunnida', 'L', '', 'tes', '0134a762b1c7d4acab4a766061b57093', '', 'Coordinator', '');
+('0867121', 'Fahmi Hidayat', 'L', 'fahmi.hidayat@gmail.com', 'fahmi', '41851c2c39e9729d51870dc74e098950', '', 'Administrator', ''),
+('1206208776', 'Harry James Potter', 'L', '', 'admin', 'c93ccd78b2076528346216b3b2f701e6', '', 'Administrator', ''),
+('121212', 'Voldemort', 'L', '', 'sp', '1b2753dfcb111675497b08509b09e5d2', '', 'Supervisor', ''),
+('1212121', 'Hermione Granger', 'P', '', 'pm1', '48028e7eb3282307e3c20f1f3f79952a', '', 'Project Manager', ''),
+('123', 'Ronald Billius Weasley', 'L', 'ronald@hogwarts.com', 'coor', 'b5190e427c466e6c90e167d5471c8044', '', 'Coordinator', '');
 
 -- --------------------------------------------------------
 
@@ -133,17 +126,15 @@ CREATE TABLE IF NOT EXISTS `barismilestone` (
   PRIMARY KEY (`id`),
   KEY `kategoriId` (`kategoriId`),
   KEY `siteId` (`siteId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `barismilestone`
 --
 
 INSERT INTO `barismilestone` (`id`, `tanggal`, `kategoriId`, `siteId`) VALUES
-(8, '2015-04-19', 5, 30),
-(9, '2015-04-20', 2, 30),
-(11, '2015-04-19', 7, 30),
-(12, '2015-04-13', 1, 30);
+(13, '2015-05-21', 2, 35),
+(14, '2015-05-20', 1, 34);
 
 -- --------------------------------------------------------
 
@@ -194,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `kategori`
@@ -209,7 +200,8 @@ INSERT INTO `kategori` (`id`, `nama`) VALUES
 (6, 'haha'),
 (7, 'Penggalian'),
 (8, 'haha'),
-(9, 'hihi');
+(9, 'hihi'),
+(10, 'menggali');
 
 -- --------------------------------------------------------
 
@@ -231,8 +223,8 @@ CREATE TABLE IF NOT EXISTS `klien` (
 --
 
 INSERT INTO `klien` (`id`, `nama`, `alamat`, `email`, `no_telp`) VALUES
-(2, 'PT Telkom  x', '<p>JalanCengkeh</p>', 'telkom@y.com', '081219'),
-(5, 'PT Indosat', 'Jalan Cengkeh', 'indosat@yahoo.com', '02187797884');
+(2, 'Durmstrang Institute', '<p>JalanCengkeh</p>', 'office@durmstrang.com', '081219'),
+(5, 'Beauxbaton Academy of Magic', 'Jalan Cengkeh', 'office@beauxbaton.com', '02187797884');
 
 -- --------------------------------------------------------
 
@@ -242,20 +234,21 @@ INSERT INTO `klien` (`id`, `nama`, `alamat`, `email`, `no_telp`) VALUES
 
 CREATE TABLE IF NOT EXISTS `pengumuman` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tanggal` date DEFAULT NULL,
+  `tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `judul` varchar(100) NOT NULL,
   `isi` text NOT NULL,
   `creator` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `creator` (`creator`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `pengumuman`
 --
 
 INSERT INTO `pengumuman` (`id`, `tanggal`, `judul`, `isi`, `creator`) VALUES
-(1, '2015-05-11', 'Libur Cuti Bersama', '<p><strong>Semua kegiatan di liburkan coyyyy</strong></p>', '1206208776');
+(1, '2015-05-11 07:00:00', 'Libur Cuti Bersama', '<p><strong>Semua kegiatan di liburkan coyyyy</strong></p>', '1206208776'),
+(2, '2015-05-14 07:00:00', 'SOP Humas', '<p style="text-align: center;"><strong>SOP PUBLIKASI HUMAS</strong></p>\r\n<p style="text-align: left; padding-left: 30px;"><strong>SOP REQUEST PUBLIKASI HUMAS</strong></p>\r\n<ol>\r\n<li><strong>Semua permintaan publikasi melalui fuki.cs.ui.ac.id/siput</strong></li>\r\n<li><strong>Semua poster/konten media lainnya harus lulus uji mutu publikasi oleh media</strong></li>\r\n<li><strong>Semua konten media akan diambil secara langsung dari request publikasi media pada sistem ini</strong></li>\r\n</ol>\r\n<p style="text-align: left; padding-left: 30px;"><strong>Publikasi Twitter</strong></p>\r\n<ol>\r\n<li><strong>Submit draft tweet yang siap dipublish maksimal H-2 jadwal tweet</strong></li>\r\n<li><strong>Follow up tweetnya, remind dan pantau untuk memastikan tidak ada kesalahan</strong></li>\r\n<li><strong>Apabila ingin meminta pembuatan draft maksimal H-3 sebelum jadwal tweet dengan memberikan content yang jelas</strong></li>\r\n</ol>\r\n<p style="padding-left: 30px;"><strong>Publikasi Fanpage Facebook</strong></p>\r\n<ol>\r\n<li><strong>Apabila ada booming, selalu mengingatkan humas untuk menyebarkan di fanpage</strong></li>\r\n<li><strong>Contentnya bebas dan apabila ingin dibuatkan maksimal H-3 sebelum waktu publikasi</strong></li>\r\n<li><strong>Follow Up humas, remind dan pantau untuk memastikan tidak ada kesalahan publikasi</strong></li>\r\n</ol>\r\n<p style="padding-left: 30px;"><strong>Scele</strong></p>\r\n<ol>\r\n<li><strong>Selalu menyertakan header [FUKI 2015] untuk subject thread, dan sertakan judulnya, contoh [FUKI 2015] Kalam Akbar</strong></li>\r\n<li><strong>Humas yang akan post di scele, dan pemilik acara akan diberikan izin untuk langsung post di scele pada kasus tertentu dan atas perizinan humas</strong></li>\r\n<li><strong>Follow up humas dan threadnya, remind dan pantau karena waktu pengeditan hanya 30 menit</strong></li>\r\n</ol>\r\n<p style="padding-left: 30px;"><strong>"SEGALA HAL YANG BERHUBUNGAN DENGAN REQUEST PUBLIKASI HUMAS HARUS MELALUI <em>fuki.cs.ui.ac.id/siput</em>"</strong></p>\r\n<p style="padding-left: 30px;"><strong>Apabila ada pertanyaan lebih lanjut silahkan menghubungi:<br />Azelea : 0896-5131-4249<br />Aulia : 0838-7148-5515</strong></p>', '1206208776');
 
 -- --------------------------------------------------------
 
@@ -285,18 +278,15 @@ CREATE TABLE IF NOT EXISTS `projectteam` (
   PRIMARY KEY (`id`),
   KEY `proyekId` (`proyekId`),
   KEY `nik` (`nik`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `projectteam`
 --
 
 INSERT INTO `projectteam` (`id`, `proyekId`, `nik`) VALUES
-(1, 11, '120920'),
-(2, 11, '123'),
-(3, 11, '1212121'),
-(4, 11, '121212'),
-(5, 13, '121212');
+(5, 13, '121212'),
+(6, 16, '123');
 
 -- --------------------------------------------------------
 
@@ -310,16 +300,18 @@ CREATE TABLE IF NOT EXISTS `proyek` (
   `klienId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `proyek_ibfk_1` (`klienId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `proyek`
 --
 
 INSERT INTO `proyek` (`id`, `nama`, `klienId`) VALUES
-(11, 'Percobaan', 5),
-(12, 'Pembangunan proyek Pembangunan', 5),
-(13, 'halo', 2);
+(12, 'Pembangunan tower sekolah', 5),
+(13, 'Pembangunan lorong bawah tanah', 2),
+(15, 'Pembangunan Tower Sinyal', 5),
+(16, 'Baru 1', 2),
+(17, 'Baru 2', 2);
 
 -- --------------------------------------------------------
 
@@ -342,17 +334,15 @@ CREATE TABLE IF NOT EXISTS `site` (
   `proyek` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `site_ibfk_1` (`proyek`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `site`
 --
 
 INSERT INTO `site` (`id`, `tanggal_mulai`, `siteID`, `nama`, `alamat`, `titik_nominal`, `status_kepemilikan`, `tipe_antena`, `keterangan`, `foto`, `status_kerja`, `proyek`) VALUES
-(30, NULL, '', 'Rajawali 1', 'Jl.Rajawali 3 no.15', '', 'pemda', '', '', '', 'survey', 11),
-(32, '2015-05-06', '', 'Rajawali 2', '', '', 'pemda', '', '', '', 'survey', 11),
-(33, NULL, '', 'rajawali12345', '', '', 'pemda', '', '', '', 'survey', 11),
-(34, NULL, '', 'asasas', '', '', 'pemda', '', '', '', '', 13);
+(34, NULL, '', 'asasas', '', '', 'pemda', '', '', '', '', 13),
+(35, '2015-05-17', '', 'Site Baru', '', '', '', '', '', '', '', 16);
 
 -- --------------------------------------------------------
 

@@ -3,8 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\issue;
-use app\models\issueSearch;
+use app\models\Issue;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,7 +32,7 @@ class IssueController extends Controller
     public function actionIndex()
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
         $data=new Issue();
@@ -51,7 +50,7 @@ class IssueController extends Controller
     public function actionView($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
     	$model=$this->findModel($id);
@@ -68,10 +67,10 @@ class IssueController extends Controller
     public function actionCreate()
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
-        $model = new issue();
+        $model = new Issue();
 
         if ($model->load(Yii::$app->request->post())) {
         	$model->creator=Yii::$app->user->identity->nik;
@@ -100,7 +99,7 @@ class IssueController extends Controller
     public function actionUpdate($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
         $model = $this->findModel($id);
@@ -138,7 +137,7 @@ class IssueController extends Controller
     public function actionDelete($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 		
 		$model=$this->findModel($id);
@@ -163,10 +162,10 @@ class IssueController extends Controller
     protected function findModel($id)
     {
     	if (\Yii::$app->user->isGuest) {
-            return $this->redirect('/propensiTemp/web');
+            return $this->redirect(Yii::$app->params['default']);
         }
 
-        if (($model = issue::findOne($id)) !== null) {
+        if (($model = Issue::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

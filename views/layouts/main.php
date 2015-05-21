@@ -42,13 +42,13 @@ AppAsset::register($this);
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <link rel="shortcut icon" href="http://localhost/propensi/views/layouts/semi-logo.png" />
+    <link rel="shortcut icon" href="<?php echo Yii::$app->params['base']?>img/semi-logo.png" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300&subset=latin,latin-ext">
 	
 </head>
 
 <body>
-	<?php $this->beginBody() ?>
+	<!-- <?php $this->beginBody() ?> -->
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -60,8 +60,8 @@ AppAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/propensi/web">
-                	<img class="img-logo" src="/propensi/views/layouts/logo.png">
+                <a class="navbar-brand" href='<?= Yii::$app->params['default']?>'>
+                	<img class="img-logo" src="<?php echo Yii::$app->params['base']?>img/logo.png">
                 </a>
             </div>
             <!-- /.navbar-header -->
@@ -189,7 +189,7 @@ AppAsset::register($this);
 	     });
 	});
 	</script>
-	<?php $this->endBody() ?>
+	<!--<?php $this->endBody() ?>-->
 </body>
 
 </html>

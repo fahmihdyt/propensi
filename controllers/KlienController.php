@@ -37,13 +37,13 @@ class KlienController extends Controller
     	$privilige= Yii::$app->user->identity->jabatan;
 		
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $searchModel = new KlienSearch();
@@ -71,13 +71,13 @@ class KlienController extends Controller
     	 $privilige= Yii::$app->user->identity->jabatan;
 		 
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         return $this->render('view', [
@@ -94,13 +94,13 @@ class KlienController extends Controller
     {
     	 $privilige= Yii::$app->user->identity->jabatan;
     	if (\Yii::$app->user->isGuest && $privilege != 'Project Manager') {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
 		
@@ -126,13 +126,13 @@ class KlienController extends Controller
     {
     	 $privilige= Yii::$app->user->identity->jabatan;
     	if (\Yii::$app->user->isGuest && $privilege != 'Project Manager') {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $model = $this->findModel($id);
@@ -162,13 +162,13 @@ class KlienController extends Controller
     {
     	 $privilige= Yii::$app->user->identity->jabatan;
     	if (\Yii::$app->user->isGuest && $privilege != 'Project Manager') {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $this->findModel($id)->delete();
@@ -191,7 +191,7 @@ class KlienController extends Controller
     {
     	 $privilige= Yii::$app->user->identity->jabatan;
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		

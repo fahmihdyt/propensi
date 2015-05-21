@@ -24,7 +24,7 @@ use \yii\web\IdentityInterface;
  * @property Pengumuman[] $pengumumen
  * @property Projectteam[] $projectteams
  */
-class user extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 	
 	public $authKey='simanproPtJAL';

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Barismilestone;
-use app\models\BarismilestoneSearch;
+//use app\models\BarismilestoneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,12 +33,12 @@ class BarismilestoneController extends Controller
     public function actionIndex()
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		//supaya org non guest gabisa akses yg lain
 		
@@ -65,14 +65,14 @@ class BarismilestoneController extends Controller
     public function actionView($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Project Manager' || $jabatan=='Supervisor' || $jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         return $this->render('view', [
@@ -88,13 +88,13 @@ class BarismilestoneController extends Controller
     public function actionCreate($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $model = new Barismilestone();
@@ -105,7 +105,7 @@ class BarismilestoneController extends Controller
 			 $model->siteId=$id;
 			
 			if($model->save()){
-			 		 return $this->redirect("/propensi/web/index.php/site/view?id=$id");
+			 		 return $this->redirect(Yii::$app->params['default']."index.php/site/view?id=$id");
 			}
 			else{
 				return $this->render('create', [
@@ -131,12 +131,12 @@ class BarismilestoneController extends Controller
     {
     	//supaya org non guest gabisa akses yg lain
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		
 				$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
 		//$model = new Barismilestone();
@@ -144,7 +144,7 @@ class BarismilestoneController extends Controller
         
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			$id=$model->siteId;
-			return $this->redirect("/propensi/web/index.php/site/view?id=$id");			
+			return $this->redirect(Yii::$app->params['default']."index.php/site/view?id=$id");			
 		}
 			
         else {
@@ -163,12 +163,12 @@ class BarismilestoneController extends Controller
     public function actionDelete($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
 		$model = $this->findModel($id);
@@ -177,7 +177,7 @@ class BarismilestoneController extends Controller
         $this->findModel($id)->delete();
 	
 		
-        return $this->redirect("/propensi/web/index.php/site/view?id=$id2");
+        return $this->redirect(Yii::$app->params['default']."index.php/site/view?id=$id2");
     }
 
     /**
@@ -190,7 +190,7 @@ class BarismilestoneController extends Controller
     protected function findModel($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		

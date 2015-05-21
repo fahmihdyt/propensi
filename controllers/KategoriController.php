@@ -33,13 +33,13 @@ class KategoriController extends Controller
     public function actionIndex()
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Project Manager' || $jabatan=='Supervisor' ||$jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 				
         $searchModel = new KategoriSearch();
@@ -59,13 +59,13 @@ class KategoriController extends Controller
     public function actionView($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Project Manager' || $jabatan=='Supervisor' ||$jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         return $this->render('view', [
@@ -83,13 +83,13 @@ class KategoriController extends Controller
     public function actionCreate()
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $model = new Kategori();
@@ -114,13 +114,13 @@ class KategoriController extends Controller
     public function actionUpdate($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
 		
@@ -145,13 +145,13 @@ class KategoriController extends Controller
     {
     	
 		if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if($jabatan=='Coordinator'){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $this->findModel($id)->delete();
@@ -178,19 +178,19 @@ class KategoriController extends Controller
 	public function actionCreates($id)
     {
     	if (\Yii::$app->user->isGuest) {
-    		return $this->redirect('/propensi/web');
+    		return $this->redirect(Yii::$app->params['default']);
     	}
 		//supaya org non guest gabisa akses yg lain
 		
 		$jabatan=Yii::$app->user->identity->jabatan;
 		if(!($jabatan=='Project Manager' || $jabatan=='Supervisor')){
-			return $this->redirect('/propensi/web/index.php/home');
+			return $this->redirect(Yii::$app->params['default'].'index.php/home');
 		}
 		
         $model = new Kategori();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect("/propensi/web/index.php/barismilestone/create?id=$id");
+            return $this->redirect(Yii::$app->params['default']."index.php/barismilestone/create?id=$id");
 			
 			
         } else {

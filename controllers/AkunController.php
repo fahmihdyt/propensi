@@ -36,7 +36,7 @@ class AkunController extends Controller
     public function actionIndex()
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		$data = Akun::find()->orderBy(['jabatan' => 'ASC', 'nama' => 'ASC'])->all();
@@ -52,7 +52,7 @@ class AkunController extends Controller
     public function actionView($id)
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 			
         return $this->render('view', [
@@ -69,12 +69,12 @@ class AkunController extends Controller
     {
         	
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator")	 {
 			\Yii::$app->getSession()->setFlash('danger', "You have no privilege to create a new account.");
-			return $this->redirect('/propensi/web/index.php/akun');	
+			return $this->redirect(Yii::$app->params['default'].'index.php/akun');	
 		}
 		
         $model = new Akun();
@@ -98,7 +98,7 @@ class AkunController extends Controller
     public function actionUpdate($id)
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		$model = $this->findModel($id);
@@ -114,7 +114,7 @@ class AkunController extends Controller
         	}	
 		} else {
 			\Yii::$app->getSession()->setFlash('danger', "You have no privilege to update this account.");
-			return $this->redirect('/propensi/web/index.php/akun');	
+			return $this->redirect(Yii::$app->params['default'].'index.php/akun');	
 		}
 		
 	
@@ -130,7 +130,7 @@ class AkunController extends Controller
     public function actionDelete($id)
     {
         if(\Yii::$app->user->isGuest) {
-        	return $this->redirect('/propensi/web');
+        	return $this->redirect(Yii::$app->params['default']);
         }
 		
 		if(\Yii::$app->user->identity->jabatan !== "Administrator"){
